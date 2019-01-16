@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="campos_crmlead_form" model="ir.ui.view"><!--esta vista pertenece al modelo-->
+            <field name="name">campos.crmlead.form</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+            <field name="model">crm.lead</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"></field><!--Referencía al alemento heredado por su ID-->
+            <field name="arch" type="xml">
+                <xpath expr="//group" position='after'>
+                    <group>
+                    <field name="id_producto_inmueble" domain="[('es_inmueble', '=', True)]"></field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

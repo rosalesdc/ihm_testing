@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="historico_variaciones_view" model="ir.ui.view">
+            <field name="name">historico.variaciones.view</field>
+            <field name="model">historico.variaciones</field>
+            <field name="arch" type="xml">
+                    <tree string='Histórico de variaciones de precios' >
+                        <field name="product_id"/>
+                        <field name="price_unit"/>
+                        <field name="date_order" string="Fecha del pedido"/>
+                        <field name="partner_id" string="Proveedor"/>
+                    </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

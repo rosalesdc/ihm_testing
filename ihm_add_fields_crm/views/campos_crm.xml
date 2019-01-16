@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="campos_crmlead_form" model="ir.ui.view"><!--esta vista pertenece al modelo-->
+            <field name="name">campos.crmlead.form</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+            <field name="model">crm.lead</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
+            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"></field><!--Referencía al alemento heredado por su ID-->
+            <field name="arch" type="xml">
+                <xpath expr="//group" position='after'>
+                    <group>
+                    <field name="id_numero_referencia"></field>
+                    <field name="tipo_credito"></field>
+                    <field name="cantidad_pagar_cbancario" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"/>
+                    <field name="cantidad_pagar_infonavitfov" attrs="{'invisible':[('tipo_credito', '!=', 'Infonavit/Fovisste'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
+                    <field name="cantidad_pagar_efectivo" attrs="{'invisible':[('tipo_credito', '!=', 'Efectivo')]}"></field>
+                    <field name="id_entidad_financiera" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
+<!--                    <field name="id_entidad_financira_cofinavit"></field>-->
+                    <field name="dias_desde_creacion"></field>
+                    <field name="deposito_18_porciento"></field>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_efinanciera_credbancario,access_efinanciera_credbancario,model_efinanciera_credbancario,base.group_user,1,1,1,1
+access_efinanciera_cofinavit,access_efinanciera_cofinavit,model_efinanciera_cofinavit,base.group_user,1,1,1,1
+access_numero_referencia,access_numero_referencia,model_numero_referencia,base.group_user,1,1,1,1

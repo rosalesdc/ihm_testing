@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="historico_graph_view">
+            <field name="name">historico.graph.view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <graph string="Precios en el tiempo" >
+                    <field name="date_planned"/>
+<!--                    <field name="price_unit" />-->
+                    <field name="partner_id" />
+                </graph>
+<!--                <pivot string="Precios en el tiempo">
+                    <field name="date_planned" type="row"/>
+                    <field name="partner_id" type="row"/>
+                    <field name="price_unit" type="col"/>
+                </pivot>-->
+            </field>
+        </record>
+        
+        <record id="action_line_orders_tree" model="ir.actions.act_window" >
+            <field name="context">{}</field>
+            <field name="domain">[('product_id','in',active_ids)]</field>
+            <field name="name">Histórico de Compras</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_id" ref="purchase.purchase_order_line_tree"/>
+            <field name="view_mode">tree,graph</field>
+        </record>
+
+        <record id="view_product_template_purchase_buttons_from" model="ir.ui.view">
+            <field name="name">product.template.purchase.button.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="%(action_line_orders_tree)d"
+                            type="action" icon="fa-money">Precios
+                    </button>
+                </div>
+            </field>
+        </record>
+        
+    </data>	
+</odoo>

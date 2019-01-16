@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="kanban_card_inherited_view" model="ir.ui.view">
+            <field name="name">kanban.card.inherited.view</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_kanban_card_manage_section o_kanban_manage_reports']">
+                    <div role="menuitem">
+                        <a type="open">Ver</a>
+                    </div>
+                </xpath>
+                <xpath expr="//a[@class='o_project_kanban_box']">
+                    <div>
+                        <a class="o_project_kanban_box" type="open">
+                            <span class="o_label">Ver Proyecto</span>
+                        </a>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+    <data>
+        
+    </data>
+</odoo>

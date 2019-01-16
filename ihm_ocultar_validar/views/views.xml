@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hide_validar_client_inherited" model="ir.ui.view">
+            <field name="name">hide.validar.client.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_invoice_open']" position="attributes">
+                    <attribute name="groups">ihm_ocultar_validar.group_validar_client</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="hide_validar_supplier_inherited" model="ir.ui.view">
+            <field name="name">hide.validar.supplier.inherited</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_invoice_open']" position="attributes">
+                    <attribute name="groups">ihm_ocultar_validar.group_validar_supplier</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

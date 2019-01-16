@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="contabilidad_inherited_view" model="ir.ui.view">
+            <field name="name">contabilidad.inherited.view</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+            <field name="arch" type="xml">
+                <!--                <xpath expr="//templates/t[@t-name='JournalBodySalePurchase']/div[@class='col-7 o_kanban_primary_right']/div[@class='row']/div[@class='col-7']/a[@id='account_dashboard_sale_pay_link']" position="replace">-->
+                <xpath expr="//a[@id='account_dashboard_sale_pay_link']" position="replace">
+                    <a type="object" t-if="journal_type == 'sale'" name="open_action" context="{'search_default_unpaid':1}" id="account_dashboard_sale_pay_link">
+                        <t t-esc="dashboard.number_waiting"/> Facturas por cobrar
+                    </a>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

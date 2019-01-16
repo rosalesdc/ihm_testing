@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="add_fields_product_view" model="ir.ui.view"><!--esta vista pertenece al modelo-->
+            <field name="name">add.fields.product.view</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+            <field name="model">product.template</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
+            <field name="inherit_id" ref="product.product_template_form_view"></field><!--Referencía al alemento heredado por su ID-->
+            
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='purchase_ok']" position="after">
+                    <div>
+                        <field name="es_inmueble"/>
+                        <label for="es_inmueble"/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='general_information']" position='after'>
+                    <page string="Inmueble" name="inmueble">
+                        <group>
+                            <group>
+                                <field name="caracteristicas"></field> 
+                                <field name="metros_cuadrados"></field> 
+                                <field name="nivel"></field>
+                                <field name="x_proyecto_id"></field>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

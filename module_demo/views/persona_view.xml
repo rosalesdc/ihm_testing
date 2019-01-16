@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--comentarios-->
+<odoo>
+	<data>
+		<record id="persona_form_view" model="ir.ui.view"><!--esta vista pertenece al modelo-->
+			<field name="name">persona.form.view</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+			<field name="model">persona.main_data</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo creado-->
+			<field name="arch" type="xml"><!--arquitectura-->
+			<form>
+				<sheet><!--hoja que es un espacio dentro de lo mostrado por el navegador-->
+					<field name="foto" widget="image" class="oe_left oe_avatar"/><!--se pueden poner algunos 
+					atributos HTML-->
+					<div class="oe_title">
+						<h1>
+							<field name="name" placeholder="Nombre de la persona"/><!--recomendable primero poner los campos que se definieron como requeridos-->
+						</h1>
+					</div>
+					<group><!--grupos de campos-->
+						<group>
+							<field name="edad"></field>
+							<field name="es_casado"></field>
+							<field name="datos_personales"></field>	
+						</group>
+
+						<group>
+							<field name="informacion_adicional"></field>
+							<field name="sexo"></field>
+							<field name="grado_estudio_id"></field>	
+						</group>
+					</group>
+						<notebook>
+							<!--Relaciones ORM-->
+							<page string="Dominios de emails" name="pagina_dominios">
+							<field name="dominios_email_ids" nolabel="1">
+								<tree>
+									<field name="name"></field>
+									<field name="dominio_publico"></field>
+								</tree>
+							</field>
+							</page>
+
+							<page string="Relacion O2m">
+								<group string="Autos de la persona">
+							<field name="autos_ids" nolabel="1"><!--hay top y botton-->
+								<tree editable="top">
+									<field name="name"></field>
+									<field name="color"></field>
+									<field name="anio"></field>
+									<field name="persona_id" readonly="True"/>
+								</tree>
+							</field>	
+					</group>
+					</page>
+				</notebook>
+				</sheet>
+			</form>
+			</field>
+		</record>
+
+		<record id="persona_tree_view" model="ir.ui.view">
+			<field name="name">persona.tree.view</field>
+			<field name="model">persona.main_data</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"></field>
+					<field name="edad"></field>
+					<field name="es_casado"></field>
+					<field name="sexo"></field>
+				</tree>
+			</field>
+		</record>
+
+		<record id="persona_search_view" model="ir.ui.view">
+			<field name="name">persona.search.view</field>
+			<field name="model">persona.main_data</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name" />
+					<field name="edad" sum="Edadwes" />
+					<field name="es_casado" />
+					<field name="sexo" />
+				</search>
+			</field>
+		</record>
+
+		<record id="persona_action_window" model="ir.actions.act_window">
+			<field name="name">persona</field>
+			<field name="res_model">persona.main_data</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem
+			id="master_data_training"
+			name="Training Module"
+			sequence="50"
+			/>
+		<menuitem
+			id="personas_menuitem"
+			name="Personas"
+			action="persona_action_window"
+			parent="master_data_training"
+			sequence="10"
+			/>
+	</data>
+</odoo>

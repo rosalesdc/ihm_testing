@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_add_historico_variaciones,access_add_historico_variaciones,ihm_hist_modelo.model_historico_variaciones,base.group_user,1,1,1,1

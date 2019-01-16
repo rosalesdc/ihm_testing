@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record id="persona_1" model="persona.main_data">
+			<field name="name">Pedro Lopez</field>
+			<field name="edad">27</field>
+			<field name="es_casado">True</field>
+		</record>
+
+		<record id="persona_2" model="persona.main_data">
+			<field name="name">Luis Angeles</field>
+			<field name="edad">38</field>
+			<field name="es_casado">False</field>
+			<field name="informacion_adicional">Persona creada desde XML</field>
+			<field name="sexo">masculino</field>
+		</record>
+	</data>
+</odoo>

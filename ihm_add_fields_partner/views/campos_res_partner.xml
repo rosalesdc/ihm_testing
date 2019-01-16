@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="ine_res_partner_form" model="ir.ui.view"><!--esta vista pertenece al modelo-->
+            <field name="name">ine.res.partner.form</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+            <field name="model">res.partner</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
+            <field name="inherit_id" ref="base.view_partner_form"></field><!--Referencía al alemento heredado por su ID-->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position='after'>
+                    <field name="id_nacionalidad"></field>
+                    <field name="id_identificacion"></field>
+                    <field name="lugar_origen"></field>
+                    <field name="fecha_nacimiento"></field>
+                    <field name="id_ocupacion"></field>
+                    <field name="antiguedad_en_empresa"></field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="view_product_template_invoice_buttons_from" model="ir.ui.view">
+            <field name="name">product.template.invoice.button.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="%(action_historico_productos_view)d"
+                            type="action" icon="fa-money">Precios
+                    </button>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

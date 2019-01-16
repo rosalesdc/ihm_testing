@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_historico_productos_view" model="ir.actions.act_window">
+            <field name="name">Historico productos</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="contextop">{
+                'search_default_product_id': [active_id],
+                'default_product_id': active_id,
+                }</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Sin datos en su historico.
+                </p>
+            </field>
+            <field name="domain">[('price_unit', '=', '100')]</field>
+        </record>
+
+        <!--        <record id="action_historico_productos_graph" model="ir.actions.act_window">
+            <field name="name">Grafico historico productos</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">graph</field>
+            <field name="context">{
+                'search_default_product_id': [active_id],
+                'default_product_id': active_id,
+                }
+            </field>
+            <field name="arch" type="xml">
+                <graph string="historical">
+                    <field name="date_order"/>
+                    <field name="price_unit"/>
+                </graph>
+            </field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Sin datos en su historico.
+                </p>
+            </field>
+        </record>-->
+    </data>
+</odoo>
