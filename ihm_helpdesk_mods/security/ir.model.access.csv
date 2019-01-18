@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_detalle_reparaciones,access_detalle_reparaciones,model_detalle_reparaciones,base.group_user,1,1,1,1
+access_categoria_falla,access_categoria_falla,model_categoria_falla,base.group_user,1,1,1,1
+access_acta_reparaciones,access_acta_reparaciones,model_acta_reparaciones,base.group_user,1,1,1,1
