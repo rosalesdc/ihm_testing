@@ -5,12 +5,23 @@ from collections import defaultdict
 from odoo import models, fields,api,_
 from odoo.exceptions import UserError, ValidationError
 
-                                            
+                                                                
 class Project(models.Model):
     _inherit = "project.project"
     
     product_qty = fields.Char("Budget Quantity")  
-   
+    product_list_ids = fields.Many2many("product.product",string="Product list",compute="_compute_product_list")
+    picking_id = fields.Many2one("stock.picking.type",string="Location", domain = [('name', '=', 'Receipts')])
+    
+    @api.one
+    def _compute_product_list(self):
+        products_list = []
+        product_list_ids_rec = self.env['qty.budget'].search([])
+        for loop in product_list_ids_rec:
+            products_list.append(loop.name.id)
+        for line in self:
+            line.product_list_ids = products_list
+            print(line.product_list_ids)
    
 class productList(models.Model):
     _inherit = 'product.list'
@@ -174,13 +185,24 @@ class productList(models.Model):
     def purchase_order(self,seller,producto,currency_id):
         supplier = self.env['res.partner'].browse(seller)
         proyecto_id = self.project_id
-        vals = {
-            'date_order':fields.Datetime.now(),
-            'x_cuenta_analitica_id':proyecto_id.analytic_account_id.id,
-            'partner_id':supplier.id,
-            'currency_id':currency_id,
-            'product_list_id':self.id
-        }
+        if proyecto_id.picking_id:
+            vals = {
+                'date_order':fields.Datetime.now(),
+                'x_cuenta_analitica_id':proyecto_id.analytic_account_id.id,
+                'partner_id':supplier.id,
+                'currency_id':currency_id,
+                'product_list_id':self.id,
+                'picking_type_id':proyecto_id.picking_id.id
+            }
+        else:
+            vals = {
+                'date_order':fields.Datetime.now(),
+                'x_cuenta_analitica_id':proyecto_id.analytic_account_id.id,
+                'partner_id':supplier.id,
+                'currency_id':currency_id,
+                'product_list_id':self.id,
+            }
+            
         print('purchase -<<<<<<',str(vals))
         res = self.env['purchase.order'].create(vals)
 
@@ -226,7 +248,6 @@ class productListLine(models.Model):
     @api.depends('product')
     def _compute_budget(self):
         categ_id = self.env['qty.budget'].search([('project_id','=',self.product_list_id.project_id.id),('name','=',self.product.id)])
-        print(categ_id)
         if categ_id:
             self.budget = categ_id.qty
         else:
@@ -235,19 +256,37 @@ class productListLine(models.Model):
     @api.one
     @api.depends('product')
     def _compute_executed(self):
-        qty_id = self.env['purchase.order.line'].search([
-            ('product_id','=',self.product.id),
-            ('order_id.x_cuenta_analitica_id','=',self.project_id.analytic_account_id.id),
-            ('order_id.state','=','purchase')
-        ])
-        total = executed_cost=0.0
-        for res in qty_id:
-            if res.state == 'purchase':
-                total += res.product_qty
-                executed_cost += res.price_subtotal
-        self.executed = total
-        self.executed_cost = executed_cost
+#         qty_id = self.env['purchase.order.line'].search([
+#             ('product_id','=',self.product.id),
+#             ('order_id.x_cuenta_analitica_id','=',self.project_id.analytic_account_id.id),
+#             ('order_id.state','=','purchase')
+#         ])
+#         total = executed_cost=0.0
+#         for res in qty_id:
+#             if res.state == 'purchase':
+#                 total += res.product_qty
+#                 executed_cost += res.price_subtotal
+#         self.executed = total
+#         self.executed_cost = executed_cost
 
+        for line in self:
+                qty_id = self.env['stock.picking'].search([
+                    ('move_ids_without_package.product_id','=',line.product.id),
+                    ('x_cuenta_analitica','=',line.project_id.analytic_account_id.id),
+                    ('state','=','done')
+                ])
+    #             print(acc_id,"amount")
+    #             print(qty_id,"stock")
+                total =0.0
+                for res in qty_id:
+                    if res.state == 'done':
+                        for reco in res.move_ids_without_package:
+                            if line.product.id == reco.product_id.id:
+                                total += reco.quantity_done
+    #                     executed_cost += res.price_subtotal
+                            line.executed = total
+    #             line.executed_cost = executed_cost
+                
     @api.onchange('cantidad')
     def on_change_state(self):
         if self.cantidad and self.budget:

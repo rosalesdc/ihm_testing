@@ -7,21 +7,22 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"></field><!--Referencía al alemento heredado por su ID-->
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='priority']" position='after'>
-                    <group>
-                        <field name="x_inmueble_id" domain="[('es_inmueble', '=', True)]"/>
-                    </group>
+                    <sheet>
+                        <group>
+                            <field name="x_inmueble_id" domain="[('es_inmueble', '=', True)]"/>
+                        </group>
+                    </sheet>
                 </xpath>
                 <xpath expr="//div[@class='oe_chatter']" position='before'>
-                    <notebook>
-                        <page string="Detalle" name="pagina_detalle">
-                            <field name="x_detalle_id" nolabel="1">
-                                <tree>
-                                    <field name="categoria_falla_id"/>
-                                    <field name="acta_reparaciones_id"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
+                    <sheet>
+                            
+                        <field name="x_detalle_id" nolabel="1">
+                            <tree>
+                                <field name="categoria_falla_id"/>
+                                <field name="acta_reparaciones_id"/>
+                            </tree>
+                        </field>
+                    </sheet>
                 </xpath>
             </field>
         </record>

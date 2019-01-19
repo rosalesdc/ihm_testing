@@ -21,13 +21,19 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base',
+                'purchase',
+                'account',
+                'analytic',
+                'po_cuenta_analitica',
+    ],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         #'views/po_ca_inherited_view.xml',
     ],
+    'installable' : True,
     # only loaded in demonstration mode
     'demo': [
     ],
