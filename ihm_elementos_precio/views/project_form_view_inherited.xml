@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="elementos_precio_form_view_inherited">
+            <field name="name">elementos.precio.form.view.inherited</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='misc']" position="before">
+                    <group string="Elementos de Precio">
+                        <field name="x_elementos_ids" nolabel="1"><!--hay top y botton-->
+                            <tree editable="top">
+                                <field name="name"></field>
+                                <field name="uom"></field>
+                                <field name="precio_venta"></field>
+<!--                                <field name="proyecto_id" readonly="True"/>-->
+                            </tree>
+                        </field>	
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
