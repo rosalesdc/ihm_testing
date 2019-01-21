@@ -5,7 +5,6 @@
             <field name="name">add.fields.product.view</field><!--texto arbitrario pero se utlizia esta forma por convención-->
             <field name="model">product.template</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
             <field name="inherit_id" ref="product.product_template_form_view"></field><!--Referencía al alemento heredado por su ID-->
-            
             <field name="arch" type="xml">
                 <xpath expr="//label[@for='purchase_ok']" position="after">
                     <div>
@@ -22,6 +21,16 @@
                                 <field name="nivel"></field>
                                 <field name="x_proyecto_id"></field>
                             </group>
+                        </group>
+                        <group string="Cantidades Inmueble">
+                            <field name="x_cantidades_inmueble" nolabel="1"><!--hay top y botton-->
+                                <tree editable="top">
+                                    <field name="uom"></field>
+                                    <field name="cantidad"></field>
+                                    <field name="cantidad_moneda"></field>
+                                    <!--                                <field name="proyecto_id" readonly="True"/>-->
+                                </tree>
+                            </field>	
                         </group>
                     </page>
                 </xpath>

@@ -27,6 +27,7 @@
 
     # always loaded
 	'data': [
+        'security/ir.model.access.csv',
 	'views/add_fields_product_view.xml',
         'views/campo_crm_producto.xml',
     ],
