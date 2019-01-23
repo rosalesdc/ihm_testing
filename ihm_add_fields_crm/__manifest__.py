@@ -22,11 +22,14 @@
     'depends': [
         'base',
         'crm', # es el nombre de la aplicacion de la que extendemos
+        'sale',
+        'sale_management',
     ],
 
     # always loaded
     'data': [
     'views/campos_crm.xml',
+    'views/sale_order_inherited.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,
