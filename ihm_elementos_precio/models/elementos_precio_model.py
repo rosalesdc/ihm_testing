@@ -14,8 +14,8 @@ class ElementosPrecio(models.Model):
                           'uom.uom', #nombre del modelo con el que se relaciona
                           string="Unidad de medida"
                           )
-    precio_venta = fields.Float(
-                                string="Precio de Venta",
+    precio_unitario = fields.Float(
+                                string="Precio unitario",
                                 default=0.0
                                 )
     proyecto_id = fields.Many2one(

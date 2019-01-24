@@ -12,7 +12,7 @@
                             <tree editable="top">
                                 <field name="name"></field>
                                 <field name="uom"></field>
-                                <field name="precio_venta"></field>
+                                <field name="precio_unitario"></field>
 <!--                                <field name="proyecto_id" readonly="True"/>-->
                             </tree>
                         </field>	

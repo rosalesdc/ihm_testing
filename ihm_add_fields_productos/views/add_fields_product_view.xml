@@ -11,24 +11,35 @@
                         <field name="es_inmueble"/>
                         <label for="es_inmueble"/>
                     </div>
+                    <div>
+                        <field name="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
+                        <label for="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
+                    </div>
+                    <group>
+                        <field name="tipo_bien_adicional" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}"/>
+                    </group>
+                    <div>
+                        <label for="parent_id" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}"/>
+                        <field name="parent_id" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}" domain="[('es_inmueble', '=', True)]"/>
+                    </div>
                 </xpath>
-                <xpath expr="//page[@name='general_information']" position='after'>
+                <xpath expr="//page[@name='general_information']" attrs="{'invisible':[('es_inmueble', '!=', True)]}" position='after'>
                     <page string="Inmueble" name="inmueble">
                         <group>
                             <group>
-                                <field name="caracteristicas"></field> 
-                                <field name="metros_cuadrados"></field> 
-                                <field name="nivel"></field>
+                                <field name="numero"></field> 
+                                <field name="caracteristicas"></field>
+                                <field name="estatus"></field>
                                 <field name="x_proyecto_id"></field>
                             </group>
                         </group>
-                        <group string="Cantidades Inmueble">
-                            <field name="x_cantidades_inmueble" nolabel="1"><!--hay top y botton-->
+                        <group string="Asignacion de elementos">
+                            <field name="x_asignacion_ids" nolabel="1">
                                 <tree editable="top">
-                                    <field name="uom"></field>
+                                    <field name="elemento_id"></field>
+                                    <field name="elemento_precio_unitario"></field>
                                     <field name="cantidad"></field>
-                                    <field name="cantidad_moneda"></field>
-                                    <!--                                <field name="proyecto_id" readonly="True"/>-->
+                                    <field name="importe" sum="Importe Total"></field>
                                 </tree>
                             </field>	
                         </group>

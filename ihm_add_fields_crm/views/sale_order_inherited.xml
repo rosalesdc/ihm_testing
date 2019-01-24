@@ -7,13 +7,14 @@
             <field name="inherit_id" ref="sale.view_order_form"></field>
             <field name="arch" type="xml">
                 
-                <xpath expr="//button[@name='payment_action_capture']" position='after'>
+<!--                <xpath expr="//button[@name='payment_action_capture']" position='after'>
                         <button name="payment_action_referencia" type="object" string="Realizar Pago" class="oe_highlight"/>
-                </xpath>
+                        <button name="262" id="account_invoice_payment_btn" type="action" string="Registrar Pago-" class="oe_highlight"/>
+                </xpath>-->
                 
                 <xpath expr="//field[@name='payment_term_id']" position='after'>
                         <field name="x_id_numero_referencia"></field>
-                        <field name="pagos_ids"></field>
+                        <field name="pagos_ids" ></field>
                 </xpath>
             </field>
         </record>

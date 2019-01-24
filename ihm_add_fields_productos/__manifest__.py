@@ -23,6 +23,8 @@
         'crm',
         'product',
         'sale',
+        'project',
+
     ],
 
     # always loaded
