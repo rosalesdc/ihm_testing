@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_my_report_tree" model="ir.ui.view">
+        <field name="name">my.report.tree</field>
+        <field name="model">my.report</field>
+        <field name="arch" type="xml">
+            <tree string="Name Col" >
+<!--                <field name="id" type="row" />-->
+                <field name="name" type="row" />
+                <field name="name_crm" type="row" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_my_report" model="ir.actions.act_window">
+        <field name="name">Name</field>
+        <field name="res_model">my.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem name="Reporte SQL" action="action_my_report" id="menu_my_report"/>
+
+</odoo>
