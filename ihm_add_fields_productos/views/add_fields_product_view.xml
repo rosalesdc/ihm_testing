@@ -23,8 +23,8 @@
                         <field name="parent_id" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}" domain="[('es_inmueble', '=', True)]"/>
                     </div>
                 </xpath>
-                <xpath expr="//page[@name='general_information']" attrs="{'invisible':[('es_inmueble', '!=', True)]}" position='after'>
-                    <page string="Inmueble" name="inmueble">
+                <xpath expr="//page[@name='general_information']" position='after'>
+                    <page string="Inmueble" name="inmueble" attrs="{'invisible':[('es_inmueble', '!=', True)]}" >
                         <group>
                             <group>
                                 <field name="numero"></field> 
@@ -36,7 +36,8 @@
                         <group string="Asignacion de elementos">
                             <field name="x_asignacion_ids" nolabel="1">
                                 <tree editable="top">
-                                    <field name="elemento_id"></field>
+                                    <field name="elemento_id" />
+                                    <field name="elemento_proyecto_id"></field>
                                     <field name="elemento_precio_unitario"></field>
                                     <field name="cantidad"></field>
                                     <field name="importe" sum="Importe Total"></field>
@@ -49,4 +50,3 @@
         </record>
     </data>
 </odoo>
-

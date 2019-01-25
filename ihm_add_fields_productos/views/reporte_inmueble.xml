@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="reporte_inmueble_tree" model="ir.ui.view">
+        <field name="name">reporte.inmueble.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"></field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="name" domain="[('es_inmueble', '=', True)]" />
+            </xpath>
+            <xpath expr="//field[@name='name']" position='after'>
+                <field name="oportunidades_ids" />
+            </xpath>
+            <xpath expr="//field[@name='default_code']" position='replace'>
+                <field name="es_inmueble" />
+            </xpath>
+            <xpath expr="//field[@name='list_price']" position='replace'>
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position='replace'>
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position='replace'>
+            </xpath>
+            <xpath expr="//field[@name='qty_available']" position='replace'>
+            </xpath>
+            <xpath expr="//field[@name='type']" position="attributes">
+                <attribute name="invisible">1</attribute> 
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="invisible">1</attribute> 
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_report_inmueble" model="ir.actions.act_window">
+        <field name="name">Inmuebles</field>
+        <field name="res_model">product.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="reporte_inmueble_tree"/>
+    </record>
+
+    <menuitem name="Reporte Inmueble" 
+              action="action_report_inmueble" 
+              id="menu_reporte_inmueble"/>
+</odoo>
+
+

@@ -42,7 +42,11 @@ class AddProductFields(models.Model):
                                        'inmueble_id', #un campo de regreso
                                        string="Asignacion elementos"
                                        )
-    
+    oportunidades_ids = fields.One2many(
+                                        'crm.lead', #modelo al que se hace referencia
+                                        'id_producto_inmueble', #un campo de regreso
+                                        string="Oportunidad"
+                                        )#
                                             
 
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html
