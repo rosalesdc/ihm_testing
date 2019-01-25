@@ -8,19 +8,23 @@ class CustomReport(models.Model):
     _description = "my report"
     _auto = False
 
-    name = fields.Char(string='Nombre', readonly=True)
+    name = fields.Integer(string='Nombre', readonly=True)
+    name_product = fields.Char(string="Nombre Producto")
     name_crm = fields.Char(string='Nombre Oportunidad', readonly=True)
     
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
         self._cr.execute("""CREATE or REPLACE VIEW my_report as  
-                        SELECT product_template.id, product_template.name as name, crm_lead.name as name_crm 
-                        FROM product_template
-                        FULL OUTER JOIN crm_lead
-                        ON product_template.id=crm_lead.id_producto_inmueble
-                        WHERE product_template.es_inmueble=TRUE AND product_template.es_bien_adicional=FALSE
+                        SELECT product_template.id, crm_lead.id as name, crm_lead.name as name_crm, product_template.name as name_product 
+                        FROM crm_lead
+                        FULL OUTER JOIN product_template
+                        ON crm_lead.id_producto_inmueble=product_template.id
+                        WHERE product_template.es_inmueble=TRUE AND product_template.es_bien_adicional=FALSE;
                         """)
-                        
+        #result = self._cr.dictfetchall() # return the data into the list of dictionary format
+        print("finalizando")
+
+        
 #    def primeraok(self):
 #        tools.drop_view_if_exists(self._cr, self._table)
 #        self._cr.execute("""CREATE or REPLACE VIEW my_report as  

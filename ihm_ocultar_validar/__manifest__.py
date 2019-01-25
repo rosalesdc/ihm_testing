@@ -31,6 +31,7 @@
     'data': [
         'security/security.xml',
         'views/views.xml',
+        #'views/ocultar_qtybutton_view.xml', esta operación mejor se hace directo en la vista
     ],
     # only loaded in demonstration mode
     'demo': [

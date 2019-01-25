@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="hide_qty_button" model="ir.ui.view">
+            <field name="name">hide.qty.button</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="budget_management_v2.edit_project_inherit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@icon='fa-list-alt']" position="attributes">
+                    <attribute name="groups">ihm_ocultar_validar.group_director</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

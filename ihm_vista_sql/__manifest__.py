@@ -18,7 +18,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','website','contacts','purchase'],
+    'depends': ['base','website','contacts','purchase','crm','product'],
 
     # always loaded
     'data': [
@@ -37,3 +37,9 @@
 #https://sajjadhossain.com/2013/06/30/openerp-7-creating-report-using-sql-query
 #https://pypi.org/project/setuptools-odoo/
 #https://stackoverflow.com/questions/44797225/get-data-from-different-model-odoo-9
+
+#SOBRE VISTAS HEREDADAS SIN MODIFICAR ORIGINAL
+#https://groups.google.com/forum/#!topic/openerp-spain-users/aiUeIfpAaSI
+
+#despachar consultas
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-do-a-sql-query-in-odoo-10-119605

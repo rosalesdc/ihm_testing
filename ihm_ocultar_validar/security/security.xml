@@ -9,5 +9,9 @@
             <field name="name">validacion_factura_supplier</field>
             <field name="comment">Grupo para validacion de facturas Supplier</field>
         </record>
+        <record id="group_director" model="res.groups">
+            <field name="name">validacion_director</field>
+            <field name="comment">Grupo para validaciones y elementos visibles para director</field>
+        </record>
     </data>
 </odoo>
