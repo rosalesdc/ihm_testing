@@ -1,0 +1,44 @@
+<odoo>
+    <template id="indexa">
+        <t t-call="website.layout">
+            <t t-set="title">Academy</t>
+            <div class="oe_structure">
+                <div class="container">
+                    In Container
+                    <table>
+                        <t t-foreach="teachers" t-as="teacher">
+                            <tr>
+                                <td>
+                                    <a t-attf-href="#">
+                                        <t t-esc="teacher.name_product"/>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a t-attf-href="#">
+                                        <t t-esc="teacher.name_crm"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="biography">
+        <t t-call="website.layout">
+            <t t-set="title">Academy</t>
+            BIOGRAFIAS
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <p>
+                        <t t-esc="person.id"/> 
+                        <t t-esc="person.name"/>
+                    </p>
+                </div>
+            </div>
+            <div class="oe_structure"/>
+        </t>
+    </template>
+</odoo>
