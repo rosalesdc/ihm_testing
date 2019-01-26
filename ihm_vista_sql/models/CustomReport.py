@@ -8,14 +8,14 @@ class CustomReport(models.Model):
     _description = "my report"
     _auto = False
 
-    name = fields.Integer(string='Nombre', readonly=True,default=0)
+    name = fields.Integer(string='ID', readonly=True,default=0)
     name_product = fields.Char(string="Nombre Producto", default="noprod")
     name_crm = fields.Char(string='Nombre Oportunidad', readonly=True, default="nocrm")
     
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
         self._cr.execute("""CREATE or REPLACE VIEW my_report as  
-                        SELECT product_template.id, product_template.id as name, product_template.name as name_product, crm_lead.name as name_crm 
+                        SELECT ROW_NUMBER() OVER (ORDER BY product_template.name) as id, product_template.id as name, product_template.name as name_product, crm_lead.name as name_crm 
                         FROM product_template  
                         FULL OUTER JOIN crm_lead 
                         ON product_template.id=crm_lead.id_producto_inmueble 

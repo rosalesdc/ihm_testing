@@ -32,7 +32,7 @@ class PurchaseOrderLinesIn(models.Model):
         fecha = self.env['purchase.order'].search([('id', '=', id_)], limit=1)
         date_o=fecha.date_order
         print(date_o)
-        #---------
+
         
         #se obtiene el ultimo precio registrado del producto que se está ingresando, puede diferir del la fecha de su orden
         query = "select product_id,price_unit,order_id,partner_id,date_order from historico_variaciones WHERE product_id= %s AND date_order<= %s ORDER BY create_date DESC LIMIT 1;"

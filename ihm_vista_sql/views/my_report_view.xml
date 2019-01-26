@@ -7,8 +7,8 @@
             <tree string="Name Col" create="false">
 <!--                <field name="id" type="row" />-->
                 <field name="name" type="row" />
-                <field name="name_crm" type="row" />
                 <field name="name_product" type="row" />
+                <field name="name_crm" type="row" />
             </tree>
         </field>
     </record>

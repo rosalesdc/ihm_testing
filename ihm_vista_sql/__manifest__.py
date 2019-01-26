@@ -45,3 +45,6 @@
 
 #despachar consultas
 #https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-do-a-sql-query-in-odoo-10-119605
+
+#GENERAR NUMERO INCREMENTAL "AL VUELO" EN LA CONSULTA
+#http://www.forosdelweb.com/f87/query-con-campo-autoincremental-941713/
