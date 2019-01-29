@@ -30,9 +30,20 @@
     'data': [
     'views/campos_crm.xml',
     'views/sale_order_inherited.xml',
+    'views/payment_sale_orders.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,
 }
 
+
 #https://www.odoo.com/es_ES/forum/ayuda-1/question/conditionally-display-or-hide-a-field-in-a-view-13042
+
+##LLAMAR A UNA VISTA
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/create-window-action-button-using-xml-id-112510
+
+#PASAR PARAMETRO A UNA VISTA
+#https://stackoverflow.com/questions/34926074/odoo-context-field-default-value-for-popup
+
+#BOTON QUE ABRE UNA VISTA
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/create-window-action-button-using-xml-id-112510

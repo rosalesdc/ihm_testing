@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        
+        <record id="action_account_saleorder_payment" model="ir.actions.act_window">
+            <field name="name">Registra mi pago</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <!--            <field name="view_id" ref="account.view_account_payment_saleorder_form"/>-->
+            <field name="view_id" ref="payment_sale_orders_form"/>
+            
+<!--            <field name="context">{'default_sale_orders_ids': [(4, active_id, None)]}</field>-->
+            <field name="context">{'default_partner_id': context.get('partner_id', False),'default_payment_type': 'inbound','default_x_id_nreferencia': context.get('name', False),}</field>
+            <field name="target">new</field>
+        </record>
+        
+        
         <record id="referencia_sale_order_form" model="ir.ui.view">
             <field name="name">referencia.sale.order.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"></field>
             <field name="arch" type="xml">
                 
-<!--                <xpath expr="//button[@name='payment_action_capture']" position='after'>
-                        <button name="payment_action_referencia" type="object" string="Realizar Pago" class="oe_highlight"/>
-                        <button name="262" id="account_invoice_payment_btn" type="action" string="Registrar Pago-" class="oe_highlight"/>
-                </xpath>-->
+                <xpath expr="//button[@name='payment_action_capture']" position='after'>
+                    <button name="%(action_account_saleorder_payment)d" 
+                            id="account_invoice_payment_btn" 
+                            type="action" 
+                            string="Registrar Pago-" 
+                            class="oe_highlight"
+                            context="{'partner_id': partner_id, 'payment_type': 'inbound','x_id_nreferencia': name}"
+                    />
+                </xpath>
                 
                 <xpath expr="//field[@name='payment_term_id']" position='after'>
-                        <field name="x_id_numero_referencia"></field>
-                        <field name="pagos_ids" ></field>
+                    <field name="x_id_numero_referencia"></field>
                 </xpath>
+<!--                SE HABIA PUESTO PARA LOS PAGOS PERO SE SUSTITUYE CON BOTON-->
+<!--                <xpath expr="//page[@name='order_lines']" position='after'>
+                    <page string="Pagos Realizados" name="order_pagos">
+                        <field name="pagos_ids" ></field>
+                    </page>
+                </xpath>-->
             </field>
         </record>
+        
     </data>
 </odoo>

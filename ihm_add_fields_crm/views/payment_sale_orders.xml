@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_sale_orders_form" model="ir.ui.view">
+        <field name="name">payment.sale.orders.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"></field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_transaction_id']" position="after">
+                <field name="x_id_nreferencia"></field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -5,6 +5,12 @@ from odoo import models
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
+    
+    #FUNCION PARA CALCULO DE ELEMENTOS
+#    @api.one
+#    @api.depends('invoice_line_ids.price_subtotal')
+#    def _compute_total_elementos(self):
+#        self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
 
     #Para relacionar los inmuebles de tipo "bien adicional" con un inmueble "normal"
     _parent_store = True
@@ -42,6 +48,10 @@ class AddProductFields(models.Model):
                                        'inmueble_id', #un campo de regreso
                                        string="Asignacion elementos"
                                        )
+#CAMPO PARA EL CALCULO DE TOTAL DE LOS ELEMENTOS
+#    importe_total_elementos = fields.Float(string='Importe total elementos',
+#                                           store=True, readonly=True, compute='_compute_total_elementos')
+        
     oportunidades_ids = fields.One2many(
                                         'crm.lead', #modelo al que se hace referencia
                                         'id_producto_inmueble', #un campo de regreso
