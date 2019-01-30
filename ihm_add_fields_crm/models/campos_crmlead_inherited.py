@@ -61,8 +61,6 @@ class CamposResPartner(models.Model):
                                            string="¿Se ha realizado depósito?",
                                            )
 
-                                        
-
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'
     name = fields.Char(

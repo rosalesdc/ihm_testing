@@ -28,9 +28,10 @@
 
     # always loaded
     'data': [
+    #'views/vista_crm_sale_button.xml', ESTO ERA PARA AGREGAR EN EL CONTEXTO EL NUMERO DE REFERENCIA
     'views/campos_crm.xml',
-    'views/sale_order_inherited.xml',
     'views/payment_sale_orders.xml',
+    'views/sale_order_inherited.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,

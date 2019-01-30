@@ -11,15 +11,19 @@ class SaleOrderMod(models.Model):
                                      string='Oportunidad',
                                      )
 
-    x_id_numero_referencia = fields.Many2one(
-                                             string='Número de Referencia',
-                                             
-                                             related='opportunity_id.id_numero_referencia',
-                                             )
-                                             
+#    x_id_numero_referencia = fields.Many2one(
+#                                             string='Número de Referencia',                                             
+#                                             related='opportunity_id.id_numero_referencia',
+#                                             )
+
+    id_numero_referencia = fields.Many2one(
+                                           'numero.referencia',
+                                           string="Número de Referencia"
+                                           )
+                    
     pagos_ids = fields.Many2many(
-                                'account.payment',
-                                string="Pago",
-                                store=True,
-                                )
+                                 'account.payment',
+                                 string="Pago",
+                                 store=True,
+                                 )
                                 

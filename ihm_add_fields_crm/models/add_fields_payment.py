@@ -11,9 +11,7 @@ class AddPaymentFields(models.Model):
                                        string="Ordenes Venta",
                                        store=True,
                                        )
-
-    x_id_nreferencia = fields.Char(
-                                       string='Número de Referencia',
-                                       
-                                       
-                                       )
+    id_numero_referencia = fields.Many2one(
+                                           'numero.referencia',
+                                           string="Número de Referencia"
+                                           )

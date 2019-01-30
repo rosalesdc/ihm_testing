@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="calendario_stock_picking_view_inherited">
+            <field name="name">calendario.stock.picking.view.inherited</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='extra']" position="before">
+                    <group string="Citas ">
+                        <field name="x_calendario_ids" nolabel="1"><!--hay top y botton-->
+                            <tree editable="top">
+                                <field name="name"></field>
+                                <field name="fecha_agendada"></field>
+                                <field name="hora_agendada" widget="float_time"></field>
+                                <!--                                <field name="proyecto_id" readonly="True"/>-->
+                            </tree>
+                        </field>	
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
