@@ -45,6 +45,6 @@ class AsignacionElementos(models.Model):
     importe = fields.Float(
                            string="Importe",
                            store=False,
-                           compute='_compute_importe'
+                           compute='_compute_importe',
                            )
                            

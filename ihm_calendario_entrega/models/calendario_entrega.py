@@ -22,12 +22,23 @@ class CalendarioEntrega(models.Model):
 class StockPikingDeliver(models.Model):
     _inherit = 'stock.picking'
     
+#    @api.multi
+#    def _compute_meeting_count(self):
+#        meeting_data = self.env['calendar.event'].read_group([('x_deliver_id', 'in', self.ids)], ['x_deliver_id'], ['x_deliver_id'])
+#        mapped_data = {m['x_deliver_id'][0]: m['x_deliver_id'] for m in meeting_data}
+#        for lead in self:
+#            lead.meeting_count = mapped_data.get(lead.id, 0)                                   
+    
     @api.multi
     def _compute_meeting_count(self):
-        meeting_data = self.env['calendar.event'].read_group([('x_deliver_id', 'in', self.ids)], ['x_deliver_id'], ['x_deliver_id'])
-        mapped_data = {m['x_deliver_id'][0]: m['x_deliver_id'] for m in meeting_data}
-        for lead in self:
-            lead.meeting_count = mapped_data.get(lead.id, 0)                                   
+        contador = 0
+        for line in self.x_calendario_ids:
+            contador += 1
+            
+        self.meeting_count=contador
+        
+        #self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
+        
     
     @api.multi
     def action_schedule_meeting(self):
@@ -40,7 +51,7 @@ class StockPikingDeliver(models.Model):
         if self.partner_id:
             partner_ids.append(self.partner_id.id)
         action['context'] = {
-            'default_x_deliver_id': self.id ,
+            'default_x_deliver_id': self.id,
             'default_partner_id': self.partner_id.id,
             'default_partner_ids': partner_ids,
             #'default_team_id': self.team_id.id,
@@ -49,16 +60,19 @@ class StockPikingDeliver(models.Model):
         return action
     
     x_calendario_ids = fields.One2many(
-                                       'calendario.entrega', #modelo al que se hace referencia
-                                       'id_po_deliver', #un campo de regreso
+                                       'calendar.event', #modelo al que se hace referencia
+                                       'x_deliver_id', #un campo de regreso
                                        string="Calendario entregas"
                                        )
     
     #LAMAR AQUI LA FUNCION PARA CONTAR LOS MEETINGS
-    meeting_count = fields.Integer('# Meetings')                                   
     
+    meeting_count = fields.Integer(string='# Meetings',
+                                   readonly=True,
+                                   compute='_compute_meeting_count',
+                                   )                               
     
-    
+
 class CalendarEventDeliver(models.Model):
     _inherit = 'calendar.event'
     

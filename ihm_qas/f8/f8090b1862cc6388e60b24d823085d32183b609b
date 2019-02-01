@@ -1,0 +1,34 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:donat="http://www.sat.gob.mx/donat" targetNamespace="http://www.sat.gob.mx/donat" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="Donatarias">
+    <xs:annotation>
+      <xs:documentation>Nodo opcional para incluir la informaci&#243;n requerida por el Servicio de Administraci&#243;n Tributaria a las organizaciones civiles o fideicomisos autorizados para recibir donativos, que permite hacer deducibles los Comprobantes Fiscales Digitales a los donantes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="1.0">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la versi&#243;n del complemento de donatarias</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="noAutorizacion" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el n&#250;mero del oficio en que se haya informado a la organizaci&#243;n civil o fideicomiso, la procedencia de la autorizaci&#243;n para recibir donativos deducibles, o su renovaci&#243;n correspondiente otorgada por el Servicio de Administraci&#243;n Tributaria.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="fechaAutorizacion" type="xs:date" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la fecha del oficio en que se haya informado a la organizaci&#243;n civil o fideicomiso, la procedencia de la autorizaci&#243;n para recibir donativos deducibles, o su renovaci&#243;n correspondiente otorgada por el Servicio de Administraci&#243;n Tributaria.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="leyenda" use="required" fixed="Este comprobante ampara un donativo, el cual ser&#225; destinado por la donataria a los fines propios de su objeto social. En el caso de que los bienes donados hayan sido deducidos previamente para los efectos del impuesto sobre la renta, este donativo no es deducible. La reproducci&#243;n no autorizada de este comprobante constituye un delito en los t&#233;rminos de las disposiciones fiscales.">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para se&#241;alar de manera expresa que el comprobante que se expide se deriva de un donativo.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

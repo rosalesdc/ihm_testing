@@ -1,0 +1,170 @@
+<xs:schema xmlns:vehiculousado="http://www.sat.gob.mx/vehiculousado" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sat.gob.mx/vehiculousado" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="VehiculoUsado">
+    <xs:annotation>
+      <xs:documentation>Complemento opcional que permite incorporar informaci&#243;n a los contribuyentes que enajenen veh&#237;culos nuevos a personas f&#237;sicas que no tributen en los t&#233;rminos de las Secciones I y II del Cap&#237;tulo II del T&#237;tulo IV de la ley del ISR, y que reciban en contraprestaci&#243;n como resultados de esa enajenaci&#243;n un veh&#237;culo usado y dinero</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="InformacionAduanera" type="vehiculousado:t_InformacionAduanera" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Nodo opcional para introducir la informaci&#243;n aduanera aplicable cuando se trate de ventas de primera mano de mercanc&#237;as importadas.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Version" use="required" fixed="1.0">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la versi&#243;n del complemento</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="montoAdquisicion" type="vehiculousado:t_Importe" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el monto de adquisici&#243;n del veh&#237;culo usado seg&#250;n factura original, primera venta</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="montoEnajenacion" type="vehiculousado:t_Importe" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el monto de enajenaci&#243;n del veh&#237;culo usado</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="claveVehicular" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la clave vehicular del veh&#237;culo usado</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="7"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="marca" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la marca  del veh&#237;culo usado</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="tipo" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el tipo del veh&#237;culo usado</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="modelo" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el a&#241;o modelo del veh&#237;culo usado</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:pattern value="[0-9]{4}"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="numeroMotor" use="optional">
+        <xs:annotation>
+          <xs:documentation>Atributo opcional para expresar el n&#250;mero de motor del veh&#237;culo usado (en caso de contar con dicho n&#250;mero se deber&#225; ingresar)</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="17"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="numeroSerie" use="optional">
+        <xs:annotation>
+          <xs:documentation>Atributo opcional para expresar el n&#250;mero de serie de la carrocer&#237;a del veh&#237;culo usado (en caso de contar con dicho n&#250;mero se deber&#225; ingresar)</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="17"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="NIV" use="optional">
+        <xs:annotation>
+          <xs:documentation>Atributo opcional para expresar el n&#250;mero de identificaci&#243;n vehicular del veh&#237;culo usado (Cuando exista el NIV deber&#225; incluirse este invariablemente)</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:minLength value="1"/>
+            <xs:maxLength value="17"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="valor" type="vehiculousado:t_Importe" use="required">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar el valor del veh&#237;culo, establecido en la Gu&#237;a EBC o Libro Azul (Gu&#237;a de Informaci&#243;n a Comerciantes de Autom&#243;viles y Camiones y Aseguradores de la Rep&#250;blica Mexicana) vigente, emitida por la Asociaci&#243;n Nacional de Comerciantes en Autom&#243;viles y Camiones  nuevos y usados A.C.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="t_InformacionAduanera">
+    <xs:annotation>
+      <xs:documentation>Tipo definido para expresar informaci&#243;n aduanera</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="numero" use="required">
+      <xs:annotation>
+        <xs:documentation>Atributo requerido para expresar el n&#250;mero del documento aduanero que ampara la importaci&#243;n del bien.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"/>
+          <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="fecha" use="required">
+      <xs:annotation>
+        <xs:documentation>Atributo requerido para expresar la fecha de expedici&#243;n del documento aduanero que ampara la importaci&#243;n del bien.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:date">
+          <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="aduana">
+      <xs:annotation>
+        <xs:documentation>Atributo opcional para precisar la aduana por la que se efectu&#243; la importaci&#243;n del bien.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:minLength value="1"/>
+          <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:simpleType name="t_Importe">
+    <xs:annotation>
+      <xs:documentation>Tipo definido para expresar importes num&#233;ricos con fracci&#243;n hasta seis decimales</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="6"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

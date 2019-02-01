@@ -21,14 +21,23 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'mail',
         'sale',
         'sale_management',
     ],
 
     # always loaded
     'data': [
+    'views/venta_escritura_view.xml',
     'views/venta_inherited.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,
 }
+
+#CAMPO PARA ARCHIVOS ADJUNTOS
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/in-binary-field-odoo-v-11-134833
+#BUSCAR ELEMENTOS
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-do-a-sql-query-in-odoo-10-119605
+#AGREGAR Chatter
+#http://www.odooninja.com/add-chatter-existing-model/

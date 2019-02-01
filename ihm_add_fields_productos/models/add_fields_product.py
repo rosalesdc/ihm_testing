@@ -2,6 +2,7 @@
 
 from odoo import fields
 from odoo import models
+from odoo import api
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
@@ -11,7 +12,18 @@ class AddProductFields(models.Model):
 #    @api.depends('invoice_line_ids.price_subtotal')
 #    def _compute_total_elementos(self):
 #        self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
-
+    
+    @api.one
+    @api.depends('x_asignacion_ids.importe')
+    def _compute_total_elementos(self):
+        self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
+        
+    @api.one
+    def asignar_precio_inmueble(self):
+        #Generates a random name between 9 and 15 characters long and writes it to the record.
+        precio_calculado=float(self.importe_total_elementos)
+        self.write({'list_price': precio_calculado})
+    
     #Para relacionar los inmuebles de tipo "bien adicional" con un inmueble "normal"
     _parent_store = True
     parent_id     = fields.Many2one('product.template', string="Inmueble relacionado")
@@ -36,7 +48,7 @@ class AddProductFields(models.Model):
                                selection=[
                                ('Disponible', 'Disponible'),
                                ('Apartado', 'Apartado'),
-                               ('Vendido', 'Entregado'),
+                               ('Vendido', 'Vendido'),
                                ('Entregado', 'Entregado'),
                                ],
                                string="Estatus"
@@ -48,9 +60,13 @@ class AddProductFields(models.Model):
                                        'inmueble_id', #un campo de regreso
                                        string="Asignacion elementos"
                                        )
+                                       
 #CAMPO PARA EL CALCULO DE TOTAL DE LOS ELEMENTOS
-#    importe_total_elementos = fields.Float(string='Importe total elementos',
-#                                           store=True, readonly=True, compute='_compute_total_elementos')
+    importe_total_elementos = fields.Float(string='Importe total elementos',
+                                           #store=True, 
+                                           readonly=True, 
+                                           compute='_compute_total_elementos',
+                                           )
         
     oportunidades_ids = fields.One2many(
                                         'crm.lead', #modelo al que se hace referencia

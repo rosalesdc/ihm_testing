@@ -8,5 +8,5 @@ class SaleOrderInherited(models.Model):
     
     x_venta_escritura_id = fields.Many2one(
                                        'venta.escrituras', #nombre del modelo con el que se relaciona
-                                       string="Escrituras"
+                                       string="Escritura/Contrato"
                                        )

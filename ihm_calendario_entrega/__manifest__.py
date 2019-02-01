@@ -29,7 +29,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/calendario_entrega_view.xml',
+        #'views/calendario_entrega_view.xml',
         'views/smart_button_citas.xml',
     ],
     # only loaded in demonstration mode

@@ -1,0 +1,193 @@
+<xs:schema xmlns:destruccion="http://www.sat.gob.mx/certificadodestruccion" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.sat.gob.mx/certificadodestruccion" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="certificadodedestruccion">
+    <xs:annotation>
+      <xs:documentation>Complemento para incorporar la informaci&#243;n que integra el certificado de destrucci&#243;n de veh&#237;culos destruidos por los centros de destrucci&#243;n autorizados por el SAT.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VehiculoDestruido">
+          <xs:annotation>
+            <xs:documentation>Nodo requerido para expresar la informaci&#243;n del veh&#237;culo que se destruy&#243;.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="Marca" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar la marca del veh&#237;culo que se destruy&#243;.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="50"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="TipooClase" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar el tipo o clase del veh&#237;culo que se destruy&#243;.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="50"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="A&#241;o" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para la expresi&#243;n del a&#241;o del veh&#237;culo.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:int">
+                  <xs:minInclusive value="1900"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Modelo" use="optional">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para expresar el modelo del veh&#237;culo que se destruy&#243;.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="NIV" use="optional">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para expresar el  n&#250;mero de identificaci&#243;n vehicular del veh&#237;culo (Cuando exista el NIV deber&#225; incluirse este invariablemente).</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="17"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="NumSerie" use="optional">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para expresar el n&#250;mero de serie de la carrocer&#237;a del veh&#237;culo (en caso de contar con dicho n&#250;mero se deber&#225; ingresar)</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="17"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="NumPlacas" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar el n&#250;mero de placas met&#225;licas de identificaci&#243;n del servicio p&#250;blico federal o, en su caso, del servicio p&#250;blico de autotransporte de pasajero urbano o suburbano.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="10"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="NumMotor" use="optional">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para expresar el n&#250;mero de motor del veh&#237;culo (en caso de contar con dicho n&#250;mero se deber&#225; ingresar).</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="17"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="NumFolTarjCir" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar el n&#250;mero de folio de la tarjeta de circulaci&#243;n.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="40"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InformacionAduanera" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Nodo opcional para expresar la informaci&#243;n aduanera aplicable cuando se trate de un veh&#237;culo importado que se destruy&#243;.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="NumPedImp" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar el n&#250;mero de documento aduanero que ampara la importaci&#243;n del veh&#237;culo a destruir.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:maxLength value="40"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Fecha" use="required" type="xs:date">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para expresar la fecha de expedici&#243;n del documento aduanero que ampara la importaci&#243;n del veh&#237;culo a destruir.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Aduana" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para precisar la aduana a trav&#233;s de la cual se regulariz&#243; la legal estancia en el pa&#237;s del veh&#237;culo destruido.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="Version" use="required" fixed="1.0">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido que indica la versi&#243;n del complemento.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="Serie" use="required" type="destruccion:c_TipoSerie">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar  la serie de acuerdo al cat&#225;logo.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="NumFolDesVeh" use="required">
+        <xs:annotation>
+          <xs:documentation>
+            Atributo requerido que expresa el n&#250;mero de folio para la destrucci&#243;n del veh&#237;culo emitido por el Servicio de Administraci&#243;n Tributaria.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="c_TipoSerie">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SERIE A"/>
+      <xs:enumeration value="SERIE B"/>
+      <xs:enumeration value="SERIE C"/>
+      <xs:enumeration value="SERIE D"/>
+      <xs:enumeration value="SERIE E"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

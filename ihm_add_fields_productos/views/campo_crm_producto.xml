@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//group" position='after'>
                     <group>
-                    <field name="id_producto_inmueble" domain="[('es_inmueble', '=', True)]"></field>
+                    <field name="id_producto_inmueble" domain="[('estatus', '=', 'Disponible')]"></field>
                     </group>
                 </xpath>
             </field>

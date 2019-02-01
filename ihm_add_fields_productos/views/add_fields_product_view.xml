@@ -42,7 +42,11 @@
                                     <field name="cantidad"></field>
                                     <field name="importe" sum="Importe Total"></field>
                                 </tree>
-                            </field>	
+                            </field>
+                            <group>
+                                <field name="importe_total_elementos"></field>
+                                <button string="Asignar este precio al Inmueble" type="object" name="asignar_precio_inmueble" class="oe_highlight"/>
+                            </group>
                         </group>
                     </page>
                 </xpath>

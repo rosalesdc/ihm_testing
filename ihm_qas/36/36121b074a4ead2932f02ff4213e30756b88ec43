@@ -1,0 +1,56 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:leyendasFisc="http://www.sat.gob.mx/leyendasFiscales" targetNamespace="http://www.sat.gob.mx/leyendasFiscales" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:element name="LeyendasFiscales">
+    <xs:annotation>
+      <xs:documentation>Nodo opcional para incluir leyendas previstas en disposiciones fiscales, distintas a las contenidas en el est&#225;ndar de Comprobante Fiscal Digital (CFD) o Comprobante Fiscal Digital a trav&#233;s de Internet (CFDI).</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Leyenda" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Nodo para expresar la(s) leyenda(s) fiscal(es) que apliquen al comprobante</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:attribute name="disposicionFiscal">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para especificar la Ley, Resoluci&#243;n o Disposici&#243;n fiscal que regula la leyenda, deber&#225; expresarse en siglas de may&#250;sculas y sin puntuaci&#243;n (p. ej: ISR)</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="norma">
+              <xs:annotation>
+                <xs:documentation>Atributo opcional para especificar el n&#250;mero de Art&#237;culo o en su caso Regla que regula la obligaci&#243;n de la leyenda</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:whiteSpace value="collapse"/>
+                  <xs:minLength value="1"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="textoLeyenda" use="required">
+              <xs:annotation>
+                <xs:documentation>Atributo requerido para especificar la leyenda fiscal</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:minLength value="1"/>
+                  <xs:whiteSpace value="collapse"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" fixed="1.0">
+        <xs:annotation>
+          <xs:documentation>Atributo requerido para expresar la versi&#243;n del complemento de Leyendas Fiscales</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

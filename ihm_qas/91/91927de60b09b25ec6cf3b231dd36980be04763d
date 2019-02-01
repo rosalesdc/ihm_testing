@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Sello="amSX8N/YggIWxGyOOsALndedMYYSUMU/svlbzjIJ2ttyzAmpiKH2RGIrKQp5zcMbd+Rqr5LvlFZR3ZNc3/Aq6ReQtBzHl4PVpSxfR/VIx+QeoFfkjY4P0Nj59qjbutNvVSz0Q5cj4Pq7x4bKeAPV2g+aSAaVbJkG5AhsdM+V619c2CPBEFDwSZVJEYWJQYrUQwMJhabnlQu3aVRlP7BqdB1KFVkVvi9SM6QS8plgVOMiBIrLmNwORbB2HazovegvAHm/kfcn8vt2ashiA4fChvKBulax/CesDV5PGXSsiIe7GY3Va2BibS4tA90V1g5/Kdj5fRBfJT0KDmio4HLvpw==" Fecha="2019-01-11T11:09:26" Folio="2" Serie="INV 2019" FormaPago="03" NoCertificado="00001000000408181830" Certificado="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" CondicionesDePago="Pago inmediato" SubTotal="5000000.00" Moneda="MXN" Total="5000000.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="11000">
+  <cfdi:Emisor Rfc="NIC070222RR8" Nombre="Nueva Imagen Construcciones SA de CV" RegimenFiscal="601"/>
+  <cfdi:Receptor Rfc="XAXX010101000" Nombre="INMOBILIARIA IHM SA" UsoCFDI="I01"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="72111101" NoIdentificacion="OP" Cantidad="1.0" ClaveUnidad="E48" Unidad="Servicio" Descripcion="OP  OBRAS EN PROCESO" ValorUnitario="5000000.00" Importe="5000000.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="5000000.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="0.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="0.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+</cfdi:Comprobante>

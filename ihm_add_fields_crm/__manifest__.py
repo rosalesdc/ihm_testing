@@ -21,9 +21,11 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
-        'crm', # es el nombre de la aplicacion de la que extendemos
+        'crm', 
         'sale',
         'sale_management',
+        'stock',
+        'ihm_add_fields_productos',#esta dependencia ya que los productos deben tener los estados
     ],
 
     # always loaded
@@ -48,3 +50,6 @@
 
 #BOTON QUE ABRE UNA VISTA
 #https://www.odoo.com/es_ES/forum/ayuda-1/question/create-window-action-button-using-xml-id-112510
+
+#REDEFINIR METODOS
+#https://emperove.gitbooks.io/fundamentos-de-desarrollo-odoo-10/content/capitulo-3.html

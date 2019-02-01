@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <record id="escrituras_form_view" model="ir.ui.view">
+            <field name="name">escrituras.form.view</field>
+            <field name="model">venta.escrituras</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Información de Escritura</h1>
+                        </div>
+                        <group>
+                            <field name="name"></field>
+                            <field name="notaria"></field>
+                            <field name="fecha_escritura"></field>
+                            <field name="message_ids" widget="mail_thread"/>	
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="escrituras_tree_view" model="ir.ui.view">
+            <field name="name">escrituras.tree.view</field>
+            <field name="model">venta.escrituras</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"></field>
+                    <field name="notaria"></field>
+                    <field name="fecha_escritura"></field>
+                </tree>
+            </field>
+        </record>
+
+        <record id="escrituras_search_view" model="ir.ui.view">
+            <field name="name">escrituras.search.view</field>
+            <field name="model">venta.escrituras</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name" />
+                </search>
+            </field>
+        </record>
+                
+        <record id="venta_escritura_action_window" model="ir.actions.act_window">               
+            <field name="name">Escrituras</field>
+            <field name="res_model">venta.escrituras</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="context">
+                {'search_default_sale_order_id': [active_id], 'default_sale_order_id': active_id}
+            </field>
+        </record>
+    </data>
+</odoo>
