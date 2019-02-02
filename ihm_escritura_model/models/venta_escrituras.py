@@ -5,7 +5,8 @@ from odoo import models
 
 class VentaEscrituras(models.Model):
     _name = 'venta.escrituras'
-    _inherit = ['mail.thread']
+#    _inherit = ['mail.thread']
+#    _inherit = ['mail.thread', 'mail.activity.mixin']
     
     name = fields.Char(
                        string="Numero Escrituras",
@@ -17,5 +18,10 @@ class VentaEscrituras(models.Model):
                                   string="Fecha"
                                   )
 
+#    orden_id = fields.Many2one(
+#                                 'sale.order',
+#                                 string="Orden"
+#                                 )
+                
 #    attachment = fields.Binary(string="Attachment",)    
 #    store_fname = fields.Char(string="File Name")

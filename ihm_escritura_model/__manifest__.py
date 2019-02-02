@@ -28,11 +28,13 @@
 
     # always loaded
     'data': [
+    'views/inmueble_escritura_view.xml',
     'views/venta_escritura_view.xml',
     'views/venta_inherited.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,
+    'auto_install':False,
 }
 
 #CAMPO PARA ARCHIVOS ADJUNTOS
