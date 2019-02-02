@@ -7,9 +7,9 @@
             <field name="inherit_id" ref="sale.view_order_form"></field>
             <field name="arch" type="xml">
                 <xpath expr="//group/group" position='after'>
-<!--                    <group>
-                        <field name="x_venta_escritura_ids"/>
-                    </group>-->
+                    <group>
+                        <field name="x_inmueble_escritura_id"/>
+                    </group>
                 </xpath>
             </field>
         </record>

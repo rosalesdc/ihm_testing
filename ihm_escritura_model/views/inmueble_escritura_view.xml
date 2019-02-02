@@ -14,14 +14,16 @@
                             </h1>
                         </div>
                         <group>
-                            <group>
-                                <field name="name" placeholder="Número de Escritura"/>
-                                <field name="notaria"></field>
-                                <field name="fecha"></field>
-                                <field name="orden_venta_id"></field>
-                                <field name="message_ids" widget="mail_thread"/>
-                            </group>
+                            <field name="name" placeholder="Número de Escritura"/>
+                            <field name="notaria"></field>
+                            <field name="fecha"></field>
+                            <field name="orden_venta_id"></field>
                         </group>
+                        <div class="oe_chatter">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids" widget="mail_activity"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
                     </sheet>
                 </form>
             </field>
