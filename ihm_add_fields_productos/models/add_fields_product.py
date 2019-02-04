@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from odoo import api
 from odoo import fields
 from odoo import models
-from odoo import api
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
@@ -21,7 +21,7 @@ class AddProductFields(models.Model):
     @api.one
     def asignar_precio_inmueble(self):
         #Generates a random name between 9 and 15 characters long and writes it to the record.
-        precio_calculado=float(self.importe_total_elementos)
+        precio_calculado = float(self.importe_total_elementos)
         self.write({'list_price': precio_calculado})
     
     #Para relacionar los inmuebles de tipo "bien adicional" con un inmueble "normal"
@@ -49,6 +49,9 @@ class AddProductFields(models.Model):
                                ('Disponible', 'Disponible'),
                                ('Apartado', 'Apartado'),
                                ('Vendido', 'Vendido'),
+                               ('Escriturado', 'Escriturado'),
+                               ('En Preparación', 'En preparación'),
+                               ('Liberado', 'Liberado'),
                                ('Entregado', 'Entregado'),
                                ],
                                string="Estatus"
@@ -73,6 +76,11 @@ class AddProductFields(models.Model):
                                         'id_producto_inmueble', #un campo de regreso
                                         string="Oportunidad"
                                         )#
+                                        
+    cantidad_enganche = fields.Float(
+                                     string="Cantidad Enganche"
+                                    
+                                     )
                                             
 
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html

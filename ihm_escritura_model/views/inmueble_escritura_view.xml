@@ -67,7 +67,7 @@
                 }
             </field>
         </record>
-        <menuitem
+<!--        <menuitem
             id="inmueble_escritura_menuitem"
             name="Escrituras"
             sequence="10"
@@ -78,6 +78,6 @@
             action="inmueble_escritura_action_window"
             parent="inmueble_escritura_menuitem"
             sequence="10"
-        />
+        />-->
     </data>
 </odoo>

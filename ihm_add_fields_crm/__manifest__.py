@@ -25,6 +25,7 @@
         'sale',
         'sale_management',
         'stock',
+        'project',
         'ihm_add_fields_productos',#esta dependencia ya que los productos deben tener los estados
     ],
 
@@ -53,3 +54,8 @@
 
 #REDEFINIR METODOS
 #https://emperove.gitbooks.io/fundamentos-de-desarrollo-odoo-10/content/capitulo-3.html
+
+#PASAR PARAMETRO A VISTA
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-open-form-view-from-smart-button-with-pass-value-from-current-form-to-the-another-form-coming-from-button-action-131301
+
+#https://sateliteguayana.wordpress.com/2015/02/09/presentar-vista-particular-con-atributo-view_id-desde-un-campo-en-openerp-odoo/

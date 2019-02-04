@@ -16,7 +16,7 @@
                     <field name="id_entidad_financiera" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
 <!--                    <field name="id_entidad_financira_cofinavit"></field>-->
                     <field name="dias_desde_creacion"></field>
-                    <field name="deposito_18_porciento"></field>
+<!--                    <field name="deposito_18_porciento"></field>-->
                     </group>
                 </xpath>
             </field>

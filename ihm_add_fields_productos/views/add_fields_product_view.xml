@@ -31,6 +31,7 @@
                                 <field name="caracteristicas"></field>
                                 <field name="estatus"></field>
                                 <field name="x_proyecto_id"></field>
+                                <field name="cantidad_enganche"></field>
                             </group>
                         </group>
                         <group string="Asignacion de elementos">

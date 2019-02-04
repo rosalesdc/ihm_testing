@@ -29,7 +29,7 @@
     # always loaded
     'data': [
     'views/inmueble_escritura_view.xml',
-    'views/venta_escritura_view.xml',
+    #'views/venta_escritura_view.xml',
     'views/venta_inherited.xml',
     'security/ir.model.access.csv',
     ],

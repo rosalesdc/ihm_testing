@@ -1,3 +1,2 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_venta_escrituras,access_venta_escrituras,model_venta_escrituras,base.group_user,1,1,1,1
 access_inmueble_escritura,access_inmueble_escritura,model_inmueble_escritura,base.group_user,1,1,1,1

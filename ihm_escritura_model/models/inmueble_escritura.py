@@ -1,9 +1,7 @@
-
 # -*- coding: utf-8 -*-
 from odoo import api
 from odoo import fields
 from odoo import models
-
 
 class InmuebleEscritura(models.Model): 
     _name = 'inmueble.escritura'

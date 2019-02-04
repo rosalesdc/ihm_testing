@@ -57,9 +57,9 @@ class CamposResPartner(models.Model):
     
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
                                          
-    deposito_18_porciento = fields.Boolean(
-                                           string="¿Se ha realizado depósito?",
-                                           )
+#    deposito_18_porciento = fields.Boolean(
+#                                           string="¿Se ha realizado depósito?",
+#                                           )
 
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'
