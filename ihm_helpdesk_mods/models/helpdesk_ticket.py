@@ -10,24 +10,24 @@ class HelpDeskInherited(models.Model):
                                     'product.template', #nombre del modelo con el que se relaciona
                                     string="Inmueble"
                                     )
-    x_detalle_id = fields.Many2one(
-                                   'detalle.reparaciones', #nombre del modelo con el que se relaciona
-                                   string="Detalle de reparaciones"
+    x_categoria_id = fields.Many2one(
+                                   'categoria.falla', #nombre del modelo con el que se relaciona
+                                   string="Categoría"
                                    )
 
 
-class DetalleReparaciones(models.Model):
-    _name = 'detalle.reparaciones'
-    name = fields.Char(string="Detalle")
-    categoria_falla_id = fields.Many2one(
-                                        'categoria.falla',
-                                        string="Categoría de Falla"
-                                         )
-                                         
-    acta_reparaciones_id = fields.Many2one(
-                                        'acta.reparaciones',
-                                        string="Acta de reparaciones"
-                                         )
+#class DetalleReparaciones(models.Model):
+#    _name = 'detalle.reparaciones'
+#    name = fields.Char(string="Detalle")
+#    categoria_falla_id = fields.Many2one(
+#                                        'categoria.falla',
+#                                        string="Categoría de Falla"
+#                                         )
+#                                         
+#    acta_reparaciones_id = fields.Many2one(
+#                                        'acta.reparaciones',
+#                                        string="Acta de reparaciones"
+#                                         )
 
 
 

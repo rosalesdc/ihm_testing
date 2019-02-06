@@ -7,22 +7,17 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"></field><!--Referencía al alemento heredado por su ID-->
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='priority']" position='after'>
-                    <sheet>
-                        <group>
                             <field name="x_inmueble_id" domain="[('es_inmueble', '=', True)]"/>
-                        </group>
-                    </sheet>
+                            <field name="x_categoria_id"></field>
                 </xpath>
-                <xpath expr="//div[@class='oe_chatter']" position='before'>
-                    <sheet>
-                            
-                        <field name="x_detalle_id" nolabel="1">
-                            <tree>
-                                <field name="categoria_falla_id"/>
-                                <field name="acta_reparaciones_id"/>
-                            </tree>
-                        </field>
-                    </sheet>
+                <xpath expr="//button[@name='toggle_active']" position="before">
+                    <button class="oe_stat_button" type="object" context="{'partner_id': partner_id}" name="action_schedule_meeting" icon="fa-calendar">
+                        <div class="o_stat_info">
+                            <field name="meeting_count" class="o_stat_value"/>
+                            <span class="o_stat_text" attrs="{'invisible': [('meeting_count', '&lt;', 2)]}"> Meetings</span>
+                            <span class="o_stat_text" attrs="{'invisible': [('meeting_count', '&gt;', 1)]}"> Meeting</span>
+                        </div>
+                    </button>
                 </xpath>
             </field>
         </record>
