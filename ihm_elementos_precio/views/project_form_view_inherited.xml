@@ -13,12 +13,34 @@
                                 <field name="name"></field>
                                 <field name="uom"></field>
                                 <field name="precio_unitario"></field>
-<!--                                <field name="proyecto_id" readonly="True"/>-->
+                                <!--                                <field name="proyecto_id" readonly="True"/>-->
                             </tree>
                         </field>	
                     </group>
+                    <group string="Actualizacion masiva de productos (Estatus: Disponible)">
+                            <group>
+                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight"/>
+                            </group>
+                        </group>
                 </xpath>
             </field>
         </record>
     </data>
+    
+<!--    <data>
+        <record id="add_button_project_view" model="ir.ui.view">
+            <field name="name">add.button.project.view</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"></field>Referencía al alemento heredado por su ID
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='misc']" position="before">
+                        <group string="Actualizacion masiva de productos (Estatus: Disponible)">
+                            <group>
+                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight"/>
+                            </group>
+                        </group>
+                </xpath>
+            </field>
+        </record>
+    </data>-->
 </odoo>

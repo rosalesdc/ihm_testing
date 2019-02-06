@@ -20,8 +20,10 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'
-    ,'project'
+    'depends': ['base',
+    'project',
+    'stock',
+    #'ihm_add_fields_productos', #para acceder a los elementos de precio registrados en productos
     ],
 
     # always loaded
