@@ -34,7 +34,7 @@ class CamposResPartner(models.Model):
     cantidad_pagar_cbancario = fields.Float(
                                             string="Cantidad a pagar credito bancario",
                                             default=0.0,
-                                            required=True, )
+                                            required=True,)
     
     cantidad_pagar_infonavitfov = fields.Float('Cantidad a pagar INFONAVIT/FOVISTE', (10, 2))
     
@@ -56,10 +56,14 @@ class CamposResPartner(models.Model):
 #                                                     )
     
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
-                                         
-#    deposito_18_porciento = fields.Boolean(
-#                                           string="¿Se ha realizado depósito?",
-#                                           )
+    
+    expediente_apartado = fields.Date(string="Fecha de apartado")
+    expediente_contrato = fields.Date(string="Fecha de contrato")
+    expediente_ingreso_ifinanciera = fields.Date(string="Fecha de ingreso a institución financiera")
+    expediente_autorizacion_ifinanciera = fields.Date(string="Autorización de institucion financiera")
+    expediente_avaluo = fields.Date(string="Fecha de solicitud de avaluo")
+    expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
+    expediente_firma = fields.Date(string="Fecha de firma")
 
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'
