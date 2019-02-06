@@ -24,6 +24,7 @@
         'product',
         'sale',
         'project',
+        'ihm_add_fields_proyecto',#para obtener el equipo de entrega del proyecto
 
     ],
 
@@ -39,3 +40,7 @@
 	],
     'installable':True,
 }
+
+#envio de correos
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-send-email-in-openerp-by-python-code-72118
+#https://www.odoo.com/es_ES/forum/ayuda-1/question/how-to-send-email-from-html-form-112029

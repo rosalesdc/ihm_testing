@@ -4,6 +4,8 @@ from odoo import api
 from odoo import fields
 from odoo import models
 
+import smtplib
+
 class AddProductFields(models.Model):
     _inherit = 'product.template'
     
@@ -12,7 +14,33 @@ class AddProductFields(models.Model):
 #    @api.depends('invoice_line_ids.price_subtotal')
 #    def _compute_total_elementos(self):
 #        self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
-    
+
+    @api.onchange('estatus') #Validaciones, si algún miembro no tiene correo, si hay servidores configurados
+    def _envia_correos(self):
+        print("Ejecutando enviar")
+        if self.estatus=="Escriturado":
+            print("El inmueble es escriturado, enviando correo...")
+            
+            servidor_salida=self.env['ir.mail_server'].search([], limit=1)
+            
+            proyecto = self.env['project.project'].search([('id', '=', self.x_proyecto_id.id)], limit=1)
+            if not proyecto:
+                print("Producto sin proyecto asignado")
+            for miembros in proyecto.equipo_entrega:
+                sender = servidor_salida.smtp_user
+                #sender = 'drc@soluciones4g.com'
+                receivers = miembros.email
+                message = "Estimado(a) "+miembros.name+", el inmueble "+self.name+" ha cambiado su estatus a Escriturado"
+                smtpObj = smtplib.SMTP(host=servidor_salida.smtp_host, port=servidor_salida.smtp_port)
+                #smtpObj = smtplib.SMTP(host='smtp.gmail.com', port=587)
+                smtpObj.ehlo()
+                smtpObj.starttls()
+                smtpObj.ehlo()
+                smtpObj.login(user=servidor_salida.smtp_user, password=servidor_salida.smtp_pass)
+                #smtpObj.login(user="drc@soluciones4g.com", password="S3nsusveri5")
+                smtpObj.sendmail(sender, receivers, message)
+            print ("Correo enviado")
+        
     @api.one
     @api.depends('x_asignacion_ids.importe')
     def _compute_total_elementos(self):
@@ -20,7 +48,6 @@ class AddProductFields(models.Model):
         
     @api.one
     def asignar_precio_inmueble(self):
-        #Generates a random name between 9 and 15 characters long and writes it to the record.
         precio_calculado = float(self.importe_total_elementos)
         self.write({'list_price': precio_calculado})
     

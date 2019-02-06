@@ -9,4 +9,9 @@ class CamposProyecto(models.Model):
     cantidad_apartado = fields.Float(
                                      string="Cantidad Apartado"
                                      )
+                                     
+    equipo_entrega = fields.Many2many(
+                                      'res.partner',
+                                      string="Equipo de entrega"
+                                      )
 
