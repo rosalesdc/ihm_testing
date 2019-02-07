@@ -56,7 +56,6 @@ class CamposResPartner(models.Model):
 #                                                     )
     
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
-    
     expediente_apartado = fields.Date(string="Fecha de apartado")
     expediente_contrato = fields.Date(string="Fecha de contrato")
     expediente_ingreso_ifinanciera = fields.Date(string="Fecha de ingreso a institución financiera")

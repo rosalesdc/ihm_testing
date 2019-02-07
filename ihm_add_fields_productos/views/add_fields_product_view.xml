@@ -32,6 +32,7 @@
                                 <field name="estatus"></field>
                                 <field name="x_proyecto_id"></field>
                                 <field name="cantidad_enganche"></field>
+                                <field name="garantia_id"></field>
                             </group>
                         </group>
                         <group string="Asignacion de elementos">

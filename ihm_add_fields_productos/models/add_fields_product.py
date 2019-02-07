@@ -106,8 +106,10 @@ class AddProductFields(models.Model):
                                         
     cantidad_enganche = fields.Float(
                                      string="Cantidad Enganche"
-                                    
                                      )
-                                            
+    garantia_id = fields.Many2one(
+                                  'tipo.garantia',
+                                  string="Tipo de garantia"
+                                  )
 
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html
