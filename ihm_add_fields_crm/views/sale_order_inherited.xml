@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        
         <record id="action_account_saleorder_payment" model="ir.actions.act_window">
             <field name="name">Registra mi pago</field>
             <field name="res_model">account.payment</field>

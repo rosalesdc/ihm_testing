@@ -24,6 +24,9 @@
         'mail',
         'sale',
         'sale_management',
+        'crm',
+        'ihm_add_fields_crm',
+        'ihm_add_fields_productos',
     ],
 
     # always loaded

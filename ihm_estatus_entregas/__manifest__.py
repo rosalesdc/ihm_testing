@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+{
+    'name': "IHM estados entrega",
+    'description': """
+        Generar nuevo estado en transferencias
+    """,
+    'author': "Soluciones4G",
+    'website': "http://www.soluciones4g.com",
+    'version': '0.1',
+    'depends': ['base',
+    'stock',
+    'ihm_add_fields_productos',
+    ],
+    'data': [
+        'views/stock_picking_state.xml',
+        ],
+    'installable':True,
+    'auto_install':False,
+}
