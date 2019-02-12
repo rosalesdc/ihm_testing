@@ -11,7 +11,7 @@
                         <field name="es_inmueble"/>
                         <label for="es_inmueble"/>
                     </div>
-                    <div>
+<!--                    <div>
                         <field name="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
                         <label for="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
                     </div>
@@ -21,7 +21,7 @@
                     <div>
                         <label for="parent_id" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}"/>
                         <field name="parent_id" attrs="{'invisible':[('es_bien_adicional', '!=', True)]}" domain="[('es_inmueble', '=', True)]"/>
-                    </div>
+                    </div>-->
                 </xpath>
                 <xpath expr="//page[@name='general_information']" position='after'>
                     <page string="Inmueble" name="inmueble" attrs="{'invisible':[('es_inmueble', '!=', True)]}" >

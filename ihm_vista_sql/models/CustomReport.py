@@ -19,7 +19,7 @@ class CustomReport(models.Model):
                         FROM product_template  
                         FULL OUTER JOIN crm_lead 
                         ON product_template.id=crm_lead.id_producto_inmueble 
-                        WHERE product_template.es_inmueble=TRUE AND product_template.es_bien_adicional=FALSE AND product_template.company_id=1;
+                        WHERE product_template.es_inmueble=TRUE AND product_template.company_id=1;
                         """)
         #result = self._cr.dictfetchall() # return the data into the list of dictionary format
         print("finalizando")

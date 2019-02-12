@@ -8,15 +8,7 @@ import smtplib
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
-    
-    #FUNCION PARA CALCULO DE ELEMENTOS
-#    @api.one
-#    @api.depends('invoice_line_ids.price_subtotal')
-#    def _compute_total_elementos(self):
-#        self.importe_total_elementos = sum(line.importe for line in self.x_asignacion_ids)
-
-
-        
+           
     @api.one
     @api.depends('x_asignacion_ids.importe')
     def _compute_total_elementos(self):
@@ -26,25 +18,10 @@ class AddProductFields(models.Model):
     def asignar_precio_inmueble(self):
         precio_calculado = float(self.importe_total_elementos)
         self.write({'list_price': precio_calculado})
-    
-    #Para relacionar los inmuebles de tipo "bien adicional" con un inmueble "normal"
-    _parent_store = True
-    parent_id     = fields.Many2one('product.template', string="Inmueble relacionado")
-    parent_left   = fields.Integer('Parent Left', index=True)
-    parent_right  = fields.Integer('Parent  Right', index=True)
-    #child_ids = fields.One2many('product.tempĺate', 'parent_id')
-    
+       
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
-    es_bien_adicional = fields.Boolean(string="Es un bien adicional")
-    tipo_bien_adicional = fields.Selection(
-                                           selection=[
-                                           ('Cajon de Estacionamiento', 'Cajón de Estacionamiento'),
-                                           ('Bodega', 'Bodega'),
-                                           ],
-                                           string="Tipo de bien adicional",
-                                           default='Bodega',
-                                           )
+    
     caracteristicas = fields.Text(string="Características")
     numero = fields.Char(string="Número")
     estatus = fields.Selection(
