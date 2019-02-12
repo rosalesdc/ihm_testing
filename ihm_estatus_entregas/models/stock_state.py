@@ -9,29 +9,29 @@ from odoo import models
 class StockState(models.Model):
     _inherit = 'stock.picking'
 
-    state = fields.Selection([
-                             ('draft', 'Borrador'),
-                             ('waiting', 'Esperando otra operacion'),
-                             ('confirmed', 'En espera'),
-                             ('assigned', 'En preparación'),
-                             ('process', 'Liberado'),
-                             ('done', 'Hecho'),
-                             ('cancel', 'Cancelado'),
-                             ], string='Status', compute='_compute_state',
-                             copy=False, index=True, readonly=True, store=True, track_visibility='onchange',
-                             help=" * Draft: not confirmed yet and will not be scheduled until confirmed.\n"
-                             " * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows).\n"
-                             " * Waiting: if it is not ready to be sent because the required products could not be reserved.\n"
-                             " * Ready: products are reserved and ready to be sent. If the shipping policy is 'As soon as possible' this happens as soon as anything is reserved.\n"
-                             " * Done: has been processed, can't be modified or cancelled anymore.\n"
-                             " * Cancelled: has been cancelled, can't be confirmed anymore.")
-                             
-    @api.multi
-    def set_state_assigned_picking(self): #
-        self.ensure_one()
-        self.write({'state': 'process'})
-        for lines in self.move_lines:
-            lines.product_id.estatus = "Liberado"
+#    state = fields.Selection([
+#                             ('draft', 'Borrador'),
+#                             ('waiting', 'Esperando otra operacion'),
+#                             ('confirmed', 'En espera'),
+#                             ('assigned', 'En preparación'),
+#                             ('process', 'Liberado'),
+#                             ('done', 'Hecho'),
+#                             ('cancel', 'Cancelado'),
+#                             ], string='Status', compute='_compute_state',
+#                             copy=False, index=True, readonly=True, store=True, track_visibility='onchange',
+#                             help=" * Draft: not confirmed yet and will not be scheduled until confirmed.\n"
+#                             " * Waiting Another Operation: waiting for another move to proceed before it becomes automatically available (e.g. in Make-To-Order flows).\n"
+#                             " * Waiting: if it is not ready to be sent because the required products could not be reserved.\n"
+#                             " * Ready: products are reserved and ready to be sent. If the shipping policy is 'As soon as possible' this happens as soon as anything is reserved.\n"
+#                             " * Done: has been processed, can't be modified or cancelled anymore.\n"
+#                             " * Cancelled: has been cancelled, can't be confirmed anymore.")
+
+#    @api.multi
+#    def set_state_assigned_picking(self): #
+#        self.ensure_one()
+#        self.write({'state': 'process'})
+#        for lines in self.move_lines:
+#            lines.product_id.estatus = "Liberado"
             
     @api.multi
     def set_state_done_picking(self): #
@@ -43,20 +43,6 @@ class StockState(models.Model):
 #        producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
 #        producto_inmueble.estatus="Escriturado"
         
-        
-        
-    @api.multi
-    @api.depends('state', 'is_locked')
-    def _compute_show_validate(self):
-        for picking in self:
-            if not (picking.immediate_transfer) and picking.state == 'draft':
-                picking.show_validate = False
-            elif picking.state not in ('draft', 'waiting', 'confirmed', 'assigned', 'process') or not picking.is_locked:
-                picking.show_validate = False
-            else:
-                picking.show_validate = True
-                
-                      
         
     @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
     @api.one
@@ -89,16 +75,24 @@ class StockState(models.Model):
             else:
                 self.state = relevant_move_state
         
+        if self.state is 'assigned':
+            #Cambiar el estado del inmueble
+            for lines in self.move_lines:
+                print("Cambiando estados")
+                #cambiando el estado desde las lineas
+                #lines.product_id.estatus = "Entregado"
+                #cambiando el estado buscando el registro
+                producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
+                producto_inmueble.estatus = "Preparacion"
         if self.state is 'done':
             #Cambiar el estado del inmueble
             for lines in self.move_lines:
                 print("Cambiando estados")
                 #cambiando el estado desde las lineas
                 #lines.product_id.estatus = "Entregado"
-                
                 #cambiando el estado buscando el registro
                 producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
-                producto_inmueble.estatus = "Entregado"            
+                producto_inmueble.estatus = "Entregado"
         print("fin del metodo")
 
         

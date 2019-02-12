@@ -21,6 +21,12 @@ class InmuebleEscritura(models.Model):
                                      string="Orden"
                                      )
     
+    _sql_constraints = [
+        ('name_unique',
+         'UNIQUE(name)',
+         "En número de escritura debe ser único"),
+        ]
+    
     def _envia_correos(self,prod_inmueble): #Validaciones, si algún miembro no tiene correo, si hay servidores configurados
         print("Ejecutando enviar")
         if prod_inmueble.estatus=="Escriturado":
