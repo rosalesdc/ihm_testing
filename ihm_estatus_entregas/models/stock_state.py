@@ -32,6 +32,12 @@ class StockState(models.Model):
         self.write({'state': 'process'})
         for lines in self.move_lines:
             lines.product_id.estatus = "Liberado"
+            
+    @api.multi
+    def set_state_done_picking(self): #
+        
+        for lines in self.move_lines:
+            lines.product_id.estatus = "Entregado"
         
 #        oportunidad = self.env['crm.lead'].search([('id_numero_referencia.name', '=', escritura.orden_venta_id.id_numero_referencia.name)], limit=1)
 #        producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
@@ -49,6 +55,8 @@ class StockState(models.Model):
                 picking.show_validate = False
             else:
                 picking.show_validate = True
+                
+                      
         
     @api.depends('move_type', 'move_lines.state', 'move_lines.picking_id')
     @api.one
@@ -65,6 +73,7 @@ class StockState(models.Model):
         - Done: if the picking is done.
         - Cancelled: if the picking is cancelled
         '''
+
         if not self.move_lines:
             self.state = 'draft'
         elif any(move.state == 'draft' for move in self.move_lines):  # TDE FIXME: should be all ?
@@ -73,15 +82,23 @@ class StockState(models.Model):
             self.state = 'cancel'
         elif all(move.state in ['cancel', 'done'] for move in self.move_lines):
             self.state = 'done'
-            for lines in self.move_lines:
-                print("Cambiando estados")
-                #lines.product_id.estatus = "Entregado"
-                producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
-                producto_inmueble.estatus = "Entregado"
         else:
             relevant_move_state = self.move_lines._get_relevant_state_among_moves()
             if relevant_move_state == 'partially_available':
                 self.state = 'assigned'
             else:
                 self.state = relevant_move_state
+        
+        if self.state is 'done':
+            #Cambiar el estado del inmueble
+            for lines in self.move_lines:
+                print("Cambiando estados")
+                #cambiando el estado desde las lineas
+                #lines.product_id.estatus = "Entregado"
+                
+                #cambiando el estado buscando el registro
+                producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
+                producto_inmueble.estatus = "Entregado"            
         print("fin del metodo")
+
+        
