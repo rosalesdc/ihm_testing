@@ -11,7 +11,7 @@
                         <field name="es_inmueble"/>
                         <label for="es_inmueble"/>
                     </div>
-<!--                    <div>
+                    <!--                    <div>
                         <field name="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
                         <label for="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>
                     </div>
@@ -51,6 +51,30 @@
                             </group>
                         </group>
                     </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <!--        HACER SOLO LECTURA EL PRECIO-->
+        <record id="price_manager_form_view_user" model="ir.ui.view">
+            <field name="name">price.manager.form.view.user</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="price_manager_form_view_dir" model="ir.ui.view">
+            <field name="name">price.manager.form.view.dir</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view" />
+            <field name="groups_id" eval="[(6,0,[ref('ihm_ocultar_validar.group_director')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']" position="attributes">
+                    <attribute name="readonly">0</attribute>
                 </xpath>
             </field>
         </record>
