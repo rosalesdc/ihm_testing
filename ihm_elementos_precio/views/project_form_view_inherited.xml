@@ -19,7 +19,7 @@
                     </group>
                     <group string="Actualizacion masiva de productos (Estatus: Disponible)">
                             <group>
-                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight"/>
+                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight" groups="ihm_ocultar_validar.group_director" />
                             </group>
                         </group>
                 </xpath>
