@@ -67,7 +67,7 @@ class CamposResPartner(models.Model):
     
     asesor_ventas = fields.Many2one(
                                     'res.partner',
-                                    string="Asesor de venta"
+                                    string="Asesor de ventas"
                                     )
 
 class EntidadFinanciraCbancario(models.Model):

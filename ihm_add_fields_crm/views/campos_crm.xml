@@ -22,7 +22,7 @@
                 </xpath>
                 
                 <xpath expr="//field[@name='user_id']" position='after'>
-                    <field name="asesor_ventas" domain="[('category_id', '=', 'Asesor de ventas')]" ></field>
+                    <field name="asesor_ventas" domain="[('category_id', '=', 'Asesor de Ventas')]" ></field>
                 </xpath>
                 
                 <xpath expr="//page[@name='lead']" position='after'>

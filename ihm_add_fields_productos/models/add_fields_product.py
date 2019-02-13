@@ -31,7 +31,6 @@ class AddProductFields(models.Model):
                                ('Vendido', 'Vendido'),
                                ('Escriturado', 'Escriturado'),
                                ('Preparacion', 'En preparación'),
-                               ('Liberado', 'Liberado'),
                                ('Entregado', 'Entregado'),
                                ],
                                string="Estatus"
