@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="tag_asesor_ventas" model="res.partner.category">
+            <field name="name">Asesor de Ventas</field>
+        </record>
+    </data>
+</odoo>

@@ -11,3 +11,7 @@ class CampoRelacionProduct(models.Model):
                                            string="Inmueble asociado"
                                            )
 
+    id_proyecto = fields.Many2one(
+                                  'project.project',
+                                  string="Proyecto asociado"
+                                  )

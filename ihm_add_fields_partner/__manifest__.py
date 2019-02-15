@@ -28,6 +28,7 @@
     'data': [
     'views/campos_res_partner.xml',
     'security/ir.model.access.csv',
+    'data/etiquetas.xml',
     ],
     'installable':True,
 }

@@ -27,3 +27,7 @@ class SaleOrderMod(models.Model):
                                  store=True,
                                  )
                                 
+    id_proyecto = fields.Many2one(
+                                  'project.project',
+                                  string="Proyecto asociado"
+                                  )

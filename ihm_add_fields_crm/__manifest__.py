@@ -25,6 +25,7 @@
         'sale',
         'sale_management',
         'stock',
+        'contacts',
         'project',
         'account_accountant',
         'ihm_add_fields_productos',#esta dependencia ya que los productos deben tener los estados
