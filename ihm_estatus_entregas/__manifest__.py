@@ -13,6 +13,7 @@
     ],
     'data': [
         'views/stock_picking_state.xml',
+        'security/ir.model.access.csv',
         ],
     'installable':True,
     'auto_install':False,

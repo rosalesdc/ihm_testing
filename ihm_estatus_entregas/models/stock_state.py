@@ -10,11 +10,11 @@ class StockState(models.Model):
     _inherit = 'stock.picking'
 
     state = fields.Selection([
-                             ('draft', 'Borrador'),
+                             ('draft', 'Escriturado'),
                              ('waiting', 'Esperando otra operacion'),
-                             ('confirmed', 'En espera'),
-                             ('assigned', 'En preparación'),
-                             ('done', 'Hecho'),
+                             ('confirmed', 'En preparación'),
+                             ('assigned', 'Liberado'),
+                             ('done', 'Entregado'),
                              ('cancel', 'Cancelado'),
                              ], string='Status', compute='_compute_state',
                              copy=False, index=True, readonly=True, store=True, track_visibility='onchange',
@@ -31,14 +31,14 @@ class StockState(models.Model):
 #        self.write({'state': 'process'})
 #        for lines in self.move_lines:
 #            lines.product_id.estatus = "Liberado"
-            
+
 #    @api.multi
 #    def set_state_done_picking(self): #
-#        
+#
 #        for lines in self.move_lines:
 #            lines.product_id.estatus = "Entregado"
 
-    
+
     @api.depends('state')
     def _cambia_estatus(self):
         print("Cambiando estado")
@@ -48,34 +48,38 @@ class StockState(models.Model):
             for lines in self.move_lines:
                 #cambiando el estado desde las lineas
                 #lines.write({'estatus': 'Liberado'})
-                
+
                 #cambiando el estado buscando el registro
                 producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("En for con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
+                print("En for1 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Escriturado":
                     print("Cambiando -- Preparacion")
                     producto_inmueble.write({'estatus': 'Preparacion'})
-                producto_inmueble2 = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("Nueva variable: "+producto_inmueble2.estatus)
-                    
+                producto_inmueble2 = self.env['product.template'].search([('id', '=', lines.id)], limit=1)
+                #print("Nueva variable: "+producto_inmueble2.estatus)
+
         if self.state == "done":
             #Cambiar el estado del inmueble
             print("El estado de la orden es Done")
             for lines in self.move_lines:
                 #cambiando el estado desde las lineas
                 #lines.write({'estatus': 'Liberado'})
-                
+
                 #cambiando el estado buscando el registro
                 producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("En for con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
+                print("En for2 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Preparacion":
                     print("Cambiando -- Entregado")
                     producto_inmueble.write({'estatus': 'Entregado'})
                 producto_inmueble2 = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
                 print("Nueva variable: "+producto_inmueble2.estatus)
-                    
+
         return "Cambiando"
-        
-    
+
+
     cambia_estatus_inmueble = fields.Char(compute='_cambia_estatus')
-    
+
+    estado_id = fields.Many2one(
+                                     'estatus.model',
+                                     string="Estatus"
+                                     )

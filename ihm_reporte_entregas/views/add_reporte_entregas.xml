@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="reporte_entregas_tree_view" model="ir.ui.view">
+            <field name="name">reporte.entregas.tree.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='backorder_id']" position='after'>
+                    <field name="estado_id"></field>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="reporte_entregas_action_window" model="ir.actions.act_window">
+            <field name="name">Entregas</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="entregas_menuitem"
+            name="Entregas"
+            action="reporte_entregas_action_window"
+            parent="stock.menu_valuation"
+            sequence="101"
+        />
+    </data>
+</odoo>

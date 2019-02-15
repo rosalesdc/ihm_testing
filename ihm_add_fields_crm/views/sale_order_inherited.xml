@@ -12,7 +12,7 @@
             <field name="context">{'default_partner_id': context.get('partner_id', False), 'default_payment_type': 'inbound', 'default_id_numero_referencia': context.get('id_numero_referencia', False),}</field>
             <field name="target">new</field>
         </record>
-        
+
         <record id="referencia_sale_order_form" model="ir.ui.view">
             <field name="name">referencia.sale.order.form</field>
             <field name="model">sale.order</field>
@@ -22,17 +22,19 @@
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
                 </xpath>
-                
+
                 <xpath expr="//button[@name='payment_action_capture']" position='after'>
-                    <button name="%(action_account_saleorder_payment)d" 
-                            id="account_invoice_payment_btn" 
-                            type="action" 
-                            string="Registrar Pago-" 
+                    <button name="%(action_account_saleorder_payment)d"
+                            id="account_invoice_payment_btn"
+                            type="action"
+                            string="Registrar Pago-"
                             class="oe_highlight"
                             context="{'partner_id': partner_id, 'payment_type': 'inbound', 'id_numero_referencia': id_numero_referencia,}"
                     />
                 </xpath>
-                              
+                <xpath expr="//tree/field[@name='product_id']" position='replace'>
+                    <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto)]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"/>
+                </xpath>
 <!--                SE HABIA PUESTO PARA LOS PAGOS PERO SE SUSTITUYE CON BOTON-->
 <!--                <xpath expr="//page[@name='order_lines']" position='after'>
                     <page string="Pagos Realizados" name="order_pagos">
@@ -41,13 +43,13 @@
                 </xpath>-->
             </field>
         </record>
-        
+
         <!--                FILTRAR LOS PRODUCTOS POR PROYECTO EN LAS LINEAS DE LA ORDEN-->
 <!--        <record id="referencia_sale_order_form" model="ir.ui.view">
             <field name="name">referencia.sale.order.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"></field>
-            <field name="arch" type="xml">              
+            <field name="arch" type="xml">
                 <xpath expr="//tree/field[@name='product_id']" position='replace'>
                     <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto)]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"/>
                 </xpath>
