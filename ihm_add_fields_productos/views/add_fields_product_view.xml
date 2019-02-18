@@ -38,7 +38,7 @@
                         <group string="Asignacion de elementos">
                             <field name="x_asignacion_ids" nolabel="1">
                                 <tree editable="top">
-                                    <field name="elemento_id" />
+                                    <field name="elemento_id" domain="[('proyecto_id', '=', parent.x_proyecto_id)]"/>
                                     <field name="elemento_proyecto_id"></field>
                                     <field name="elemento_precio_unitario"></field>
                                     <field name="cantidad"></field>
