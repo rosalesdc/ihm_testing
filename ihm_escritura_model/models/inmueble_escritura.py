@@ -63,12 +63,24 @@ class InmuebleEscritura(models.Model):
         #CAMBIA EL ESTATUS DEL INMUEBLE A ESCRITURADO
         print("CREATING VALUES:::::::::::::::::::::::::")
         escritura = super(InmuebleEscritura, self).create(vals)
-        oportunidad = self.env['crm.lead'].search([('id_numero_referencia.name', '=', escritura.orden_venta_id.id_numero_referencia.name)], limit=1)
-        producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
-        if producto_inmueble.estatus == "Vendido":
-            producto_inmueble.estatus="Escriturado"
-            self._envia_correos(producto_inmueble)
-        else:
-            raise ValidationError('El producto no estaba en estatus: Vendido'+producto_inmueble.name)
+        #oportunidad = self.env['crm.lead'].search([('id_numero_referencia.name', '=', escritura.orden_venta_id.id_numero_referencia.name)], limit=1)
+        
+        so=self.env['sale.order'].search([('id_numero_referencia.name', '=', escritura.orden_venta_id.id_numero_referencia.name)], limit=1)
+        
+        #producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
+        print("Verificar si se puede escriturar")
+        for lines in so.order_line:
+            print(lines.product_id.estatus)
+            if lines.product_id.estatus == "Vendido":
+                print("Cambiando -- Vendido")
+                lines.product_id.write({'estatus': 'Escriturado'})
+                print("Inmueble Escriturado")
+            else:
+                raise ValidationError('Producto(s) no en estatus Vendido: '+lines.product_id.name)
+#        if producto_inmueble.estatus == "Vendido":
+#            producto_inmueble.estatus="Escriturado"
+#            self._envia_correos(producto_inmueble)
+#        else:
+#            raise ValidationError('El producto no estaba en estatus: Vendido'+producto_inmueble.name)
         return escritura
         
