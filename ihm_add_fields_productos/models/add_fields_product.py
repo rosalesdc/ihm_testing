@@ -33,7 +33,8 @@ class AddProductFields(models.Model):
                                ('Preparacion', 'En preparación'),
                                ('Entregado', 'Entregado'),
                                ],
-                               string="Estatus"
+                               string="Estatus",
+                               copy=False
                                )
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     

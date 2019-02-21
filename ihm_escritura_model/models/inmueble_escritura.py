@@ -38,7 +38,7 @@ class InmuebleEscritura(models.Model):
             proyecto = self.env['project.project'].search([('id', '=', prod_inmueble.x_proyecto_id.id)], limit=1)
             
             #obtener todos los productos del proyecto
-            inmuebles_escriturados=self.env['product.template'].search([('x_proyecto_id.id', '=', proyecto.id),(('estatus', '=', "Escriturado"))])
+            inmuebles_escriturados=self.env['product.product'].search([('x_proyecto_id.id', '=', proyecto.id),(('estatus', '=', "Escriturado"))])
             listado_proyectos="--- Listado de inmuebles escriturados en: "+proyecto.name+" ---\n"
             for inmuebles in inmuebles_escriturados:
                 listado_proyectos += (inmuebles.name+"\n")
@@ -49,7 +49,7 @@ class InmuebleEscritura(models.Model):
             for miembros in proyecto.equipo_entrega:
                 sender = servidor_salida.smtp_user
                 receivers = miembros.email
-                message = "Estimado(a) "+miembros.name+", el inmueble "+prod_inmueble.name+" ha cambiado su estatus a Escriturado \n"+listado_proyectos
+                message = "Estimado(a) "+miembros.name+", el inmueble "+prod_inmueble.name+" ha sido escriturado, por favor, tome las acciones necesarias correspondientes para liberar dicho inmueble, muchas gracias.\n"+listado_proyectos
                 smtpObj = smtplib.SMTP(host=servidor_salida.smtp_host, port=servidor_salida.smtp_port)
                 smtpObj.ehlo()
                 smtpObj.starttls()
@@ -72,11 +72,12 @@ class InmuebleEscritura(models.Model):
         for lines in so.order_line:
             print(lines.product_id.estatus)
             if lines.product_id.estatus == "Vendido":
-                print("Cambiando -- Vendido")
+                #print("Cambiando -- Vendido")
                 lines.product_id.write({'estatus': 'Escriturado'})
-                print("Inmueble Escriturado")
+                self._envia_correos(lines.product_id)
+                #print("Inmueble Escriturado")
             else:
-                raise ValidationError('Producto(s) no en estatus Vendido: '+lines.product_id.name)
+                raise ValidationError('Producto(s) no en estatus Vendido ')
 #        if producto_inmueble.estatus == "Vendido":
 #            producto_inmueble.estatus="Escriturado"
 #            self._envia_correos(producto_inmueble)

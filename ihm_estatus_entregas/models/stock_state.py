@@ -38,7 +38,7 @@ class StockState(models.Model):
 #        for lines in self.move_lines:
 #            lines.product_id.estatus = "Entregado"
 
-
+    @api.multi
     @api.depends('state')
     def _cambia_estatus(self):
         print("Cambiando estado")
@@ -50,12 +50,12 @@ class StockState(models.Model):
                 #lines.write({'estatus': 'Liberado'})
 
                 #cambiando el estado buscando el registro
-                producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
+                producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 print("En for1 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Escriturado":
                     print("Cambiando -- Preparacion")
                     producto_inmueble.write({'estatus': 'Preparacion'})
-                producto_inmueble2 = self.env['product.template'].search([('id', '=', lines.id)], limit=1)
+                producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
 
         if self.state == "done":
@@ -66,12 +66,12 @@ class StockState(models.Model):
                 #lines.write({'estatus': 'Liberado'})
 
                 #cambiando el estado buscando el registro
-                producto_inmueble = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
+                producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 print("En for2 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Preparacion":
                     print("Cambiando -- Entregado")
                     producto_inmueble.write({'estatus': 'Entregado'})
-                producto_inmueble2 = self.env['product.template'].search([('id', '=', lines.product_id.id)], limit=1)
+                producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 print("Nueva variable: "+producto_inmueble2.estatus)
 
         return "Cambiando"

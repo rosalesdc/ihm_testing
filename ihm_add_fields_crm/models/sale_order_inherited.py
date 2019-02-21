@@ -18,7 +18,8 @@ class SaleOrderMod(models.Model):
 
     id_numero_referencia = fields.Many2one(
                                            'numero.referencia',
-                                           string="Número de Referencia"
+                                           string="Número de Referencia",
+                                           copy=False
                                            )
                     
     pagos_ids = fields.Many2many(
