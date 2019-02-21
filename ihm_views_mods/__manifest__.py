@@ -22,13 +22,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',],
+    'depends': ['base','stock'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/contabilidad_inherited_view.xml',
         'views/pedidos_compra_inherited_view.xml',
+        'views/kanban_productos_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

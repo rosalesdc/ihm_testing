@@ -30,11 +30,12 @@ class AddProductFields(models.Model):
                                ('Apartado', 'Apartado'),
                                ('Vendido', 'Vendido'),
                                ('Escriturado', 'Escriturado'),
-                               ('Preparacion', 'En preparación'),
+                               ('Preparacion', 'Liberado'),
                                ('Entregado', 'Entregado'),
                                ],
                                string="Estatus",
-                               copy=False
+                               copy=False,
+                               #readonly=True,
                                )
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     
