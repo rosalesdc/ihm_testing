@@ -8,8 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//label[@for='purchase_ok']" position="after">
                     <div>
-                        <field name="es_inmueble"/>
-                        <label for="es_inmueble"/>
+                        <field name="es_inmueble" groups="ihm_ocultar_validar.group_director"/>
+                        <label for="es_inmueble" groups="ihm_ocultar_validar.group_director"/>
                     </div>
                     <!--                    <div>
                         <field name="es_bien_adicional" attrs="{'invisible':[('es_inmueble', '!=', True)]}"/>

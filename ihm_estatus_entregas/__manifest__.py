@@ -14,6 +14,7 @@
     'data': [
         'views/stock_picking_state.xml',
         'security/ir.model.access.csv',
+        'security/security.xml',
         ],
     'installable':True,
     'auto_install':False,

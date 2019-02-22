@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_validar_entrega" model="res.groups">
+            <field name="name">validacion_entrega</field>
+            <field name="comment">Grupo para validacion de Entregas</field>
+        </record>
+        <record id="group_liberar_entrega" model="res.groups">
+            <field name="name">validacion_liberar_entrega</field>
+            <field name="comment">Grupo para liberacion de Entregas</field>
+        </record>
+    </data>
+</odoo>

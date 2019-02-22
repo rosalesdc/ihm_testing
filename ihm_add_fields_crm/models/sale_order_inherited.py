@@ -32,3 +32,11 @@ class SaleOrderMod(models.Model):
                                   'project.project',
                                   string="Proyecto asociado"
                                   )
+
+    expediente_apartado = fields.Date(string="Fecha de apartado")
+    expediente_contrato = fields.Date(string="Fecha de contrato")
+    expediente_ingreso_ifinanciera = fields.Date(string="Fecha de ingreso a institución financiera")
+    expediente_autorizacion_ifinanciera = fields.Date(string="Autorización de institucion financiera")
+    expediente_avaluo = fields.Date(string="Fecha de solicitud de avaluo")
+    expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
+    expediente_firma = fields.Date(string="Fecha de firma")

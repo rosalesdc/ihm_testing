@@ -57,18 +57,13 @@ class CamposResPartner(models.Model):
     
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
     
-    expediente_apartado = fields.Date(string="Fecha de apartado")
-    expediente_contrato = fields.Date(string="Fecha de contrato")
-    expediente_ingreso_ifinanciera = fields.Date(string="Fecha de ingreso a institución financiera")
-    expediente_autorizacion_ifinanciera = fields.Date(string="Autorización de institucion financiera")
-    expediente_avaluo = fields.Date(string="Fecha de solicitud de avaluo")
-    expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
-    expediente_firma = fields.Date(string="Fecha de firma")
+
     
     asesor_ventas = fields.Many2one(
                                     'res.partner',
                                     string="Asesor de ventas"
                                     )
+    primera_fecha_prospecto=fields.Date(string="Primera fecha de prospecto")
 
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'

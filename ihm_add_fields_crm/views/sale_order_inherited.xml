@@ -18,6 +18,20 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"></field>
             <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position='after'>
+                    <group>
+                        <field name="expediente_apartado"></field>
+                        <field name="expediente_contrato"></field>
+                        <field name="expediente_ingreso_ifinanciera"></field>
+                        <field name="expediente_autorizacion_ifinanciera"></field>
+                        
+                    </group>
+                    <group>
+                        <field name="expediente_avaluo"></field>
+                        <field name="expediente_instruccion_ifinanciera"></field>
+                        <field name="expediente_firma"></field>
+                    </group>
+                </xpath>
                 <xpath expr="//field[@name='payment_term_id']" position='after'>
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
