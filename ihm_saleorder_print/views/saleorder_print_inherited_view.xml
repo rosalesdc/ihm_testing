@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="saleorder_print_inherited_view" model="ir.ui.view">
+            <field name="name">saleorder.print.inherited.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.report_saleorder_document"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//p[@t-field='doc.note']" position="before">
+                    HOLASSS
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+<!--<div name="numero_referencia" t-if="doc.id_numero_referencia" class="col-auto mw-100 mb-2">
+                        <strong>Numero de referencia:</strong>
+                        <p class="m-0" t-field="doc.id_numero_referencia"/>
+                    </div>-->
