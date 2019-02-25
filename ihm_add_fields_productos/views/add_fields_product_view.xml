@@ -24,7 +24,7 @@
                     </div>-->
                 </xpath>
                 <xpath expr="//page[@name='general_information']" position='after'>
-                    <page string="Inmueble" name="inmueble" attrs="{'invisible':[('es_inmueble', '!=', True)]}" >
+                    <page string="Inmueble" name="inmueble" attrs="{'invisible':[('es_inmueble', '!=', True)]}" groups="ihm_ocultar_validar.group_director">
                         <group>
                             <group>
                                 <field name="numero"></field> 

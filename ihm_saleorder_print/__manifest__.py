@@ -3,11 +3,11 @@
     'name': "ihm print saleorder",
 
     'summary': """
-        Modificaciones a las ordenes y pedidos de ventas
+        Modificaciones a los impresos de ordenes y pedidos de ventas
         """,
 
     'description': """
-        Modificaciones a las ordenes y pedidos de ventas
+        Modificaciones a los impresos de ordenes y pedidos de ventas
     """,
 
     'author': "Soluciones 4G",
@@ -24,9 +24,10 @@
 
     # always loaded
     'data': [
-        'views/saleorder_print_inherited_view.xml',
+        'views/report_saleorder.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
     ],
+    "installable": True,
 }

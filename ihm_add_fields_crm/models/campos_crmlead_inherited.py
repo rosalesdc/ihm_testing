@@ -14,7 +14,10 @@ class CamposResPartner(models.Model):
         b = datetime.now()
         #print("fecha B: " + str(b))
         delta = b - a
-        return delta.days
+        #print("DELTA DAYS!!!")
+        #print(delta.days)
+        self.dias_desde_creacion=delta.days
+        #return delta.days
     
     id_numero_referencia = fields.Many2one(
                                            'numero.referencia',

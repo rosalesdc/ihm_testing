@@ -3,7 +3,6 @@
 from odoo import api
 from odoo import fields
 from odoo import models
-
 import smtplib
 
 class AddProductFields(models.Model):
@@ -18,6 +17,11 @@ class AddProductFields(models.Model):
     def asignar_precio_inmueble(self):
         precio_calculado = float(self.importe_total_elementos)
         self.write({'list_price': precio_calculado})
+        
+    @api.model
+    def get_default_estatus(self):
+        default_estatus = 'Disponible'
+        return default_estatus
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
@@ -36,6 +40,7 @@ class AddProductFields(models.Model):
                                string="Estatus",
                                copy=False,
                                #readonly=True,
+                               default=get_default_estatus,
                                )
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     
