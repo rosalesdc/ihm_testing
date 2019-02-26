@@ -1,0 +1,9 @@
+SELECT ROW_NUMBER() OVER (ORDER BY product_template.name) as id,
+		product_template.id as name,
+		product_template.name as name_product,
+		crm_lead.name as name_crm,
+		crm_lead.tipo_credito as tipo_credito
+    FROM product_template  
+    FULL OUTER JOIN crm_lead 
+    ON product_template.id=crm_lead.id_producto_inmueble 
+    WHERE product_template.es_inmueble=TRUE;
