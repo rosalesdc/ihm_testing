@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='misc']" position="before">
-                    <group string="Elementos de Precio">
+                    <group string="Elementos de Precio" groups="ihm_ocultar_validar.group_director">
                         <field name="x_elementos_ids" nolabel="1"><!--hay top y botton-->
                             <tree editable="top">
                                 <field name="name"></field>
@@ -17,9 +17,9 @@
                             </tree>
                         </field>	
                     </group>
-                    <group string="Actualizacion masiva de productos (Estatus: Disponible)">
+                    <group string="Actualizacion masiva de productos (Estatus: Disponible)" groups="ihm_ocultar_validar.group_director">
                             <group>
-                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight" groups="ihm_ocultar_validar.group_director" />
+                                <button string="Actualizar precio de todos los inmuebles" type="object" name="actualizar_todos_productos" class="oe_highlight" />
                             </group>
                         </group>
                 </xpath>

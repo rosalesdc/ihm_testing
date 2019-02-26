@@ -51,7 +51,7 @@ class StockState(models.Model):
 
                 #cambiando el estado buscando el registro
                 producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("En for1 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
+                #print("En for1 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Escriturado":
                     print("Cambiando -- Preparacion")
                     producto_inmueble.write({'estatus': 'Preparacion'})
@@ -67,12 +67,12 @@ class StockState(models.Model):
 
                 #cambiando el estado buscando el registro
                 producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("En for2 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
+                #print("En for2 con " + producto_inmueble.name + " - " + producto_inmueble.estatus)
                 if producto_inmueble.estatus == "Preparacion":
                     print("Cambiando -- Entregado")
                     producto_inmueble.write({'estatus': 'Entregado'})
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
-                print("Nueva variable: "+producto_inmueble2.estatus)
+                #print("Nueva variable: "+producto_inmueble2.estatus)
 
         return "Cambiando"
 

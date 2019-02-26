@@ -13,5 +13,9 @@
             <field name="name">validacion_director</field>
             <field name="comment">Grupo para validaciones y elementos visibles para director</field>
         </record>
+        <record id="group_equipo_entrega" model="res.groups">
+            <field name="name">equipo_entrega</field>
+            <field name="comment">Grupo para configurar los equipos de entrega</field>
+        </record>
     </data>
 </odoo>

@@ -18,7 +18,7 @@
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='misc']" position="before">
-                    <group string="Equipo de entrega">
+                    <group string="Equipo de entrega" groups="ihm_ocultar_validar.group_equipo_entrega">
                         <field name="equipo_entrega" nolabel="1">
                             <tree>
                                 <field name="name"></field>

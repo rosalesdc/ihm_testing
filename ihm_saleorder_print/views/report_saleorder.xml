@@ -27,10 +27,10 @@
                     <strong>Número de referencia:</strong>
                     <p class="m-0" t-field="doc.id_numero_referencia"/>
                 </div>
-                <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
+<!--                <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2">
                     <strong>Validéz:</strong>
                     <p class="m-0" t-field="doc.validity_date"/>
-                </div>
+                </div>-->
             </div>
         </xpath>
         <xpath expr="//table[@class='table table-sm o_main_table']" position="replace">
