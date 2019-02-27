@@ -39,7 +39,7 @@ class AddProductFields(models.Model):
                                ],
                                string="Estatus",
                                copy=False,
-                               #readonly=True,
+                               readonly=True,
                                default=get_default_estatus,
                                )
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')

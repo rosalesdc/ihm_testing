@@ -73,7 +73,7 @@ class StockState(models.Model):
                     producto_inmueble.write({'estatus': 'Entregado'})
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
-
+#
         return "Cambiando"
 
 
