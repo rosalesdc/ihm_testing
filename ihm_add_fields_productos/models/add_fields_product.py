@@ -70,5 +70,8 @@ class AddProductFields(models.Model):
                                   'tipo.garantia',
                                   string="Tipo de garantia"
                                   )
-
+    sale_order = fields.Many2one(
+                                  'sale.order',
+                                  string="Orden de venta del"
+                                  )
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from odoo import api
 from odoo import fields
 from odoo import models
 
@@ -40,3 +40,46 @@ class SaleOrderMod(models.Model):
     expediente_avaluo = fields.Date(string="Fecha de solicitud de avaluo")
     expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
     expediente_firma = fields.Date(string="Fecha de firma")
+    
+    tipo_credito = fields.Selection(
+                                    selection=[
+                                    ('COFINAVIT', 'COFINAVIT'),
+                                    ('Crédito Bancario', 'Crédito Bancario'),
+                                    ('Infonavit/Fovisste', 'Infonavit/Fovisste'),
+                                    ('Efectivo', 'Efectivo'),
+                                    ],
+                                    string="Tipo de credito"
+                                    )
+    
+    cantidad_pagar_cbancario = fields.Float(
+                                            string="Cantidad a pagar credito bancario",
+                                            default=0.0,
+                                            required=True, )
+    
+    cantidad_pagar_infonavitfov = fields.Float('Cantidad a pagar INFONAVIT/FOVISTE', (10, 2))
+    
+    cantidad_pagar_efectivo = fields.Float('Cantidad a pagar Efectivo', (10, 2))
+    
+    id_entidad_financiera = fields.Many2one(
+                                            'res.bank',
+                                            string="Entidad Financiera"
+                                            )
+    rep_asesor_ventas = fields.Many2one(
+                                    'res.partner',
+                                    string="Asesor de ventas"
+                                    )
+                                    
+                                    
+class OrderLinesProduct(models.Model):
+    _inherit = 'sale.order.line'
+
+    #Añade la orden de Venta al Inmueble, para reporte
+    @api.multi
+    def create(self, vals):
+        res_id = super(OrderLinesProduct, self).create(vals)
+        for record in res_id:
+            if record.product_id.es_inmueble==True:
+                record.product_id.sale_order=record.order_id
+        return res_id
+
+   

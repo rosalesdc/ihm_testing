@@ -47,16 +47,7 @@ class CamposResPartner(models.Model):
                                             'res.bank',
                                             string="Entidad Financiera"
                                             )
-    
-#    id_entidad_financiera_cbancario = fields.Many2one(
-#                                                      'efinanciera.credbancario',
-#                                                      string="Entidad Financiera (Crédito Bancario)"
-#                                                      )
-#    
-#    id_entidad_financira_cofinavit = fields.Many2one(
-#                                                     'efinanciera.cofinavit',
-#                                                     string="Entidad Financiera (Crédito COFINAVIT)"
-#                                                     )
+
     
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
     
