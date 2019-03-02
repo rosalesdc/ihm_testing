@@ -6,7 +6,9 @@
         <field name="arch" type="xml">
             <tree string="Name Col" create="false">
                 <!--                <field name="id" type="row" />-->
-                <field name="name" type="row" />
+<!--                <field name="name" type="row" />-->
+                <field name="proyecto" type="row" />
+                
                 <field name="nombre_inmueble" type="row" />
                 <field name="estatus" type="row" />
                 <field name="precio" type="row" />
@@ -15,10 +17,10 @@
                 <field name="cantidad_cbancario" type="row" />
                 <field name="cantidad_infornativ" type="row" />
                 <field name="cliente" type="row" />
+                <field name="orden" type="row" />
                 <field name="referencia" type="row" />
                 <field name="asesor" type="row" />
                 <field name="entidad_financiera" type="row" />
-                <field name="proyecto" type="row" />
                 <field name="autorizacion_i_financera" type="row" />
                 <field name="autorizacion_avaluo" type="row" />
                 <field name="instruccion_i_financiera" type="row" />

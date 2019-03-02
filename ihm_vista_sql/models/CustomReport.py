@@ -16,7 +16,8 @@ class CustomReport(models.Model):
     tipo_credito = fields.Char(string='Tipo de credito', readonly=True, default="-")
     cantidad_cbancario = fields.Char(string='Cantidad C Bancario', readonly=True, default="-")
     cantidad_infornativ = fields.Char(string='Cantidad C Infonavit', readonly=True, default="-")
-    cliente = fields.Char(string='Cliente', readonly=True, default="-")
+    cliente = fields.Char(string='Cliente', readonly=True, default="-") 
+    orden = fields.Char(string='Orden', readonly=True, default="-")
     referencia = fields.Char(string='Referencia', readonly=True, default="-")
     asesor = fields.Char(string='Asesor', readonly=True, default="-")
     entidad_financiera = fields.Char(string='Entidad Financiera', readonly=True, default="-")
@@ -36,7 +37,8 @@ class CustomReport(models.Model):
 		product_template.name as nombre_inmueble,
                 product_template.estatus as estatus,
 		crm_lead.name as oportunidad,
-		res_partner.name as cliente,
+		res_partner.name as cliente, 
+                sale_order.name as orden, 
 		sale_order.tipo_credito as tipo_credito,
 		sale_order.expediente_autorizacion_ifinanciera as autorizacion_i_financera,
 		sale_order.expediente_avaluo as autorizacion_avaluo,
