@@ -6,6 +6,14 @@ from odoo import models
 class SaleOrderMod(models.Model):
     _inherit = 'sale.order'
 
+    @api.multi
+    def _obtener_elementos(self):
+        elementos=""
+        for lines in self.order_line:
+            elementos+=lines.product_id.name+", "
+        self.rep_productos=elementos
+        
+        
     opportunity_id = fields.Many2one(
                                      'crm.lead',
                                      string='Oportunidad',
@@ -68,7 +76,7 @@ class SaleOrderMod(models.Model):
                                     'res.partner',
                                     string="Asesor de ventas"
                                     )
-                                    
+    #rep_productos=fields.Char(string="Otros Inmuebles", compute='_obtener_elementos', store=True)                                
                                     
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'

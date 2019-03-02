@@ -33,7 +33,7 @@
                 </div>-->
             </div>
         </xpath>
-        <xpath expr="//table[@class='table table-sm o_main_table']" position="replace">
+        <xpath expr="//table[@class='table table-sm']" position="replace">
             <table class="table table-sm o_main_table">
                 <thead>
                     <tr>
@@ -45,7 +45,7 @@
                             <span>Desc.(%)</span>
                             <t t-set="colspan" t-value="colspan+1"/>
                         </th>
-                        <th class="text-right">Impuestos</th>
+                        <th class="text-right"> </th>
                         <th class="text-right">
                             
                             <t groups="account.group_show_line_subtotals_tax_included">Total Price</t>

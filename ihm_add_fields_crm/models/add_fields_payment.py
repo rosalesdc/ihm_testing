@@ -18,6 +18,8 @@ class AddPaymentFields(models.Model):
                                            'numero.referencia',
                                            string="Número de Referencia"
                                            )
+    reportado = fields.Boolean(string="Reportado")
+                                         
     @api.multi
     def post(self):
         res = super(AddPaymentFields, self).post()

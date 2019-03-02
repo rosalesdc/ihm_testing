@@ -52,12 +52,13 @@ class CamposResPartner(models.Model):
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
     
 
-    
     asesor_ventas = fields.Many2one(
                                     'res.partner',
                                     string="Asesor de ventas"
                                     )
     primera_fecha_prospecto=fields.Date(string="Primera fecha de prospecto")
+    
+    fecha_entrega_referencia=fields.Date(string="Fecha en que se proporciona Referencia")
 
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'

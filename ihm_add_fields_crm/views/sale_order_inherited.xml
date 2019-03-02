@@ -42,7 +42,7 @@
                     <field name="id_entidad_financiera" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
                     <!--                        CAMPOS QUE SERAN INVISIBLES-->
                     <field name="rep_asesor_ventas" />
-                    
+<!--                    <field name="rep_productos" />-->
                 </xpath>
 
                 <xpath expr="//button[@name='payment_action_capture']" position='after'>
@@ -51,7 +51,8 @@
                             type="action"
                             string="Registrar Pago-"
                             class="oe_highlight"
-                            context="{'partner_id': partner_id, 'payment_type': 'inbound', 'id_numero_referencia': id_numero_referencia,}"
+                            context="{'partner_id': partner_id, 'payment_type': 'inbound', 'id_numero_referencia': id_numero_referencia,}" 
+                            groups="account.group_account_manager"
                     />
                 </xpath>
                 <xpath expr="//tree/field[@name='product_id']" position='replace'>

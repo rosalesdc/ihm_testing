@@ -83,5 +83,12 @@ class InmuebleEscritura(models.Model):
 #            self._envia_correos(producto_inmueble)
 #        else:
 #            raise ValidationError('El producto no estaba en estatus: Vendido'+producto_inmueble.name)
+
+###COPIA EL NOMBRE DE LA ESCRITURA A LA SO
+        
+        print (self.orden_venta_id.name)
+            
+        
+        
         return escritura
         

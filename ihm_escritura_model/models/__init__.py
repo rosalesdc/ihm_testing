@@ -2,4 +2,4 @@
 
 from . import inmueble_escritura
 #from . import venta_escrituras
-#from . import sale_order_inherited
+from . import sale_order_inherited

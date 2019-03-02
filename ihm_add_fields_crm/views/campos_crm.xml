@@ -8,7 +8,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//group" position='after'>
                     <group>
-                        <field name="id_numero_referencia"></field>
+                        <field name="id_numero_referencia" required="1"></field>
+                        <field name="fecha_entrega_referencia"></field>
                         <field name="dias_desde_creacion"></field>
                         <!--                    <field name="deposito_18_porciento"></field>-->
                     </group>
