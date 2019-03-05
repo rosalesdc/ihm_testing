@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="reporte_inmueble_tree" model="ir.ui.view">
         <field name="name">reporte.inmueble.tree</field>
@@ -43,6 +43,6 @@
     <menuitem name="Reporte Inmueble" 
               action="action_report_inmueble" 
               id="menu_reporte_inmueble"/>
-</odoo>
+</odoo>-->
 
 

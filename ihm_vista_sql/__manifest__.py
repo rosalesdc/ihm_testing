@@ -18,12 +18,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','website','contacts','purchase','crm','product'],
+    'depends': ['base','website','contacts','purchase','crm','product','sale',
+        'sale_management',],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/templates.xml',
+        #'views/templates.xml',
         'views/my_report_view.xml',
         
     ],

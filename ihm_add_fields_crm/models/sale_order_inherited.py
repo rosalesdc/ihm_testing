@@ -13,6 +13,16 @@ class SaleOrderMod(models.Model):
             elementos+=lines.product_id.name+", "
         self.rep_productos=elementos
         
+    #@api.one
+    @api.model
+    def create(self, vals):
+        #self.ensure_one()
+        res = super(SaleOrderMod, self).create(vals)
+        for record in res:
+            print(record.id_asesor_ventas.name)
+            record.nombre_asesor=record.id_asesor_ventas.name
+            print(record.nombre_asesor)
+        return res
         
     opportunity_id = fields.Many2one(
                                      'crm.lead',
@@ -72,11 +82,14 @@ class SaleOrderMod(models.Model):
                                             'res.bank',
                                             string="Entidad Financiera"
                                             )
-    rep_asesor_ventas = fields.Many2one(
+    id_asesor_ventas = fields.Many2one(
                                     'res.partner',
                                     string="Asesor de ventas"
                                     )
-    #rep_productos=fields.Char(string="Otros Inmuebles", compute='_obtener_elementos', store=True)                                
+    
+    nombre_asesor=fields.Char(string="Asesor")                                
+    #rep_productos=fields.Char(string="Otros Inmuebles", compute='_obtener_elementos', store=True) 
+    
                                     
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'

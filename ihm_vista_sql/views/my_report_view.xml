@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Name Col" create="false">
                 <!--                <field name="id" type="row" />-->
-<!--                <field name="name" type="row" />-->
+                <!--                <field name="name" type="row" />-->
                 <field name="proyecto" type="row" />
                 
                 <field name="nombre_inmueble" type="row" />
@@ -38,6 +38,15 @@
         <field name="view_mode">tree</field>
     </record>
 
-    <menuitem name="Reporte SQL" action="action_my_report" id="menu_my_report"/>
+<!--    <menuitem name="Reporte SQL" action="action_my_report" id="menu_my_report"/>-->
+
+        <menuitem
+        id="reporte_general_menuitem"
+        name="Reporte General de ventas"
+        action="action_my_report"
+        parent="sale.menu_sale_report"
+        sequence="10"
+    />
+    
 
 </odoo>

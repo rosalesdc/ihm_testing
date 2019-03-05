@@ -62,6 +62,7 @@ class InmuebleEscritura(models.Model):
     def create(self, vals):
         #CAMBIA EL ESTATUS DEL INMUEBLE A ESCRITURADO
         print("CREATING VALUES:::::::::::::::::::::::::")
+        num_lineas=0
         escritura = super(InmuebleEscritura, self).create(vals)
         #oportunidad = self.env['crm.lead'].search([('id_numero_referencia.name', '=', escritura.orden_venta_id.id_numero_referencia.name)], limit=1)
         
@@ -70,6 +71,7 @@ class InmuebleEscritura(models.Model):
         #producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
         print("Verificar si se puede escriturar")
         for lines in so.order_line:
+            num_lineas+=1;
             print(lines.product_id.estatus)
             if lines.product_id.estatus == "Vendido":
                 #print("Cambiando -- Vendido")
@@ -78,6 +80,8 @@ class InmuebleEscritura(models.Model):
                 #print("Inmueble Escriturado")
             else:
                 raise ValidationError('Producto(s) no en estatus Vendido ')
+        if num_lineas==0:
+            raise ValidationError('No hay lineas en la orden')
 #        if producto_inmueble.estatus == "Vendido":
 #            producto_inmueble.estatus="Escriturado"
 #            self._envia_correos(producto_inmueble)

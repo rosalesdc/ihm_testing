@@ -32,10 +32,11 @@ class CustomReport(models.Model):
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
         self._cr.execute("""CREATE or REPLACE VIEW my_report as  
-                        SELECT ROW_NUMBER() OVER (ORDER BY product_template.name) as id,
+                SELECT ROW_NUMBER() OVER (ORDER BY product_template.name) as id,
 		product_template.id as name,
 		product_template.name as nombre_inmueble,
                 product_template.estatus as estatus,
+		
 		crm_lead.name as oportunidad,
 		res_partner.name as cliente, 
                 sale_order.name as orden, 
@@ -44,7 +45,7 @@ class CustomReport(models.Model):
 		sale_order.expediente_avaluo as autorizacion_avaluo,
 		sale_order.expediente_instruccion_ifinanciera as instruccion_i_financiera,
 		numero_referencia.name as referencia,
-		sale_order.rep_asesor_ventas as asesor, 
+		sale_order.id_asesor_ventas as asesor, 
 		product_template.list_price as precio,
 		res_bank.name as entidad_financiera,
 		sale_order.cantidad_pagar_cbancario as cantidad_cbancario,
@@ -61,8 +62,8 @@ class CustomReport(models.Model):
 	FULL OUTER JOIN res_partner ON res_partner.id=crm_lead.partner_id
 	FULL OUTER JOIN numero_referencia ON sale_order.id_numero_referencia=numero_referencia.id
 	FULL OUTER JOIN res_bank ON sale_order.id_entidad_financiera=res_bank.id
-	FULL OUTER JOIN project_project ON sale_order.id_proyecto=project_project.id 
-        FULL OUTER JOIN inmueble_escritura ON sale_order.id=inmueble_escritura.orden_venta_id
+	FULL OUTER JOIN project_project ON product_template.x_proyecto_id=project_project.id 
+    FULL OUTER JOIN inmueble_escritura ON sale_order.id=inmueble_escritura.orden_venta_id
 	
     WHERE product_template.es_inmueble=TRUE;
                         ;

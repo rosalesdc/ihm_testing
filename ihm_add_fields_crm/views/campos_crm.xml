@@ -16,7 +16,7 @@
                 </xpath>
                 <xpath expr="//field[@name='user_id']" position='after'>
                     <field name="primera_fecha_prospecto"></field>
-                    <field name="asesor_ventas" domain="[('category_id', '=', 'Asesor de Ventas')]" ></field>
+                    <field name="id_asesor_ventas" domain="[('category_id', '=', 'Asesor de Ventas')]" ></field>
                 </xpath>
             </field>
         </record>

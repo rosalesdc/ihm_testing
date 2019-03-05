@@ -5,30 +5,30 @@
             <field name="name">reporte.entregas.kanban.view</field>
             <field name="model">stock.picking</field>
             <field name="arch" type="xml">
-                 <kanban>
-                <field name="name"/>
-                <field name="state"/>
-                <field name="backorder_id"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_vignette oe_semantic_html_override">
-                            <a type="open"></a>
-                            <div class="oe_kanban_details">
-                                <h4>
-                                    <a type="open">
-                                        <field name="name"/>
-                                    </a>
-                                </h4>
-                                <div name="tags"/>
-                                <ul>
-                                    <li>Empresa: <field name="partner_id"></field></li>
-                                    <li>Estado: <field name="state"></field></li>
-                                </ul>
+                <kanban>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="backorder_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+                                <a type="open"></a>
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open">
+                                            <field name="name"/>
+                                        </a>
+                                    </h4>
+                                    <div name="tags"/>
+                                    <ul>
+                                        <li>Empresa: <field name="partner_id"></field></li>
+                                        <li>Estado: <field name="state"></field></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    </t>
-                </templates>
-            </kanban>
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
         <record id="reporte_entregas_tree_view" model="ir.ui.view">
@@ -54,7 +54,7 @@
             id="entregas_menuitem"
             name="Entregas"
             action="reporte_entregas_action_window"
-            parent="stock.menu_valuation"
+            parent="stock.menu_warehouse_report"
             sequence="101"
         />
     </data>

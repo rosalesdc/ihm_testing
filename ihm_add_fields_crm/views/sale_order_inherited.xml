@@ -35,13 +35,15 @@
                 <xpath expr="//field[@name='payment_term_id']" position='after'>
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
+                    <field name="id_asesor_ventas" readonly="1" options="{'no_open': True}" ></field>
+                    
                     <field name="tipo_credito"></field>
                     <field name="cantidad_pagar_cbancario" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"/>
                     <field name="cantidad_pagar_infonavitfov" attrs="{'invisible':[('tipo_credito', '!=', 'Infonavit/Fovisste'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
                     <field name="cantidad_pagar_efectivo" attrs="{'invisible':[('tipo_credito', '!=', 'Efectivo')]}"></field>
                     <field name="id_entidad_financiera" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
                     <!--                        CAMPOS QUE SERAN INVISIBLES-->
-                    <field name="rep_asesor_ventas" />
+                    
 <!--                    <field name="rep_productos" />-->
                 </xpath>
 

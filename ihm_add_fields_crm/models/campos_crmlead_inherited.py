@@ -52,7 +52,7 @@ class CamposResPartner(models.Model):
     dias_desde_creacion = fields.Integer(compute='_calcula_numero_dias')
     
 
-    asesor_ventas = fields.Many2one(
+    id_asesor_ventas = fields.Many2one(
                                     'res.partner',
                                     string="Asesor de ventas"
                                     )
@@ -80,6 +80,11 @@ class NumeroReferencia(models.Model):
                        string="Número de referencia",
                        required=True,
                        )
+    _sql_constraints = [
+        ('name_unique',
+         'UNIQUE(name)',
+         "En número de referencia debe ser único"),
+        ]
                        
 
                        
