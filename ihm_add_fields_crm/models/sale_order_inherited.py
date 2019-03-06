@@ -9,9 +9,10 @@ class SaleOrderMod(models.Model):
     @api.multi
     def _obtener_elementos(self):
         elementos=""
-        for lines in self.order_line:
-            elementos+=lines.product_id.name+", "
-        self.rep_productos=elementos
+        print (elementos)
+#        for lines in self.order_line:
+#            elementos+=lines.product_id.name+", "
+#        self.rep_productos=elementos
         
     #@api.one
     @api.model
@@ -88,7 +89,7 @@ class SaleOrderMod(models.Model):
                                     )
     
     nombre_asesor=fields.Char(string="Asesor")                                
-    #rep_productos=fields.Char(string="Otros Inmuebles", compute='_obtener_elementos', store=True) 
+    productos_reporte=fields.Char(string="Otros Inmuebles", default="-", compute='_obtener_elementos', store=True) 
     
                                     
 class OrderLinesProduct(models.Model):

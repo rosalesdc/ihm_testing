@@ -28,7 +28,7 @@
     'data': [
         
         'views/contabilidad_inherited_view.xml',
-       # 'views/pedidos_compra_inherited_view.xml',
+        'views/pedidos_compra_inherited_view.xml',
         'views/kanban_productos_view.xml',
         'views/ventas_add_escritura_view.xml',
     ],
