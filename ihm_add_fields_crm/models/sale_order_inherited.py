@@ -71,6 +71,8 @@ class SaleOrderMod(models.Model):
     expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
     expediente_firma = fields.Date(string="Fecha de firma")
     
+    avaluo_fiscal=fields.Float('Cantidad Avaluo Fiscal', (10, 2))
+    
     tipo_credito = fields.Selection(
                                     selection=[
                                     ('COFINAVIT', 'COFINAVIT'),

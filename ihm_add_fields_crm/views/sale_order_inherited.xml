@@ -33,6 +33,7 @@
                     </group>
                 </xpath>
                 <xpath expr="//field[@name='payment_term_id']" position='after'>
+                    <field name="avaluo_fiscal"></field>
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_asesor_ventas" readonly="1" options="{'no_open': True}" ></field>
