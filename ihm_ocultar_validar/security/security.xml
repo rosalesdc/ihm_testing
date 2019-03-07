@@ -17,5 +17,9 @@
             <field name="name">equipo_entrega</field>
             <field name="comment">Grupo para configurar los equipos de entrega</field>
         </record>
+        <record id="group_validar_pagos" model="res.groups">
+            <field name="name">validar_pagos</field>
+            <field name="comment">Grupo para validar pagos</field>
+        </record>
     </data>
 </odoo>

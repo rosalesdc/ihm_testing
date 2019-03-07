@@ -5,7 +5,11 @@
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form"></field>
 <!--        <field name="mode">primary</field>-->
+
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='post']" position="attributes">
+                <attribute name="groups">ihm_ocultar_validar.group_validar_pagos</attribute>
+            </xpath>
             
             <xpath expr="//field[@name='payment_transaction_id']" position="after">
                 <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>

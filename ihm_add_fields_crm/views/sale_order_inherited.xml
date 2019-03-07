@@ -36,7 +36,7 @@
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_asesor_ventas" readonly="1" options="{'no_open': True}" ></field>
-<!--                    <field name="productos_reporte" readonly="1"  ></field>-->
+                    <!--                    <field name="productos_reporte" readonly="1"  ></field>-->
                     
                     <field name="tipo_credito"></field>
                     <field name="cantidad_pagar_cbancario" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"/>
@@ -45,7 +45,7 @@
                     <field name="id_entidad_financiera" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
                     <!--                        CAMPOS QUE SERAN INVISIBLES-->
                     
-<!--                    <field name="rep_productos" />-->
+                    <!--                    <field name="rep_productos" />-->
                 </xpath>
 
                 <xpath expr="//button[@name='payment_action_capture']" position='after'>
@@ -62,12 +62,41 @@
                     <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto),('estatus', '=', 'Disponible')]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"/>
                 </xpath>
                 
+               
+                
+                
+                
                 <!--                SE HABIA PUESTO PARA LOS PAGOS PERO SE SUSTITUYE CON BOTON-->
                 <!--                <xpath expr="//page[@name='order_lines']" position='after'>
                     <page string="Pagos Realizados" name="order_pagos">
                         <field name="pagos_ids" ></field>
                     </page>
                 </xpath>-->
+            </field>
+        </record>
+        
+        
+        <!--        SOLO UN ADMINISTRADOR PUEDE MODIFICAR EL PRECIO UNITARIO EN EL PEDIDO-->
+        <record id="unit_price_perm_user" model="ir.ui.view">
+            <field name="name">unit.price.perm.user</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="unit_price_perm_direc" model="ir.ui.view">
+            <field name="name">unit.price.perm.direc</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="groups_id" eval="[(6,0,[ref('ihm_ocultar_validar.group_director')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
             </field>
         </record>
     </data>

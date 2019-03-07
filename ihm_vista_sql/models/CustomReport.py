@@ -45,7 +45,7 @@ class CustomReport(models.Model):
 		sale_order.expediente_avaluo as autorizacion_avaluo,
 		sale_order.expediente_instruccion_ifinanciera as instruccion_i_financiera,
 		numero_referencia.name as referencia,
-		sale_order.id_asesor_ventas as asesor, 
+		sale_order.nombre_asesor as asesor, 
 		product_template.list_price as precio,
 		res_bank.name as entidad_financiera,
 		sale_order.cantidad_pagar_cbancario as cantidad_cbancario,

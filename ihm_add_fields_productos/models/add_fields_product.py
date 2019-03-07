@@ -72,6 +72,7 @@ class AddProductFields(models.Model):
                                   )
     sale_order = fields.Many2one(
                                   'sale.order',
+                                  copy=False,
                                   string="Orden de venta del"
                                   )
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html

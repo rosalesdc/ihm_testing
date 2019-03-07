@@ -33,7 +33,7 @@
                                 <field name="x_proyecto_id"  attrs="{'required':[('es_inmueble','=',True)]}"></field>
                                 <field name="cantidad_enganche"></field>
                                 <field name="garantia_id"></field>
-                                <field name="sale_order"></field>
+<!--                                <field name="sale_order"></field>-->
                             </group>
                         </group>
                         <group string="Asignacion de elementos">
