@@ -28,6 +28,8 @@ class CustomReport(models.Model):
     escritura = fields.Char(string='Escritura', readonly=True, default="-")
     notaria = fields.Char(string='Notaría', readonly=True, default="-")
     fecha_escritura = fields.Char(string='Fecha Escritura', readonly=True, default="-")
+    avaluo_fiscal=fields.Char(string='Avalúo Fiscal', readonly=True, default="-")
+    ingreso_i_financiera=fields.Char(string='Ingreso I Financiera', readonly=True, default="-")
     
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
@@ -44,6 +46,8 @@ class CustomReport(models.Model):
 		sale_order.expediente_autorizacion_ifinanciera as autorizacion_i_financera,
 		sale_order.expediente_avaluo as autorizacion_avaluo,
 		sale_order.expediente_instruccion_ifinanciera as instruccion_i_financiera,
+                sale_order.expediente_ingreso_ifinanciera as ingreso_i_financiera,
+                sale_order.avaluo_fiscal as avaluo_fiscal,
 		numero_referencia.name as referencia,
 		sale_order.nombre_asesor as asesor, 
 		product_template.list_price as precio,

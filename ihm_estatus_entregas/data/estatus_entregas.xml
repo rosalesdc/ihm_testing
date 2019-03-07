@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="estado_01" model="estatus.model">
+            <field name="name">-Liberado con cita</field>
+        </record>
+        <record id="estado_02" model="estatus.model">
+            <field name="name">-Liberado con ticket de detalle</field>
+        </record>
+        <record id="estado_03" model="estatus.model">
+            <field name="name">-No se presentó a la cita</field>
+        </record>
+        <record id="estado_04" model="estatus.model">
+            <field name="name">-Acta firmada</field>
+        </record>
+    </data>
+</odoo>

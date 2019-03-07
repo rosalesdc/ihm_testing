@@ -8,25 +8,26 @@
                 <!--                <field name="id" type="row" />-->
                 <!--                <field name="name" type="row" />-->
                 <field name="proyecto" type="row" />
-                
                 <field name="nombre_inmueble" type="row" />
                 <field name="estatus" type="row" />
-                <field name="precio" type="row" />
-                <field name="oportunidad" type="row" />
                 <field name="tipo_credito" type="row" />
-                <field name="cantidad_cbancario" type="row" />
-                <field name="cantidad_infornativ" type="row" />
+                <field name="oportunidad" type="row" />
                 <field name="cliente" type="row" />
                 <field name="orden" type="row" />
-                <field name="referencia" type="row" />
-                <field name="asesor" type="row" />
-                <field name="entidad_financiera" type="row" />
+                <field name="ingreso_i_financiera" type="row" />
                 <field name="autorizacion_i_financera" type="row" />
                 <field name="autorizacion_avaluo" type="row" />
+                <field name="avaluo_fiscal" type="row" />
                 <field name="instruccion_i_financiera" type="row" />
+                <field name="referencia" type="row" />
+                <field name="asesor" type="row" />
+                <field name="precio" type="row" />
+                <field name="entidad_financiera" type="row" />
+                <field name="fecha_escritura" type="row" />
                 <field name="escritura" type="row" />
                 <field name="notaria" type="row" />
-                <field name="fecha_escritura" type="row" />
+                <field name="cantidad_cbancario" type="row" />
+                <field name="cantidad_infornativ" type="row" />
             </tree>
         </field>
     </record>
