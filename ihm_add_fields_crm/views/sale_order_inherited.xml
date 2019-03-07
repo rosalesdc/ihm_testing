@@ -62,7 +62,29 @@
                     <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto),('estatus', '=', 'Disponible')]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"/>
                 </xpath>
                 
-               
+                <!--               CAMPOS PARA LIQUIDACION-->
+                <xpath expr="//sheet" position='after'>
+                    <sheet string="Datos de Liquidación">
+                        <gruop>
+                            <group>
+                                <h1>Datos de Liquidación</h1>
+                            </group>
+                            <group>
+                                <field name="datos_liquidacion_ids" nolabel="1"><!--hay top y botton-->
+                                    <tree editable="top">
+                                        <field name="name"></field>
+                                        <field name="cantidad"></field>
+                                    </tree>
+                                    
+                                </field>
+                            </group>
+                            <group>
+                                <field name="total_liquidacion"></field>
+                                <field name="suma_global"></field>
+                            </group>
+                        </gruop>
+                    </sheet>
+                </xpath>
                 
                 
                 
@@ -99,5 +121,7 @@
                 </xpath>
             </field>
         </record>
+        
+
     </data>
 </odoo>

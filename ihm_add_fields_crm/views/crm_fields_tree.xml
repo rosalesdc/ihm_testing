@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="crm_tree_view_inherited">
+            <field name="name">crm.tree.view.inherited</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="id_numero_referencia"></field>
+                    <field name="id_asesor_ventas"></field>
+                    <field name="medium_id"></field>
+                    <field name="valor_inmueble"></field>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

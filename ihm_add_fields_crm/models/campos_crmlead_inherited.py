@@ -59,6 +59,9 @@ class CamposResPartner(models.Model):
     primera_fecha_prospecto=fields.Date(string="Primera fecha de prospecto")
     
     fecha_entrega_referencia=fields.Date(string="Fecha en que se proporciona Referencia")
+    
+    valor_inmueble= fields.Float(string='Precio Venta',
+                        related='id_producto_inmueble.list_price')
 
 class EntidadFinanciraCbancario(models.Model):
     _name = 'efinanciera.credbancario'

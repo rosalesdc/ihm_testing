@@ -37,6 +37,7 @@
     'views/campos_crm.xml',
     'views/payment_sale_orders.xml',
     'views/sale_order_inherited.xml',
+    'views/crm_fields_tree.xml',
     'security/ir.model.access.csv',
     ],
     'installable':True,

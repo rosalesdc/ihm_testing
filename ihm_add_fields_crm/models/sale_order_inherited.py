@@ -8,7 +8,7 @@ class SaleOrderMod(models.Model):
 
     @api.multi
     def _obtener_elementos(self):
-        elementos=""
+        elementos = ""
         print (elementos)
 #        for lines in self.order_line:
 #            elementos+=lines.product_id.name+", "
@@ -21,9 +21,20 @@ class SaleOrderMod(models.Model):
         res = super(SaleOrderMod, self).create(vals)
         for record in res:
             print(record.id_asesor_ventas.name)
-            record.nombre_asesor=record.id_asesor_ventas.name
+            record.nombre_asesor = record.id_asesor_ventas.name
             print(record.nombre_asesor)
         return res
+    
+    @api.one
+    @api.depends('datos_liquidacion_ids.cantidad')
+    def _compute_total_liquidacion(self):
+        self.total_liquidacion = sum(line.cantidad for line in self.datos_liquidacion_ids)
+    
+    @api.one
+    @api.depends('total_liquidacion')
+    def _compute_total_global(self):
+        self.suma_global = self.amount_total+self.total_liquidacion
+        
         
     opportunity_id = fields.Many2one(
                                      'crm.lead',
@@ -73,7 +84,7 @@ class SaleOrderMod(models.Model):
     cantidad_pagar_cbancario = fields.Float(
                                             string="Cantidad a pagar credito bancario",
                                             default=0.0,
-                                            required=True, )
+                                            required=True,)
     
     cantidad_pagar_infonavitfov = fields.Float('Cantidad a pagar INFONAVIT/FOVISTE', (10, 2))
     
@@ -84,13 +95,27 @@ class SaleOrderMod(models.Model):
                                             string="Entidad Financiera"
                                             )
     id_asesor_ventas = fields.Many2one(
-                                    'res.partner',
-                                    string="Asesor de ventas"
-                                    )
+                                       'res.partner',
+                                       string="Asesor de ventas"
+                                       )
     
-    nombre_asesor=fields.Char(string="Asesor")                                
-    productos_reporte=fields.Char(string="Otros Inmuebles", default="-", compute='_obtener_elementos', store=True) 
-    
+    nombre_asesor = fields.Char(string="Asesor")                                
+    productos_reporte = fields.Char(string="Otros Inmuebles", default="-", compute='_obtener_elementos', store=True) 
+    datos_liquidacion_ids = fields.One2many(
+                                            'datos.liquidacion', #modelo al que se hace referencia
+                                            'saleorder_id', #un campo de regreso
+                                            string="Datos Liquidación"
+                                            )
+    total_liquidacion = fields.Float(string='Total datos de liquidación',
+                                           #store=True, 
+                                           readonly=True, 
+                                           compute='_compute_total_liquidacion',
+                                           )
+    suma_global = fields.Float(string='Suma Global',
+                                           #store=True, 
+                                           readonly=True, 
+                                           compute='_compute_total_global',
+                                           )
                                     
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'
@@ -100,8 +125,22 @@ class OrderLinesProduct(models.Model):
     def create(self, vals):
         res_id = super(OrderLinesProduct, self).create(vals)
         for record in res_id:
-            if record.product_id.es_inmueble==True:
-                record.product_id.sale_order=record.order_id
+            if record.product_id.es_inmueble == True:
+                record.product_id.sale_order = record.order_id
         return res_id
 
-   
+class DatosLiquidacion(models.Model):
+    
+    _name = 'datos.liquidacion'
+    
+    name = fields.Char(
+                       string="Concepto"
+                       )
+    cantidad = fields.Float(
+                            string="Cantidad",
+                            default=0.0
+                            )
+    saleorder_id = fields.Many2one(
+                                   'sale.order',
+                                   string="Orden"
+                                   )
