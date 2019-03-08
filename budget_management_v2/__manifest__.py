@@ -12,7 +12,7 @@ Budget Management by Quantity
 =============================
 To establish and control the quantities bought of a product category in a project.
     """,
-    'depends': ['project','project_product_list','purchase'],
+    'depends': ['project','project_product_list','purchase','base'],
     'website': 'https://www.pptssolutions.com',
     'data': [
         'security/ir.model.access.csv',

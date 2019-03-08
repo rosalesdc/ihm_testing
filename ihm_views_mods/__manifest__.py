@@ -22,7 +22,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','stock','purchase','ihm_escritura_model',],
+    'depends': ['base', 'stock', 'purchase', 'ihm_escritura_model', ],
 
     # always loaded
     'data': [
@@ -31,6 +31,7 @@
         'views/pedidos_compra_inherited_view.xml',
         'views/kanban_productos_view.xml',
         'views/ventas_add_escritura_view.xml',
+        'views/oportunidad_inherited_search.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

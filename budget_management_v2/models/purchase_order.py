@@ -32,4 +32,24 @@ class PurchaseOrder(models.Model):
                     'project_id' : project_id.id
         })
         return record
+    
+    @api.onchange('x_cuenta_analitica_id')
+    def _onchange_location(self):
+            location_id = self.env['project.project'].search([('analytic_account_id','=',self.x_cuenta_analitica_id.id)])
+            if self.x_cuenta_analitica_id:
+                self.picking_type_id = location_id.picking_id.id
+                
+                
+      
+                
+                
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    analytic_acc_id = fields.Many2one('account.analytic.account',string='Analytic Account',compute="_compute_analytic_acc")  
+    
+    @api.one
+    def _compute_analytic_acc(self):  
+        if self.order_id.x_cuenta_analitica_id:
+            self.analytic_acc_id =  self.order_id.x_cuenta_analitica_id.id             
 

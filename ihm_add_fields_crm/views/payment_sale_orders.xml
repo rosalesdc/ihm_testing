@@ -24,6 +24,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
+                <field name="communication"></field>
+                <field name="reportado"></field>
             </xpath>
         </field>
     </record>

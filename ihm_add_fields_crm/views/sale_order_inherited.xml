@@ -56,7 +56,8 @@
                             string="Registrar Pago-"
                             class="oe_highlight"
                             context="{'partner_id': partner_id, 'payment_type': 'inbound', 'id_numero_referencia': id_numero_referencia,}" 
-                            groups="account.group_account_manager"
+                            groups="ihm_ocultar_validar.group_registrar_pagos"
+                            
                     />
                 </xpath>
                 <xpath expr="//tree/field[@name='product_id']" position='replace'>

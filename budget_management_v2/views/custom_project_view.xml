@@ -8,11 +8,12 @@
 			<data>
 				<xpath expr="//button[@name='attachment_tree_view']" position="before">
 					<button name="%(action_qty_budget_view)d"
-						class="oe_stat_button" type="action" icon="fa-list-alt" string="Qty Budget">
+						class="oe_stat_button" type="action" icon="fa-list-alt" string="Qty Budget" attrs="{'invisible': [('user_access','=','no')]}">
 					</button>
 				</xpath>
 			<xpath expr="//field[@name='user_id']" position="after">
 				<field name="product_list_ids" widget="many2many_tags" invisible="1"/>
+				<field name="user_access" invisible="1"/>
 			</xpath>
 			 <xpath expr="//field[@name='partner_id']" position="after">
 				<field name="picking_id"/>

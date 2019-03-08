@@ -9,6 +9,9 @@
 				<xpath expr="//field[@name='partner_id']" position="after">
 					<field name="product_list_id" invisible="1" />
 				</xpath>
+				<xpath expr="//field[@name='order_line']/tree//field[@name='x_prioridad']" position="before">
+			        <field name="analytic_acc_id"/>
+		      </xpath>
 			</field>
 		</record>
 		
@@ -22,7 +25,9 @@
         <xpath expr="//search/group" position="inside">
             <filter string="Product List" name="product_list_id" domain="[]" context="{'group_by':'product_list_id'}"/>
         </xpath>
+        
       </field>
     </record>
 	</data>
 </odoo>
+

@@ -18,14 +18,14 @@
 								</field> 										
 								<field name="qty" />
 								<field name="uom_id" />
-								<field name="cantidad_total"/>
+								<field name="cantidad_total" groups="base.group_system"/>
 							</group>
 							<group>
 								<field name="executed" readonly="1" />
-								<field name="executed_cost" readonly="1" />
+								<field name="executed_cost" readonly="1" groups="base.group_system"/>
 								<field name="percentage_qty" readonly="1" />
-								<field name="percentage_amt" readonly="1" />
-								<field name="remaining_amt" readonly="1" />
+								<field name="percentage_amt" readonly="1" groups="base.group_system"/>
+								<field name="remaining_amt" readonly="1" groups="base.group_system"/>
 								<field name="remaining_qty" readonly="1" />
 								<field name="project_id" invisible="1"/>
 							</group>
@@ -46,15 +46,15 @@
 					<field name="product_list_ids" invisible="1">
 					</field>  
 								
-					<field name="qty" />
+					<field name="qty" sum="total"/>
 					<field name="uom_id" />
-					<field name="cantidad_total"/>
-					<field name="executed" readonly="1" />
-					<field name="executed_cost" readonly="1" />
-					<field name="percentage_qty" readonly="1" />
-					<field name="percentage_amt" readonly="1" />
-					<field name="remaining_amt" readonly="1" />
-					<field name="remaining_qty" readonly="1" />
+					<field name="cantidad_total" groups="base.group_system" sum="total"/>
+					<field name="executed" readonly="1"  sum="total"/>
+					<field name="executed_cost" readonly="1" groups="base.group_system" sum="total"/>
+					<field name="percentage_qty" readonly="1"  sum="total"/>
+					<field name="percentage_amt" readonly="1" groups="base.group_system" sum="total"/>
+					<field name="remaining_amt" readonly="1" groups="base.group_system" sum="total"/>
+					<field name="remaining_qty" readonly="1"  sum="total"/>
 					<field name="project_id" invisible="1"/>
 				</tree>
 			</field>

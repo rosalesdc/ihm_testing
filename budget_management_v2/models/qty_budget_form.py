@@ -44,23 +44,34 @@ class QuantityBudget(models.Model):
                 if res.state == 'done':
                     for reco in res.move_ids_without_package:
                         if line.name.id == reco.product_id.id:
-                            total += reco.quantity_done
-#                     executed_cost += res.price_subtotal
-                        line.executed = total
+                            if reco.product_id.type != 'service':
+                                total += reco.quantity_done
+    #                     executed_cost += res.price_subtotal
+                            line.executed = total
 #             line.executed_cost = executed_cost
             executed_cost =0.0
+            exe_qty_service = 0.0
             for ren in acc_id:
                 if ren.state == 'paid':
                     for recod in ren.invoice_line_ids:
-                        if line.name.id == recod.product_id.id:
-                            executed_cost += recod.price_subtotal
-                        line.executed_cost = executed_cost
+                        if recod.product_id.type != 'service':
+                            if line.name.id == recod.product_id.id:
+                                executed_cost += recod.price_total
+                            line.executed_cost = executed_cost
+                        if recod.product_id.type == 'service':  
+                            if line.name.id == recod.product_id.id:
+                                executed_cost += recod.price_total
+                                exe_qty_service += recod.quantity
+                            line.executed_cost = executed_cost
+                            line.executed = exe_qty_service
+                        
                 elif ren.state == 'open':
                     to_amt = (ren.amount_total- ren.residual)/len(ren.invoice_line_ids)
                     for amts in ren.invoice_line_ids:
                         if line.name.id == amts.product_id.id:
                             executed_cost += to_amt
                         line.executed_cost = executed_cost
+#                            
                   
             if line.qty > 0 and total > 0:
                 line.percentage_qty = (total / line.qty)*100

@@ -12,6 +12,22 @@ class Project(models.Model):
     product_qty = fields.Char("Budget Quantity")  
     product_list_ids = fields.Many2many("product.product",string="Product list",compute="_compute_product_list")
     picking_id = fields.Many2one("stock.picking.type",string="Location", domain = [('name', '=', 'Receipts')])
+    user_access = fields.Selection([('yes', 'Yes'), 
+                                ('no', 'No')
+                                  ],compute="_compute_user_access", string="User Access")
+    @api.multi
+    def _compute_user_access(self):
+        context = self._context
+        current_uid = context.get('uid')
+        user = self.env['res.users'].browse(current_uid)
+        #print(user.id)
+        #print(user.name)
+        #print("-------------------")
+        for access_id in self:
+            if user.id == 2 or user.id == 6:
+                access_id.user_access = 'yes' 
+            else:
+                access_id.user_access = 'no' 
     
     @api.one
     def _compute_product_list(self):
@@ -224,10 +240,14 @@ class productList(models.Model):
                 'product_qty':product.x_qty_list,
                 'date_planned':product.x_fecha_requerida,
                 'product_uom':product.uom_id.id,
-                'price_unit':cost
+                'price_unit':cost,
+                'taxes_id' : [( 6,0,product.supplier_taxes_id.ids)] or False
             }
             print(str(vals_order_line))
             res_line = self.env['purchase.order.line'].create(vals_order_line)
+#             res_line.write({
+#                 'taxes_id' : product.supplier_taxes_id.ids
+#                 })
         r = self.pruchase_order_id
         r = res
         self.field_bool = True
