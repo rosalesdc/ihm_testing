@@ -33,8 +33,17 @@ class SaleOrderMod(models.Model):
     @api.one
     @api.depends('total_liquidacion')
     def _compute_total_global(self):
-        self.suma_global = self.amount_total+self.total_liquidacion
+        self.suma_global = self.amount_total + self.total_liquidacion
         
+    @api.one
+    @api.depends('suma_global')
+    def _compute_saldo_cliente(self):
+        #pagos_total== self.env['payment'].search([])
+        pagos_total=0
+        pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','=', 'posted')])
+        for pago in pagos:
+            pagos_total+=pago.amount
+        self.saldo_cliente=self.suma_global-pagos_total
         
     opportunity_id = fields.Many2one(
                                      'crm.lead',
@@ -71,7 +80,7 @@ class SaleOrderMod(models.Model):
     expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
     expediente_firma = fields.Date(string="Fecha de firma")
     
-    avaluo_fiscal=fields.Float('Cantidad Avaluo Fiscal', (10, 2))
+    avaluo_fiscal = fields.Float('Cantidad Avaluo Fiscal', (10, 2))
     
     tipo_credito = fields.Selection(
                                     selection=[
@@ -109,15 +118,19 @@ class SaleOrderMod(models.Model):
                                             string="Datos Liquidación"
                                             )
     total_liquidacion = fields.Float(string='Total datos de liquidación',
-                                           #store=True, 
-                                           readonly=True, 
-                                           compute='_compute_total_liquidacion',
-                                           )
+                                     #store=True, 
+                                     readonly=True, 
+                                     compute='_compute_total_liquidacion',
+                                     )
     suma_global = fields.Float(string='Suma Global',
-                                           #store=True, 
-                                           readonly=True, 
-                                           compute='_compute_total_global',
-                                           )
+                               #store=True, 
+                               readonly=True, 
+                               compute='_compute_total_global',
+                               )
+    saldo_cliente = fields.Float(string='Saldo del cliente',
+                                 readonly=True, 
+                                 compute='_compute_saldo_cliente',
+                                 )
                                     
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'
