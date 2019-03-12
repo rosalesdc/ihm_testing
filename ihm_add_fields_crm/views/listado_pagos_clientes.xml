@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="pagos_clientes_tree_viewc" model="ir.ui.view">
+            <field name="name">pagos.clientes.tree.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"></field>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="name"  domain="[('payment_type','=','inbound')]" string="Un nombre"/>    
+                </xpath>
+            </field>
+        </record>
+        
+<!--        <record id="pagos_kanban_inherited_view" model="ir.ui.view">
+            <field name="name">pagos.kanban.inherited.view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>-->
+        
+        
+        
+        <record id="action_listar_pagosd" model="ir.actions.act_window">
+            <field name="name">action.listar.pagos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="account.view_account_payment_kanban"/>
+             <field name="domain">[('payment_type','=','inbound')]</field>
+<!--                        <field name="target">new</field>-->
+        </record>
+
+    </data>
+    <!--    <record id="action_listar_pagos" model="ir.actions.act_window">
+        <field name="name">Pagos clientes</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+    </record>-->
+    
+    <menuitem
+        id="listado_pagos_clientes_menuitem"
+        name="Pagos de clientes"
+        action="action_listar_pagosd"
+        parent="crm.crm_menu_root"
+        sequence="30"
+    />
+</odoo>

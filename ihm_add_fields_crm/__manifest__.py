@@ -38,7 +38,9 @@
     'views/payment_sale_orders.xml',
     'views/sale_order_inherited.xml',
     'views/crm_fields_tree.xml',
+    'views/listado_pagos_clientes.xml',
     'security/ir.model.access.csv',
+    
     ],
     'installable':True,
 }
