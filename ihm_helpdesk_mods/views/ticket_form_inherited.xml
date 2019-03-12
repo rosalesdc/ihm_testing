@@ -7,8 +7,8 @@
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"></field><!--Referencía al alemento heredado por su ID-->
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='priority']" position='after'>
-                            <field name="x_inmueble_id" domain="[('es_inmueble', '=', True)]"/>
-                            <field name="x_categoria_id"></field>
+                    <field name="x_inmueble_id" domain="[('es_inmueble', '=', True)]"/>
+                    <field name="x_categoria_id"></field>
                 </xpath>
                 <xpath expr="//button[@name='toggle_active']" position="before">
                     <button class="oe_stat_button" type="object" context="{'partner_id': partner_id}" name="action_schedule_meeting" icon="fa-calendar">
@@ -18,6 +18,18 @@
                             <span class="o_stat_text" attrs="{'invisible': [('meeting_count', '&gt;', 1)]}"> Meeting</span>
                         </div>
                     </button>
+                </xpath>
+            </field>
+        </record>
+        <record id="helpdesk_ticket_tree_ihherited" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.tree.ihherited</field><!--texto arbitrario pero se utlizia esta forma por convención-->
+            <field name="model">helpdesk.ticket</field><!--texto arbitrario pero se utlizia esta forma por convención, viene del modelo base-->
+            <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"></field><!--Referencía al alemento heredado por su ID-->
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position='after'>
+                    <field name="x_inmueble_id"/>
+                    <field name="x_categoria_id"/>
+                    <field name="create_date"/>
                 </xpath>
             </field>
         </record>
