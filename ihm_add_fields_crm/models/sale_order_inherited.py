@@ -6,13 +6,15 @@ from odoo import models
 class SaleOrderMod(models.Model):
     _inherit = 'sale.order'
 
-    @api.multi
+    @api.one
+    @api.depends('order_line.name')
     def _obtener_elementos(self):
         elementos = ""
-        print (elementos)
-#        for lines in self.order_line:
-#            elementos+=lines.product_id.name+", "
-#        self.rep_productos=elementos
+        print ("elementos"+elementos)
+        for lines in self.order_line:
+            elementos+=lines.product_id.name+", "
+        print ("elementos"+elementos)
+        self.productos_reporte=elementos
         
     #@api.one
     @api.model

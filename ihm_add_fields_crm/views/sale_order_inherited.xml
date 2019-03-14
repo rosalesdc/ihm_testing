@@ -38,7 +38,8 @@
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_asesor_ventas" readonly="1" options="{'no_open': True}" ></field>
                     <!--                    <field name="productos_reporte" readonly="1"  ></field>-->
-                    
+
+<!--                    <field name="productos_reporte"></field>-->
                     <field name="tipo_credito"></field>
                     <field name="cantidad_pagar_cbancario" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"/>
                     <field name="cantidad_pagar_infonavitfov" attrs="{'invisible':[('tipo_credito', '!=', 'Infonavit/Fovisste'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
