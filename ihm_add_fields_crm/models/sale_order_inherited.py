@@ -79,6 +79,7 @@ class SaleOrderMod(models.Model):
     expediente_avaluo = fields.Date(string="Fecha de solicitud de avaluo")
     expediente_instruccion_ifinanciera = fields.Date(string="Fecha de instrucción de institución financiera")
     expediente_firma = fields.Date(string="Fecha de firma")
+    expediente_fecha_completo = fields.Date(string="Fecha de expediente completo")
     
     avaluo_fiscal = fields.Float('Cantidad Avaluo Fiscal', (10, 2))
     

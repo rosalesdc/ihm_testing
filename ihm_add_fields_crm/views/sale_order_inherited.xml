@@ -24,7 +24,7 @@
                         <field name="expediente_contrato"></field>
                         <field name="expediente_ingreso_ifinanciera"></field>
                         <field name="expediente_autorizacion_ifinanciera"></field>
-                        
+                        <field name="expediente_fecha_completo"></field>
                     </group>
                     <group>
                         <field name="expediente_avaluo"></field>
