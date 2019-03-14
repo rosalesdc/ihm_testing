@@ -29,5 +29,9 @@
             <field name="name">ventas_personalizado</field>
             <field name="comment">Grupo personalizado para ventas</field>
         </record>
+        <record id="group_correo_escrituras" model="res.groups">
+            <field name="name">correo_escrituras</field>
+            <field name="comment">Grupo envio de correo de escrituras</field>
+        </record>
     </data>
 </odoo>

@@ -3,6 +3,7 @@ from odoo import api
 from odoo import fields
 from odoo import models
 from odoo.exceptions import UserError, ValidationError
+import re
 
 import smtplib
 
@@ -29,6 +30,7 @@ class InmuebleEscritura(models.Model):
     
     def _envia_correos(self,prod_inmueble): #Validaciones, si algún miembro no tiene correo, si hay servidores configurados
         print("Ejecutando enviar")
+        
         if prod_inmueble.estatus=="Escriturado":
             #print("El inmueble es escriturado, enviando correo...")
             
@@ -47,16 +49,33 @@ class InmuebleEscritura(models.Model):
             if not proyecto:
                 print("Producto sin proyecto asignado")
             for miembros in proyecto.equipo_entrega:
+                receivers=""
                 sender = servidor_salida.smtp_user
                 receivers = miembros.email
-                message = "Estimado(a) "+miembros.name+", el inmueble "+prod_inmueble.name+" ha sido escriturado, por favor, tome las acciones necesarias correspondientes para liberar dicho inmueble, muchas gracias.\n"+listado_proyectos
-                smtpObj = smtplib.SMTP(host=servidor_salida.smtp_host, port=servidor_salida.smtp_port)
-                smtpObj.ehlo()
-                smtpObj.starttls()
-                smtpObj.ehlo()
-                smtpObj.login(user=servidor_salida.smtp_user, password=servidor_salida.smtp_pass)
-                smtpObj.sendmail(sender, receivers, message)
-            print ("Correo enviado")
+                if receivers != False:
+                    print("receiver registrado: "+receivers)
+                    receivers = receivers.encode('ascii', 'ignore').decode('ascii')
+                    print("receiver codificado: "+receivers)
+                    if (re.match('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,15}$',receivers.lower())):
+                        print ("Correo correcto validado con expresion "+receivers)
+                        message = "Estimado(a) "+miembros.name+", el inmueble "+prod_inmueble.name+" ha sido escriturado, por favor, tome las acciones necesarias correspondientes para liberar dicho inmueble, muchas gracias.\n"+listado_proyectos
+                        message = message.encode('ascii', 'ignore').decode('ascii')
+                        #message = "Estimado, inmueble escriturado"
+                        smtpObj = smtplib.SMTP(host=servidor_salida.smtp_host, port=servidor_salida.smtp_port)
+                        print("paso1")
+                        smtpObj.ehlo()
+                        print("paso2")
+                        smtpObj.starttls()
+                        print("paso3")
+                        smtpObj.ehlo()
+                        print("paso4")
+                        smtpObj.login(user=servidor_salida.smtp_user, password=servidor_salida.smtp_pass)
+                        print("paso5")
+                        smtpObj.sendmail(sender, receivers, message)
+                        print ("Correo enviado")
+                    else:
+                        print ("Correo incorrecto")
+                
     
     @api.model
     def create(self, vals):
