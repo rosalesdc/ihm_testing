@@ -10,6 +10,7 @@
                     <field name="id_numero_referencia"></field>
                     <field name="id_asesor_ventas"></field>
                     <field name="medium_id"></field>
+                    <field name="id_producto_inmueble"></field>
                     <field name="valor_inmueble"></field>
                 </xpath>
             </field>
