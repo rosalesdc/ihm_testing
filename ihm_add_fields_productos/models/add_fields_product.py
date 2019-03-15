@@ -26,7 +26,19 @@ class AddProductFields(models.Model):
     @api.one
     @api.depends('estatus')
     def _compute_copy_estatus(self):
-        self.estatus_ordenado="00-"+self.estatus
+        if self.estatus!=False:
+            if self.estatus=="Disponible":
+                self.estatus_ordenado="01-Disponible"
+            elif self.estatus=="Apartado":
+                self.estatus_ordenado="02-Apartado"
+            elif self.estatus=="Vendido":
+                self.estatus_ordenado="03-Vendido"
+            elif self.estatus=="Escriturado":
+                self.estatus_ordenado="04-Escriturado"
+            elif self.estatus=="Preparacion":
+                self.estatus_ordenado="05-Liberado"
+            elif self.estatus=="Entregado":
+                self.estatus_ordenado="06-Entregado"
         
        
     #características para los productos que son inmuebles y su proyecto relacionado
