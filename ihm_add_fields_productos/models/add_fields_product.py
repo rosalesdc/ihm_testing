@@ -64,7 +64,7 @@ class AddProductFields(models.Model):
                                         )#
                                         
     cantidad_enganche = fields.Float(
-                                     string="Cantidad Enganche"
+                                     string="Cantidad Contrato"
                                      )
     garantia_id = fields.Many2one(
                                   'tipo.garantia',
