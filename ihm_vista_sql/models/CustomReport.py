@@ -11,7 +11,7 @@ class CustomReport(models.Model):
     name = fields.Integer(string='ID', readonly=True,default=0)
     nombre_inmueble = fields.Char(string="Nombre Inmueble", default="-")
     estatus = fields.Char(string="Estatus", default="-")
-    precio = fields.Char(string='Precio', readonly=True, default="-")
+    precio = fields.Char(string='Precio SO', readonly=True, default="-")
     oportunidad = fields.Char(string='Oportunidad', readonly=True, default="-")
     tipo_credito = fields.Char(string='Tipo de credito', readonly=True, default="-")
     cantidad_cbancario = fields.Char(string='Cantidad C Bancario', readonly=True, default="-")
@@ -53,7 +53,7 @@ class CustomReport(models.Model):
                 
 		numero_referencia.name as referencia,
 		sale_order.nombre_asesor as asesor, 
-		product_template.list_price as precio,
+		sale_order.amount_total as precio,
                 
 		res_bank.name as entidad_financiera,
 		sale_order.cantidad_pagar_cbancario as cantidad_cbancario,
