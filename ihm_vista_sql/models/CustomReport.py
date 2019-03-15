@@ -21,6 +21,7 @@ class CustomReport(models.Model):
     referencia = fields.Char(string='Referencia', readonly=True, default="-")
     asesor = fields.Char(string='Asesor', readonly=True, default="-")
     entidad_financiera = fields.Char(string='Entidad Financiera', readonly=True, default="-")
+    elementos_de_orden = fields.Char(string='Elementos en la Orden', readonly=True, default="-")
     proyecto = fields.Char(string='Proyecto', readonly=True, default="-")
     autorizacion_i_financera = fields.Char(string='Aut. I Financiera', readonly=True, default="-")
     autorizacion_avaluo = fields.Char(string='Aut. Avaluo', readonly=True, default="-")
@@ -30,6 +31,7 @@ class CustomReport(models.Model):
     fecha_escritura = fields.Char(string='Fecha Escritura', readonly=True, default="-")
     avaluo_fiscal=fields.Char(string='Avalúo Fiscal', readonly=True, default="-")
     ingreso_i_financiera=fields.Char(string='Ingreso I Financiera', readonly=True, default="-")
+    categoria=fields.Char(string='Categoria', readonly=True, default="-")
     
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
@@ -48,28 +50,33 @@ class CustomReport(models.Model):
 		sale_order.expediente_instruccion_ifinanciera as instruccion_i_financiera,
                 sale_order.expediente_ingreso_ifinanciera as ingreso_i_financiera,
                 sale_order.avaluo_fiscal as avaluo_fiscal,
+                
 		numero_referencia.name as referencia,
 		sale_order.nombre_asesor as asesor, 
 		product_template.list_price as precio,
+                
 		res_bank.name as entidad_financiera,
 		sale_order.cantidad_pagar_cbancario as cantidad_cbancario,
 		sale_order.cantidad_pagar_infonavitfov as cantidad_infornativ,
+                sale_order.productos_reporte as elementos_de_orden,
 		project_project.name as proyecto,
                 inmueble_escritura.name as escritura,
 		inmueble_escritura.notaria as notaria,
-		inmueble_escritura.fecha as fecha_escritura
+		inmueble_escritura.fecha as fecha_escritura,
+                product_category.name as categoria
 		
 		
     FROM product_template  
     FULL OUTER JOIN crm_lead ON product_template.id=crm_lead.id_producto_inmueble 
 	FULL OUTER JOIN sale_order ON product_template.sale_order=sale_order.id
+        FULL OUTER JOIN product_category ON product_template.categ_id=product_category.id 
 	FULL OUTER JOIN res_partner ON res_partner.id=crm_lead.partner_id
 	FULL OUTER JOIN numero_referencia ON sale_order.id_numero_referencia=numero_referencia.id
 	FULL OUTER JOIN res_bank ON sale_order.id_entidad_financiera=res_bank.id
 	FULL OUTER JOIN project_project ON product_template.x_proyecto_id=project_project.id 
     FULL OUTER JOIN inmueble_escritura ON sale_order.id=inmueble_escritura.orden_venta_id
 	
-    WHERE product_template.es_inmueble=TRUE;
+    WHERE product_template.es_inmueble=TRUE AND product_category.name='DEPARTAMENTOS';
                         ;
                         """)
         print("finalizando")

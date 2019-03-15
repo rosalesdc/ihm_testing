@@ -28,6 +28,8 @@
                 <field name="notaria" type="row" />
                 <field name="cantidad_cbancario" type="row" />
                 <field name="cantidad_infornativ" type="row" />
+                <field name="categoria" type="row" />
+                <field name="elementos_de_orden" type="row" />
             </tree>
         </field>
     </record>
