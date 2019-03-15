@@ -22,6 +22,12 @@ class AddProductFields(models.Model):
     def get_default_estatus(self):
         default_estatus = 'Disponible'
         return default_estatus
+    
+    @api.one
+    @api.depends('estatus')
+    def _compute_copy_estatus(self):
+        self.estatus_ordenado="00-"+self.estatus
+        
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
@@ -42,6 +48,11 @@ class AddProductFields(models.Model):
                                readonly=True,
                                default=get_default_estatus,
                                )
+    estatus_ordenado=fields.Char(string="Estatus ordenado",
+                                readonly=True, 
+                                store=True,
+                                compute='_compute_copy_estatus',)
+                                
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     
     x_asignacion_ids = fields.One2many(

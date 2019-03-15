@@ -30,6 +30,7 @@
                                 <field name="numero"></field> 
                                 <field name="caracteristicas"></field>
                                 <field name="estatus"></field>
+<!--                                <field name="estatus_ordenado"></field> SE UTILIZA PERO NO SE MUESTRA EN VISTA-->
                                 <field name="x_proyecto_id"  attrs="{'required':[('es_inmueble','=',True)]}"></field>
                                 <field name="cantidad_enganche"></field>
                                 <field name="garantia_id"></field>
