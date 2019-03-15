@@ -30,12 +30,12 @@ class AddProductFields(models.Model):
     numero = fields.Char(string="Número")
     estatus = fields.Selection(
                                selection=[
-                               ('Disponible', 'Disponible'),
-                               ('Apartado', 'Apartado'),
-                               ('Vendido', 'Vendido'),
-                               ('Escriturado', 'Escriturado'),
-                               ('Preparacion', 'Liberado'),
-                               ('Entregado', 'Entregado'),
+                               ('Disponible', '01 Disponible'),
+                               ('Apartado', '02 Apartado'),
+                               ('Vendido', '03 Vendido'),
+                               ('Escriturado', '04 Escriturado'),
+                               ('Preparacion', '05 Liberado'),
+                               ('Entregado', '06 Entregado'),
                                ],
                                string="Estatus",
                                copy=False,

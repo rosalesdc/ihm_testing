@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <record id="estado_00" model="estatus.model">
+            <field name="name">-En preparación</field>
+        </record>
         <record id="estado_01" model="estatus.model">
-            <field name="name">-Liberado con cita</field>
+            <field name="name">-Liberado</field>
         </record>
         <record id="estado_02" model="estatus.model">
-            <field name="name">-Liberado con ticket de detalle</field>
+            <field name="name">-Liberado con cita</field>
         </record>
         <record id="estado_03" model="estatus.model">
-            <field name="name">-No se presentó a la cita</field>
+            <field name="name">-Liberado con Acta Firmada</field>
         </record>
         <record id="estado_04" model="estatus.model">
-            <field name="name">-Acta firmada</field>
+            <field name="name">-Liberado con ticket de detalles</field>
+        </record>
+        <record id="estado_05" model="estatus.model">
+            <field name="name">-No se presentó a la cita</field>
+        </record>
+        <record id="estado_06" model="estatus.model">
+            <field name="name">-Entregado</field>
         </record>
     </data>
 </odoo>
+
+<!--<data>
+    <record id="estado_01" model="estatus.model">
+        <field name="name">-Liberado con cita</field>
+    </record>
+    <record id="estado_02" model="estatus.model">
+        <field name="name">-Liberado con ticket de detalle</field>
+    </record>
+    <record id="estado_03" model="estatus.model">
+        <field name="name">-No se presentó a la cita</field>
+    </record>
+    <record id="estado_04" model="estatus.model">
+        <field name="name">-Acta firmada</field>
+    </record>
+</data>-->
