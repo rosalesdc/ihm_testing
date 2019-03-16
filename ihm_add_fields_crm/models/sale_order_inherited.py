@@ -134,7 +134,11 @@ class SaleOrderMod(models.Model):
                                  readonly=True, 
                                  compute='_compute_saldo_cliente',
                                  )
-                                    
+    id_notaria = fields.Many2one(
+                                'notaria.info',
+                                string="Nombre de la notaria",
+                                )
+                                       
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'
 
@@ -162,3 +166,9 @@ class DatosLiquidacion(models.Model):
                                    'sale.order',
                                    string="Orden"
                                    )
+                                   
+class Notarias(models.Model):
+    _name = 'notaria.info'
+    name = fields.Char(
+                       string="Nombre de la notaría"
+                       )

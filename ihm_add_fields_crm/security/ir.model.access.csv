@@ -3,3 +3,4 @@ access_efinanciera_credbancario,access_efinanciera_credbancario,model_efinancier
 access_efinanciera_cofinavit,access_efinanciera_cofinavit,model_efinanciera_cofinavit,base.group_user,1,1,1,1
 access_numero_referencia,access_numero_referencia,model_numero_referencia,base.group_user,1,1,1,1
 access_datos_liquidacion,access_datos_liquidacion,model_datos_liquidacion,base.group_user,1,1,1,1
+access_notaria_info,access_notaria_info,model_notaria_info,base.group_user,1,1,1,1

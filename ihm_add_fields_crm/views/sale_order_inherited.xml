@@ -37,6 +37,8 @@
                     <field name="id_numero_referencia" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_proyecto" readonly="1" options="{'no_open': True}" ></field>
                     <field name="id_asesor_ventas" readonly="1" options="{'no_open': True}" ></field>
+                    <field name="id_notaria"></field>
+                    
                     <!--                    <field name="productos_reporte" readonly="1"  ></field>-->
 
 <!--                    <field name="productos_reporte"></field>-->

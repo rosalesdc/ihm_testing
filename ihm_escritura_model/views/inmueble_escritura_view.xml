@@ -64,6 +64,7 @@
                 {
                 'search_default_orden_venta_id': [active_id], 
                 'default_orden_venta_id': active_id,
+                'default_id_notaria': active_id,
                 }
             </field>
         </record>

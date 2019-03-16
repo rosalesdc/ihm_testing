@@ -16,7 +16,10 @@ class InmuebleEscritura(models.Model):
     fecha = fields.Datetime(
                             string="Fecha de Escritura"
                             )
-    
+    id_notaria = fields.Many2one(
+                                
+                                string="Notaría ID"
+                                )
     orden_venta_id = fields.Many2one(
                                      'sale.order',
                                      string="Orden"
