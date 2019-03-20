@@ -36,7 +36,7 @@ class SaleOrderMod(models.Model):
     @api.depends('total_liquidacion')
     def _compute_total_global(self):
         self.suma_global = self.amount_total + self.total_liquidacion
-        
+
     @api.one
     @api.depends('suma_global')
     def _compute_saldo_cliente(self):

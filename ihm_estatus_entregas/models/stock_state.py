@@ -42,9 +42,13 @@ class StockState(models.Model):
     @api.depends('state')
     def _cambia_estatus(self):
         print("Cambiando estado")
+        if self.state=="confirmed":
+            print("El estado de la orden es Confirmed")
+            self.write({'estado_id': '9'})
+        
         if self.state == "assigned":
             #Cambiar el estado del inmueble
-            print("El estado de la orden es Preparado")
+            print("El estado de la orden es Assigned")
             for lines in self.move_lines:
                 #cambiando el estado desde las lineas
                 #lines.write({'estatus': 'Liberado'})
@@ -57,6 +61,8 @@ class StockState(models.Model):
                     producto_inmueble.write({'estatus': 'Preparacion'})
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
+            #cambia el subestado
+            self.write({'estado_id': '5'})
 
         if self.state == "done":
             #Cambiar el estado del inmueble
@@ -73,13 +79,14 @@ class StockState(models.Model):
                     producto_inmueble.write({'estatus': 'Entregado'})
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
-#
+            #cambia el subestado
+            self.write({'estado_id': '11'})
         return "Cambiando"
 
     @api.model
     def _default_estado_id(self):
         return self.env['estatus.model'].search([('id', '=', '9')], limit=1)
- 
+
 
     cambia_estatus_inmueble = fields.Char(compute='_cambia_estatus')
 
