@@ -88,3 +88,6 @@ class StockState(models.Model):
                                      string="Estatus",
                                      default=_default_estado_id
                                      )
+
+    productos_related = fields.Char(string='Productos',
+                        related='sale_id.productos_reporte')

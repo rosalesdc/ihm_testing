@@ -23,6 +23,7 @@
         'stock',
         'sale',
         'sale_management',
+        'ihm_estatus_entregas',
         
     ],
 
