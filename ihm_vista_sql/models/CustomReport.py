@@ -31,6 +31,7 @@ class CustomReport(models.Model):
     fecha_escritura = fields.Char(string='Fecha Escritura', readonly=True, default="-")
     avaluo_fiscal=fields.Char(string='Avalúo Fiscal', readonly=True, default="-")
     ingreso_i_financiera=fields.Char(string='Ingreso I Financiera', readonly=True, default="-")
+    fecha_completo=fields.Char(string='Expediente completo', readonly=True, default="-")
     categoria=fields.Char(string='Categoria', readonly=True, default="-")
     
     def init(self):
@@ -50,6 +51,7 @@ class CustomReport(models.Model):
 		sale_order.expediente_instruccion_ifinanciera as instruccion_i_financiera,
                 sale_order.expediente_ingreso_ifinanciera as ingreso_i_financiera,
                 sale_order.avaluo_fiscal as avaluo_fiscal,
+                sale_order.expediente_fecha_completo as fecha_completo,
                 
 		numero_referencia.name as referencia,
 		sale_order.nombre_asesor as asesor, 

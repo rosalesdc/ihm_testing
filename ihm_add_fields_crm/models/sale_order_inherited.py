@@ -40,9 +40,9 @@ class SaleOrderMod(models.Model):
     @api.one
     @api.depends('suma_global')
     def _compute_saldo_cliente(self):
-        #pagos_total== self.env['payment'].search([])
         pagos_total=0
-        pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','=', 'posted')])
+        #pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','=', 'posted')])
+        pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','in',  ['draft', 'posted'])])
         for pago in pagos:
             pagos_total+=pago.amount
         self.saldo_cliente=self.suma_global-pagos_total

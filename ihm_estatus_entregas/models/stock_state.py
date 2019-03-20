@@ -76,10 +76,15 @@ class StockState(models.Model):
 #
         return "Cambiando"
 
+    @api.model
+    def _default_estado_id(self):
+        return self.env['estatus.model'].search([('id', '=', '9')], limit=1)
+ 
 
     cambia_estatus_inmueble = fields.Char(compute='_cambia_estatus')
 
     estado_id = fields.Many2one(
                                      'estatus.model',
-                                     string="Estatus"
+                                     string="Estatus",
+                                     default=_default_estado_id
                                      )
