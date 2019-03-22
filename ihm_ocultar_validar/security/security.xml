@@ -33,5 +33,9 @@
             <field name="name">correo_escrituras</field>
             <field name="comment">Grupo envio de correo de escrituras</field>
         </record>
+        <record id="group_modificar_subestatus" model="res.groups">
+            <field name="name">modificar_subestatus</field>
+            <field name="comment">Grupo modificar subestatus entregas</field>
+        </record>
     </data>
 </odoo>

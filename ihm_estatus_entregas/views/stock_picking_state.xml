@@ -28,6 +28,30 @@
             </field>
         </record>
         
+        <!--        HACER SOLO LECTURA EL CAMBIO DE SUBESTUS-->
+        <record id="estatus_mod_form_view_user" model="ir.ui.view">
+            <field name="name">estatus.mod.form.view.user</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="groups_id" eval="[(6,0,[ref('base.group_user')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='estado_id']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="estatus_mod_form_view_dir" model="ir.ui.view">
+            <field name="name">estatus.mod.form.view.dir</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="groups_id" eval="[(6,0,[ref('ihm_ocultar_validar.group_modificar_subestatus')])]" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='estado_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--  **********************************************        -->
         <record model="ir.ui.view" id="estados_entregas_view">
             <field name="name">estados.entregas.view</field>
             <field name="model">estatus.model</field>
@@ -50,6 +74,8 @@
             parent="sale.menu_sale_config"
             sequence="60"
         />
+        
+        
     </data>
 </odoo>
 
