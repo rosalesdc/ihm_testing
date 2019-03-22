@@ -41,6 +41,7 @@ class StockState(models.Model):
     @api.multi
     @api.depends('state')
     def _cambia_estatus(self):
+                
         print("Cambiando estado")
         if self.state=="confirmed":
             print("El estado de la orden es Confirmed")
@@ -61,8 +62,15 @@ class StockState(models.Model):
                     producto_inmueble.write({'estatus': 'Preparacion'})
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
+                
             #cambia el subestado
-            self.write({'estado_id': '5'})
+            
+            if (self.estado_id.id==9 or self.estado_id.id==11):
+                print("cambia estado entrega")
+                self.write({'estado_id': '5'})
+            else:
+                print("no cambia estado entrega")
+                
 
         if self.state == "done":
             #Cambiar el estado del inmueble

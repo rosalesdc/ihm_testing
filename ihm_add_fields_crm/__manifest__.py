@@ -39,6 +39,7 @@
     'views/sale_order_inherited.xml',
     'views/crm_fields_tree.xml',
     'views/listado_pagos_clientes.xml',
+    'views/stock_move_views_inherites.xml',
     'security/ir.model.access.csv',
     
     ],
