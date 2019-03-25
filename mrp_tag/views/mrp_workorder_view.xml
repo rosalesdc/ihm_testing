@@ -1,0 +1,15 @@
+<odoo>
+     <record id="mrp_workorder_view_form_tablet" model="ir.ui.view">
+        <field name="name">mrp.workorder.view.form.inherit.quality.tablet.new</field>
+        <field name="model">mrp.workorder</field>
+         <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_done']" position="before">
+                <field name="qty_available"/>
+            </xpath>
+            <xpath expr="//field[@name='qty_done']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+     </record>
+</odoo>

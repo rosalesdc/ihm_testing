@@ -111,6 +111,12 @@
                 <xpath expr="//tree/field[@name='price_unit']" position="attributes">
                     <attribute name="readonly">1</attribute>
                 </xpath>
+<!--                <xpath expr="//tree/field[@name='name']" position="before">
+                    <field name="related_es_inmueble"></field>
+                </xpath>-->
+<!--                <xpath expr="//tree/field[@name='price_unit']" position="replace">
+                    <field name="price_unit" attrs="{'readonly':[('related_es_inmueble', '=', 'true')]}"></field>
+                </xpath>-->
             </field>
         </record>
         <record id="unit_price_perm_direc" model="ir.ui.view">

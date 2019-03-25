@@ -151,6 +151,9 @@ class OrderLinesProduct(models.Model):
             if record.product_id.es_inmueble == True:
                 record.product_id.sale_order = record.order_id
         return res_id
+    
+    related_es_inmueble = fields.Boolean(string='Es inmueble',
+                        related='product_id.es_inmueble')
 
 class DatosLiquidacion(models.Model):
     

@@ -15,6 +15,9 @@ class HistoricoVariaciones(models.Model):
                                  'product.product', #nombre del modelo con el que se relaciona
                                  string="Producto",
                                  change_default=True, required=True)
+                                 
+    product_template= fields.Many2one(string='Name',
+                        related='product_id.product_tmpl_id')
     
     price_unit = fields.Float('Cost', digits=dp.get_precision('Product Price'))
     partner_id = fields.Many2one('res.partner',

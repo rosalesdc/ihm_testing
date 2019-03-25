@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mrp_report_production_tags">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <p style="page-break-after:always;"/>
+                        <div t-if="o.finished_move_line_ids">
+                            <table t-foreach="o.finished_move_line_ids" t-as="ml" class="table table-bordered">
+                                <tr>
+                                    <td colspan="2">
+                                        <img class="img img-responsive" src="https://rocd.neocities.org/temp/schallx150.png"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px; text-align:center;" colspan="2">
+                                        <span t-field="ml.lot_id"/>
+                                        <span t-if="not ml.lot_id" t-field="ml.lot_name"/>
+                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', ml.lot_name, 600, 100)" style="width:400px;height:50px"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1px;">
+                                       <span class="small">No DE LOTE</span>
+                                    </td>
+                                    <td style="padding: 1px;">
+                                        <span class="small" t-field="ml.lot_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1px;">
+                                        <span class="small">FECHA/HORA</span>
+                                    </td>
+                                    <td style="padding: 1px;">
+                                        <span class="small" t-field="o.datetime"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        PRODUCTO
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="ml.product_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        ENCARGADO
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.manager"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        TURNO
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.turn"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        M. CUADRADOS
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                            <span t-field="o.m2"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        LARGO ROLLO (MTS)
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.large"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        ANCHO ROLLO (MTS)
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.wigth"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        GRAMAJE (GR/M2)
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.gr_m2"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        ESPESOR
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.thicknesstest"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        DESTINO
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-field="o.location_dest_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="small" style="padding: 1px;">
+                                        ROLLOS  <br/>
+                                        EN LA TARIMA
+                                    </td>
+                                    <td class="small" style="padding: 1px;">
+                                        <span t-esc="o.get_linked_move_lines(ml)"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <record id="paperformat_wo" model="report.paperformat">
+        <field name="name">Etiquetas WP</field>
+        <field name="default" eval="True" />
+        <field name="format">custom</field>
+        <field name="page_height">70</field>
+        <field name="page_width">62</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">2</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">1</field>
+        <field name="margin_right">2</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">30</field>
+        <field name="dpi">90</field>
+    </record>
+    <report
+        id="mrp_production_print"
+        string="Imprimir Etiqueta"
+        model="mrp.production"
+        report_type="qweb-pdf"
+        file="mrp_tag.mrp_report_production_tags"
+        name="mrp_tag.mrp_report_production_tags"
+        print_report_name="'Etiqueta - %s' % (object.name).replace('/','')"
+        paperformat="paperformat_wo"
+    />
+</odoo>
