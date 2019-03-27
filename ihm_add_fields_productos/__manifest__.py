@@ -23,9 +23,10 @@
         'crm',
         'product',
         'sale',
+        #'sale_management',
         'project',
         'ihm_add_fields_proyecto',#para obtener el equipo de entrega del proyecto
-
+        #'ihm_add_fields_crm',
     ],
 
     # always loaded

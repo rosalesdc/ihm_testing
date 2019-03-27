@@ -10,11 +10,11 @@ class SaleOrderMod(models.Model):
     @api.depends('order_line.name')
     def _obtener_elementos(self):
         elementos = ""
-        print ("elementos"+elementos)
+        print ("elementos" + elementos)
         for lines in self.order_line:
-            elementos+=lines.product_id.name+", "
-        print ("elementos"+elementos)
-        self.productos_reporte=elementos
+            elementos += lines.product_id.name + ", "
+        print ("elementos" + elementos)
+        self.productos_reporte = elementos
         
     #@api.one
     @api.model
@@ -40,13 +40,14 @@ class SaleOrderMod(models.Model):
     @api.one
     @api.depends('suma_global')
     def _compute_saldo_cliente(self):
-        pagos_total=0
-        pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','=', 'posted')])
+        pagos_total = 0
+        pagos = self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name), ('state', '=', 'posted')])
         #ALMA DIJO QUE TAMBIEN SE CONSIDERARA LOS PAGOS EN BORRADOR
         #pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name),('state','in',  ['draft', 'posted'])])
         for pago in pagos:
-            pagos_total+=pago.amount
-        self.saldo_cliente=self.suma_global-pagos_total
+            pagos_total += pago.amount
+        self.saldo_cliente = self.suma_global-pagos_total
+        
         
     opportunity_id = fields.Many2one(
                                      'crm.lead',
@@ -99,7 +100,7 @@ class SaleOrderMod(models.Model):
     cantidad_pagar_cbancario = fields.Float(
                                             string="Cantidad a pagar credito bancario",
                                             default=0.0,
-                                            required=True,)
+                                            required=True, )
     
     cantidad_pagar_infonavitfov = fields.Float('Cantidad a pagar INFONAVIT/FOVISTE', (10, 2))
     
@@ -136,10 +137,12 @@ class SaleOrderMod(models.Model):
                                  compute='_compute_saldo_cliente',
                                  )
     id_notaria = fields.Many2one(
-                                'notaria.info',
-                                string="Nombre de la notaria",
-                                )
-                                       
+                                 'notaria.info',
+                                 string="Nombre de la notaria",
+                                 )
+                                
+
+    
 class OrderLinesProduct(models.Model):
     _inherit = 'sale.order.line'
 
@@ -150,10 +153,11 @@ class OrderLinesProduct(models.Model):
         for record in res_id:
             if record.product_id.es_inmueble == True:
                 record.product_id.sale_order = record.order_id
+                #record.product_id.xreferencia=record.id_numero_referencia.name
         return res_id
     
     related_es_inmueble = fields.Boolean(string='Es inmueble',
-                        related='product_id.es_inmueble')
+                                         related='product_id.es_inmueble')
 
 class DatosLiquidacion(models.Model):
     

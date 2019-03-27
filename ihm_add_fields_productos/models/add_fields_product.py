@@ -40,7 +40,15 @@ class AddProductFields(models.Model):
                 self.estatus_ordenado = "05-Liberado"
             elif self.estatus == "Entregado":
                 self.estatus_ordenado = "06-Entregado"
-        
+    
+    @api.one
+    @api.model
+    @api.depends('sale_order')
+    def _obtener_referencia(self):        
+        orden = self.env['sale.order'].search([('id', '=', self.sale_order.id)],limit=1)
+        self.xreferencia=orden.name
+
+            
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
@@ -100,9 +108,10 @@ class AddProductFields(models.Model):
                                  string="Orden de venta del"
                                  )
                                  
-#    xreferencia = fields.Many2one(
-#                                 string='Referencia',
-#                                 store=True, 
-#                                 related='sale_order.id_numero_referencia')
+    xreferencia = fields.Char(
+                                string='Referencia',
+                                #store=True,
+                                compute='_obtener_referencia',
+                                 )
     
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html

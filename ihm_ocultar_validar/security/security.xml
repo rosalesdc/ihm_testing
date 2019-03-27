@@ -37,5 +37,9 @@
             <field name="name">modificar_subestatus</field>
             <field name="comment">Grupo modificar subestatus entregas</field>
         </record>
+        <record id="group_listado_inmuebles" model="res.groups">
+            <field name="name">listado_inmuebles</field>
+            <field name="comment">Grupo solo ver listado inmuebles</field>
+        </record>
     </data>
 </odoo>
