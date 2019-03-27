@@ -5,7 +5,6 @@ from collections import defaultdict
 from odoo import models, fields,api,_
 from odoo.exceptions import UserError, ValidationError
 
-                                                                
 class Project(models.Model):
     _inherit = "project.project"
     
@@ -15,6 +14,46 @@ class Project(models.Model):
     user_access = fields.Selection([('yes', 'Yes'), 
                                 ('no', 'No')
                                   ],compute="_compute_user_access", string="User Access")
+                                  
+    pagos_efectivo_ids = fields.One2many(
+                                         'pagos.efectivo', 
+                                         'proyecto_id', 
+                                         string="Pagos en efectivo"
+                                         )
+    
+                                         
+    @api.one
+    @api.model
+    def _compute_cantidad_ejecutada(self):
+#        total=sum(self.env['qty.budget'].search(['project_id','=',self.id]).mapped('executed_cost'))
+        print("CALCULANDO TOTALIDAD")
+        total=0
+        #pagos=self.env['account.payment'].search([('id_numero_referencia', '=', self.id_numero_referencia.name)])
+        budgets=self.env['qty.budget'].search([('project_id','=',self.id)])
+        for line in budgets:
+            total+=line.executed_cost
+        self.cantidad_ejecutada=total
+        
+    @api.one
+    @api.depends('pagos_efectivo_ids.importe')
+    def _compute_suma_gastos(self):
+        self.suma_gastos_efectivo = sum(line.importe for line in self.pagos_efectivo_ids)
+    
+    @api.one
+    @api.depends('suma_gastos_efectivo')
+    def _compute_total_total(self):
+        self.total_total = self.cantidad_ejecutada + self.suma_gastos_efectivo
+        
+    cantidad_ejecutada=fields.Float(string="Cantidad ejecutada",compute='_compute_cantidad_ejecutada')
+    suma_gastos_efectivo=fields.Float(string='Suma de gastos',
+                               readonly=True, 
+                               compute='_compute_suma_gastos',
+                               )
+    total_total=fields.Float(string='Total',
+                               readonly=True, 
+                               compute='_compute_total_total',
+                               )
+    
     @api.multi
     def _compute_user_access(self):
         context = self._context

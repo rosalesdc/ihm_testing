@@ -7,7 +7,8 @@ import smtplib
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
-           
+    name = fields.Char('Name', index=True, required=True, translate=False)
+    
     @api.one
     @api.depends('x_asignacion_ids.importe')
     def _compute_total_elementos(self):
@@ -26,19 +27,19 @@ class AddProductFields(models.Model):
     @api.one
     @api.depends('estatus')
     def _compute_copy_estatus(self):
-        if self.estatus!=False:
-            if self.estatus=="Disponible":
-                self.estatus_ordenado="01-Disponible"
-            elif self.estatus=="Apartado":
-                self.estatus_ordenado="02-Apartado"
-            elif self.estatus=="Vendido":
-                self.estatus_ordenado="03-Vendido"
-            elif self.estatus=="Escriturado":
-                self.estatus_ordenado="04-Escriturado"
-            elif self.estatus=="Preparacion":
-                self.estatus_ordenado="05-Liberado"
-            elif self.estatus=="Entregado":
-                self.estatus_ordenado="06-Entregado"
+        if self.estatus != False:
+            if self.estatus == "Disponible":
+                self.estatus_ordenado = "01-Disponible"
+            elif self.estatus == "Apartado":
+                self.estatus_ordenado = "02-Apartado"
+            elif self.estatus == "Vendido":
+                self.estatus_ordenado = "03-Vendido"
+            elif self.estatus == "Escriturado":
+                self.estatus_ordenado = "04-Escriturado"
+            elif self.estatus == "Preparacion":
+                self.estatus_ordenado = "05-Liberado"
+            elif self.estatus == "Entregado":
+                self.estatus_ordenado = "06-Entregado"
         
        
     #características para los productos que son inmuebles y su proyecto relacionado
@@ -60,10 +61,10 @@ class AddProductFields(models.Model):
                                readonly=True,
                                default=get_default_estatus,
                                )
-    estatus_ordenado=fields.Char(string="Estatus ordenado",
-                                readonly=True, 
-                                store=True,
-                                compute='_compute_copy_estatus',)
+    estatus_ordenado = fields.Char(string="Estatus ordenado",
+                                   readonly=True, 
+                                   store=True,
+                                   compute='_compute_copy_estatus',)
                                 
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     
@@ -94,8 +95,14 @@ class AddProductFields(models.Model):
                                   string="Tipo de garantia"
                                   )
     sale_order = fields.Many2one(
-                                  'sale.order',
-                                  copy=False,
-                                  string="Orden de venta del"
-                                  )
+                                 'sale.order',
+                                 copy=False,
+                                 string="Orden de venta del"
+                                 )
+                                 
+#    xreferencia = fields.Many2one(
+#                                 string='Referencia',
+#                                 store=True, 
+#                                 related='sale_order.id_numero_referencia')
+    
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html
