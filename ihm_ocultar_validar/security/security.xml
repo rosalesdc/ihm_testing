@@ -41,5 +41,9 @@
             <field name="name">listado_inmuebles</field>
             <field name="comment">Grupo solo ver listado inmuebles</field>
         </record>
+        <record id="group_editar_orderlines" model="res.groups">
+            <field name="name">editar_orderlines</field>
+            <field name="comment">Grupo modificar precio en lineas SO</field>
+        </record>
     </data>
 </odoo>
