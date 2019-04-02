@@ -41,7 +41,7 @@
                     
                     <!--                    <field name="productos_reporte" readonly="1"  ></field>-->
 
-<!--                    <field name="productos_reporte"></field>-->
+                    <!--                    <field name="productos_reporte"></field>-->
                     <field name="tipo_credito"></field>
                     <field name="cantidad_pagar_cbancario" attrs="{'invisible':[('tipo_credito', '!=', 'Crédito Bancario'),('tipo_credito', '!=', 'COFINAVIT')]}"/>
                     <field name="cantidad_pagar_infonavitfov" attrs="{'invisible':[('tipo_credito', '!=', 'Infonavit/Fovisste'),('tipo_credito', '!=', 'COFINAVIT')]}"></field>
@@ -62,9 +62,9 @@
                             groups="ihm_ocultar_validar.group_registrar_pagos"
                     />
                 </xpath>
-                <xpath expr="//tree/field[@name='product_id']" position='replace'>
+<!--                <xpath expr="//tree/field[@name='product_id']" position='replace'>
                     <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto),('estatus', '=', 'Disponible')]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"  />
-                </xpath>
+                </xpath>-->
                 <!--               CAMPOS PARA LIQUIDACION-->
                 <xpath expr="//sheet" position='after'>
                     <sheet string="Datos de Liquidación">
@@ -111,10 +111,10 @@
                 <xpath expr="//tree/field[@name='price_unit']" position="attributes">
                     <attribute name="readonly">1</attribute>
                 </xpath>
-<!--                <xpath expr="//tree/field[@name='name']" position="before">
+                <!--                <xpath expr="//tree/field[@name='name']" position="before">
                     <field name="related_es_inmueble"></field>
                 </xpath>-->
-<!--                <xpath expr="//tree/field[@name='price_unit']" position="replace">
+                <!--                <xpath expr="//tree/field[@name='price_unit']" position="replace">
                     <field name="price_unit" attrs="{'readonly':[('related_es_inmueble', '=', 'true')]}"></field>
                 </xpath>-->
             </field>
@@ -131,6 +131,17 @@
             </field>
         </record>
         
+        <record id="sale_order_dominio_producto_form" model="ir.ui.view">
+            <field name="name">sale.order.dominio.producto.form</field>
+            <field name="model">sale.order</field>
+            <field name="groups_id" eval="[(6, 0, [ref('ihm_ocultar_validar.group_orderlines_min') ])]"/>
+            <field name="inherit_id" ref="sale.view_order_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='product_id']" position='replace'>
+                    <field name="product_id"  domain="[('x_proyecto_id', '=', parent.id_proyecto),('estatus', '=', 'Disponible')]" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" context="{                                             'partner_id': parent.partner_id,                                             'quantity': product_uom_qty,                                             'pricelist': parent.pricelist_id,                                             'uom':product_uom,                                             'company_id': parent.company_id,                                             'default_lst_price': price_unit,                                             'default_description_sale': name                                         }"  />
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>

@@ -45,5 +45,13 @@
             <field name="name">editar_orderlines</field>
             <field name="comment">Grupo modificar precio en lineas SO</field>
         </record>
+        <record id="group_orderlines_todo" model="res.groups">
+            <field name="name">orderlines_todo</field>
+            <field name="comment">Grupo para mostrar todos los productos en las lineas de la SO</field>
+        </record>
+        <record id="group_orderlines_min" model="res.groups">
+            <field name="name">orderlines_min</field>
+            <field name="comment">Grupo para mostrar con filtro los productos en las lineas de la SO</field>
+        </record>
     </data>
 </odoo>
