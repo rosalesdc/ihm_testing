@@ -29,8 +29,14 @@
                 <xpath expr="//field[@name='uom_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+<!--                <xpath expr="//field[@name='name']" position="replace">
+                    <field name="name" domain="[('es_inmueble','=','True')]" string="Nombre"></field>
+                </xpath>-->
                 <xpath expr="//field[@name='name']" position="before">
                     <field name="x_proyecto_id"></field>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="list_price" string="Precio de venta"></field>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="xreferencia" ></field>
@@ -38,7 +44,6 @@
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="estatus"></field>
                 </xpath>
-                
             </field>
         </record>
         <record id="listado_inmuebles_inherited_view2" model="ir.ui.view">
