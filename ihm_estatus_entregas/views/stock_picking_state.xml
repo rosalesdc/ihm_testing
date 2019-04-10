@@ -20,10 +20,10 @@
                 
                 <!--                BOTON VALIDAR SOLO ES VISIBLE PARA UN GRUPO, REVISAR PUES LOS DOS SON IGUALES-->
                 <xpath expr="//header/button[@name='button_validate']" position="replace">
-                    <button name="button_validate" attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False)]}" string="Entregar" type="object" class="oe_highlight" groups="ihm_estatus_entregas.group_validar_entrega"/>
+                    <button name="button_validate" attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False)]}" string="Entregar/Recibir" type="object" class="oe_highlight" groups="ihm_estatus_entregas.group_validar_entrega"/>
                 </xpath>
                 <xpath expr="//header/button[@class='o_btn_validate']" position="replace">
-                    <button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Entregar" type="object" groups="ihm_estatus_entregas.group_validar_entrega" class="o_btn_validate"/>
+                    <button name="button_validate" attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}" string="Entregar/Recibir" type="object" groups="ihm_estatus_entregas.group_validar_entrega" class="o_btn_validate"/>
                 </xpath>
             </field>
         </record>

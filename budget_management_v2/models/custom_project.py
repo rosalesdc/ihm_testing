@@ -63,7 +63,7 @@ class Project(models.Model):
         #print(user.name)
         #print("-------------------")
         for access_id in self:
-            if user.id == 2 or user.id == 6:
+            if user.id == 2 or user.id == 6 or user.id == 21 or user.id == 17:
                 access_id.user_access = 'yes' 
             else:
                 access_id.user_access = 'no' 

@@ -45,7 +45,7 @@ class StockState(models.Model):
         print("Cambiando estado")
         if self.state=="confirmed":
             print("El estado de la orden es Confirmed")
-            self.write({'estado_id': '9'})
+            self.write({'estado_id': '1'}) #EN IHM ES 1
         
         if self.state == "assigned":
             #Cambiar el estado del inmueble
@@ -65,9 +65,9 @@ class StockState(models.Model):
                 
             #cambia el subestado
             
-            if (self.estado_id.id==9 or self.estado_id.id==11):
+            if (self.estado_id.id==1 or self.estado_id.id==7): #EN IHM es 1 o 7
                 print("cambia estado entrega")
-                self.write({'estado_id': '5'})
+                self.write({'estado_id': '2'}) # EN IHM es 2
             else:
                 print("no cambia estado entrega")
                 
@@ -88,12 +88,12 @@ class StockState(models.Model):
                 producto_inmueble2 = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
                 #print("Nueva variable: "+producto_inmueble2.estatus)
             #cambia el subestado
-            self.write({'estado_id': '11'})
+            self.write({'estado_id': '7'}) #EN IHM ES 7
         return "Cambiando"
 
     @api.model
     def _default_estado_id(self):
-        return self.env['estatus.model'].search([('id', '=', '9')], limit=1)
+        return self.env['estatus.model'].search([('id', '=', '1')], limit=1) #EN IHM ES 1
 
 
     cambia_estatus_inmueble = fields.Char(compute='_cambia_estatus')

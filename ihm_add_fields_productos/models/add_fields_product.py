@@ -8,6 +8,7 @@ import smtplib
 class AddProductFields(models.Model):
     _inherit = 'product.template'
     name = fields.Char('Name', index=True, required=True, translate=False)
+
     
     @api.one
     @api.depends('x_asignacion_ids.importe')
@@ -45,10 +46,10 @@ class AddProductFields(models.Model):
     @api.model
     @api.depends('sale_order')
     def _obtener_referencia(self):        
-        orden = self.env['sale.order'].search([('id', '=', self.sale_order.id)],limit=1)
-        self.xreferencia=orden.name
-
-            
+        orden = self.env['sale.order'].search([('id', '=', self.sale_order.id)])
+        #self.xreferencia=orden.name 
+        self.xreferencia=orden.id_numero_referencia.name
+   
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
