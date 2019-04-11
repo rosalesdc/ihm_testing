@@ -3,13 +3,29 @@
 from odoo import api
 from odoo import fields
 from odoo import models
+from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 import smtplib
 
 class AddProductFields(models.Model):
     _inherit = 'product.template'
     name = fields.Char('Name', index=True, required=True, translate=False)
 
-    
+    #Antes de actualizar el producto se verifica si el usuario es administrador
+    @api.multi
+    def write(self, vals):
+        if self.es_inmueble == True and self.is_group_admin == False:
+            raise ValidationError('Usuario actual no puede actualizar inmuebles')
+        else:
+            return super(AddProductFields, self).write(vals)
+    #Antes de eliminar el producto se verifica si el usuario es administrador
+    @api.multi
+    def unlink(self):
+        if self.es_inmueble == True and self.is_group_admin == False:
+            raise ValidationError('Usuario actual no puede eliminar inmuebles')
+        else:
+            return super(AddProductFields, self).unlink()
+        
     @api.one
     @api.depends('x_asignacion_ids.importe')
     def _compute_total_elementos(self):
@@ -48,8 +64,18 @@ class AddProductFields(models.Model):
     def _obtener_referencia(self):        
         orden = self.env['sale.order'].search([('id', '=', self.sale_order.id)])
         #self.xreferencia=orden.name 
-        self.xreferencia=orden.id_numero_referencia.name
+        self.xreferencia = orden.id_numero_referencia.name
    
+    
+    #Campo para revisar si el usuario actual es un administrador
+    is_group_admin = fields.Boolean(
+                                    string='Is Admin',
+                                    compute="_compute_is_group_admin",
+                                    )
+    #Funcion que busca al usuario en el grupo de administradores
+    @api.one
+    def _compute_is_group_admin(self):
+        self.is_group_admin = self.env['res.users'].has_group('ihm_ocultar_validar.group_director')
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")
@@ -73,7 +99,7 @@ class AddProductFields(models.Model):
     estatus_ordenado = fields.Char(string="Estatus ordenado",
                                    readonly=True, 
                                    store=True,
-                                   compute='_compute_copy_estatus',)
+                                   compute='_compute_copy_estatus', )
                                 
     x_proyecto_id = fields.Many2one('project.project', string='Proyecto')
     
@@ -110,9 +136,9 @@ class AddProductFields(models.Model):
                                  )
                                  
     xreferencia = fields.Char(
-                                string='Referencia',
-                                #store=True,
-                                compute='_obtener_referencia',
-                                 )
+                              string='Referencia',
+                              #store=True,
+                              compute='_obtener_referencia',
+                              )
     
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html
