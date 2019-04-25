@@ -17,7 +17,7 @@ class StockMoveMe(models.Model):
         print(orden.name)
         proyecto=self.env['project.project'].search([('id', '=', orden.id_proyecto.id)], limit=1)
         print("proyecto___default")
-        print(proyecto.name)
+        #print(proyecto.name)
         res.write({'id_proyecto': proyecto.id})
         
 #        for record in res:
@@ -32,7 +32,7 @@ class StockMoveMe(models.Model):
         print(orden.name)
         proyecto=self.env['project.project'].search([('id', '=', orden.id_proyecto.id)], limit=1)
         print("proyecto___default")
-        print(proyecto.name)
+        #print(proyecto.name)
         return self.env['project.project'].search([('id', '=', orden.id_proyecto.id)], limit=1)
     
     id_proyecto = fields.Many2one(

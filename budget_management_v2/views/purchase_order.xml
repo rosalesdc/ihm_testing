@@ -10,7 +10,7 @@
 					<field name="product_list_id" invisible="1" />
 				</xpath>
 				<xpath expr="//field[@name='order_line']/tree//field[@name='x_prioridad']" position="before">
-			        <field name="analytic_acc_id"/>
+			        <field name="analytic_acc_id" invisible="1"/>
 		      </xpath>
 			</field>
 		</record>

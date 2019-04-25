@@ -2,29 +2,92 @@
 from odoo import api
 from odoo import fields
 from odoo import models
+from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 class SaleOrderMod(models.Model):
     _inherit = 'sale.order'
+
+    #DESDE BOTON si la orden se cancela, los productos deben regresar a su estatus original
+    @api.multi
+    def action_cancel(self):
+        print("Orden Cancelada")
+        for lines in self.order_line:
+            producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
+            producto_inmueble.write({'estatus': 'Disponible','sale_order':''})
+        return self.write({'state': 'cancel'})
+    
+    #CACHANDO EL CAMPO DE ESTADO si la orden se cancela, los productos deben regresar a su estatus original
+#    @api.depends('state')
+#    def _cambio_estado_orden(self):
+#        print("Cambio en el estado de la orden-----------")
+#        print(self.name)
+#        if self.state=="cancel":
+#            print("La orden ha sido cancelada")
+#            for lines in self.order_line:
+#                producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
+#                producto_inmueble.write({'estatus': 'Disponible','sale_order':''})
 
     @api.one
     @api.depends('order_line.name')
     def _obtener_elementos(self):
         elementos = ""
-        print ("elementos" + elementos)
+        #print ("elementos" + elementos)
         for lines in self.order_line:
             elementos += lines.product_id.name + ", "
-        print ("elementos" + elementos)
+        #print ("elementos" + elementos)
         self.productos_reporte = elementos
         
     #@api.one
     @api.model
     def create(self, vals):
         #self.ensure_one()
+        print("CREANDO ORDEN")
         res = super(SaleOrderMod, self).create(vals)
         for record in res:
-            print(record.id_asesor_ventas.name)
+            #print(record.id_asesor_ventas.name)
             record.nombre_asesor = record.id_asesor_ventas.name
-            print(record.nombre_asesor)
+            #print(record.nombre_asesor)
+        
+            ##REVIAR PAGOS POR SI SE HIZO UNA NUEVA ORDEN##########################
+            if record.id_numero_referencia.name:
+                print("CON referencia")
+                pagos=self.env['account.payment'].search([('id_numero_referencia', '=', res.id_numero_referencia.name),('state','=', 'posted')])
+                oportunidad = self.env['crm.lead'].search([('id_numero_referencia', '=', res.id_numero_referencia.id)], limit=1)
+                so=record
+                #CHECAR SI EL PRODUCTO DE LA OPORTUNIDAD SE ENCUENTRA EN LAS LINEAS DE LA ORDEN#######
+                ######################################################################################
+                producto_encontrado=False
+                for lines in so.order_line:
+                    
+                    if lines.product_id.name == oportunidad.id_producto_inmueble.name:
+                        producto_encontrado=True
+                if producto_encontrado==False:
+                    raise ValidationError('Producto en la orden no se encuentra en la oportunidad')
+                ######################################################################################
+                
+                producto_inmueble=self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
+                proyecto=self.env['project.project'].search([('id', '=', producto_inmueble.x_proyecto_id.id)], limit=1)
+                if not pagos:
+                    print("No hay hay registros de pagos validados")
+                monto_actual=0
+                for montos in pagos:
+                    monto_actual+=montos.amount
+                if (monto_actual>=proyecto.cantidad_apartado) and (monto_actual<=producto_inmueble.cantidad_enganche):
+                    for lines in so.order_line:
+                        #print(lines.product_id.estatus)
+                        if lines.product_id.estatus == "Disponible":
+                            lines.product_id.write({'estatus': 'Apartado'})
+                if monto_actual>=producto_inmueble.cantidad_enganche:
+                    print("Cantidad vendido alcanzado")
+                    for lines in so.order_line:
+                        print(lines.product_id.estatus)
+                        if (lines.product_id.estatus == "Disponible") or (lines.product_id.estatus == "Apartado"):
+                            lines.product_id.write({'estatus': 'Vendido'})
+            else:
+                print("SIN referencia")
+            #######################################################################
+            #######################################################################
         return res
     
     @api.one
