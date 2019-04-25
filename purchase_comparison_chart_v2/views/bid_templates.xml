@@ -388,6 +388,14 @@
 															
 														</td>
 													</t>
+													<t t-if="total_supplier==1">
+														<td
+															style="text-align:center;padding:15px;border:solid #d1cfcf 1px;">
+															<b t-esc="supplier_amount_total" />
+														</td>
+													</t>
+
+
 												</t>
 											</tr>
 										</tbody>

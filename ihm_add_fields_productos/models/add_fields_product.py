@@ -11,6 +11,14 @@ class AddProductFields(models.Model):
     _inherit = 'product.template'
     name = fields.Char('Name', index=True, required=True, translate=False)
 
+    #Antes de crear un producto checa que el usuario no esté restringido
+    @api.model
+    def create(self, vals):
+        producto_creado=super(AddProductFields, self).create(vals)
+        if producto_creado.is_group_restr == True:
+            raise ValidationError('Usuario actual no puede crear inmuebles')
+        else: return producto_creado
+        
     #Antes de actualizar el producto se verifica si el usuario es administrador
     @api.multi
     def write(self, vals):
@@ -65,17 +73,26 @@ class AddProductFields(models.Model):
         orden = self.env['sale.order'].search([('id', '=', self.sale_order.id)])
         #self.xreferencia=orden.name 
         self.xreferencia = orden.id_numero_referencia.name
-   
-    
+                
+    #Funcion que busca al usuario en el grupo de administradores
+    @api.one
+    def _compute_is_group_admin(self):
+        self.is_group_admin = self.env['res.users'].has_group('ihm_ocultar_validar.group_director')
+        
+    #Funcion que busca que el usuario no pertenezca al campo que puede editar/crear productos
+    @api.one
+    def _compute_is_group_restringido(self):
+        self.is_group_restr = self.env['res.users'].has_group('ihm_ocultar_validar.group_no_editarcrear')
+       
     #Campo para revisar si el usuario actual es un administrador
     is_group_admin = fields.Boolean(
                                     string='Is Admin',
                                     compute="_compute_is_group_admin",
                                     )
-    #Funcion que busca al usuario en el grupo de administradores
-    @api.one
-    def _compute_is_group_admin(self):
-        self.is_group_admin = self.env['res.users'].has_group('ihm_ocultar_validar.group_director')
+    is_group_restr = fields.Boolean(
+                                    string='Is Restringido',
+                                    compute="_compute_is_group_restringido",
+                                    )
        
     #características para los productos que son inmuebles y su proyecto relacionado
     es_inmueble = fields.Boolean(string="Es un inmueble")

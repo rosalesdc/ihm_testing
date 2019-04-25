@@ -237,8 +237,8 @@ class ValidateBid(http.Controller):
                     supplier_amount_total_1[odd_no - 1] = "{:,.2f}".format(supplier_id[scount - 1])
                     scount += 1
         return request.render('purchase_comparison_chart_v2.purchase_comparison_list', {'po':0,'data':values, 'supplier':supplier_ids, 'list_id':list_id, 
-                                                               'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':supplier_amount_total,
-                                                                'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number})
+                                                               'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':"{:,.2f}".format(supplier_amount_total[0]),                                                                'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number,
+                                                                'total_supplier':total_supplier})
 
 
         

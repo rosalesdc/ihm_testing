@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="edit_project_inherit_project" model="ir.ui.view">
+		<field name="name">project.project.form.view.inherit.project</field>
+		<field name="model">project.project</field>
+		<field name="inherit_id" ref="project.edit_project" />
+		<field name="arch" type="xml">
+			<data>
+				<xpath expr="//button[@name='attachment_tree_view']" position="before">
+					<button name="%(action_qty_budget_view)d"
+						class="oe_stat_button" type="action" icon="fa-list-alt" string="Qty Budget">
+					</button>
+				</xpath>
+			</data>
+		</field>
+	</record>
+
+	<record id="edit_project_inherit_project_line"
+		model="ir.ui.view">
+		<field name="name">project.project.form.view.inherit.project.line
+		</field>
+		<field name="model">product.list</field>
+		<field name="inherit_id"
+			ref="project_product_list.product_list_form" />
+		<field name="arch" type="xml">
+			<xpath
+				expr="//field[@name='product_list_ids']/tree//field[@name='cantidad']"
+				position="before">
+				<field name="budget" />
+				<field name="executed" />
+				<field name="executed_cost" invisible="1"/>
+			</xpath>
+			<xpath
+				expr="//field[@name='product_list_ids']/tree//field[@name='task_id']"
+				position="after">
+				<field name="status" />
+			</xpath>
+			<xpath expr="//button[@name='set_confirm']" position="after">
+				<field name="status_compute" invisible="1" />
+				<button name="is_approve" string="Approve" type="object"
+					class="oe_highlight" groups="project.group_project_manager"
+					attrs="{'invisible': ['|', ('state', 'in', ('draft', 'done','purchase')),('status_compute', '=', True)]}" />
+			</xpath>
+			<xpath expr="//form/sheet/group" position="before">
+				<div class="oe_button_box">
+					<button name="view_purchase_order" type="object"
+						class="oe_stat_button" icon="fa-list-alt">
+						<field name="purchase_count" widget="statinfo"
+							string="Purchase Order" />
+					</button>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="edit_project_inherit_product" model="ir.ui.view">
+		<field name="name">product.product.form.view.inherit.project.line
+		</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='type']" position="after">
+				<field name="x_fecha_requerida" />
+			</xpath>
+		</field>
+	</record>
+	
+	<record id="edit_project_inherit_project_tree_view"
+		model="ir.ui.view">
+		<field name="name">project.project.tree.view.inherit.project
+		</field>
+		<field name="model">product.list</field>
+		<field name="inherit_id"
+			ref="project_product_list.product_list_tree" />
+		<field name="arch" type="xml">
+		
+		   <xpath expr="//field[@name='date']" position="after">
+				<field name="status_pro" />
+			</xpath>
+		</field>
+	</record>
+</odoo>

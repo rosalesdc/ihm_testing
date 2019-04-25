@@ -53,5 +53,9 @@
             <field name="name">orderlines_min</field>
             <field name="comment">Grupo para mostrar con filtro los productos en las lineas de la SO</field>
         </record>
+        <record id="group_no_editarcrear" model="res.groups">
+            <field name="name">no_editarcrear</field>
+            <field name="comment">Grupo para evitar que usuarios creen o editen productos</field>
+        </record>
     </data>
 </odoo>
