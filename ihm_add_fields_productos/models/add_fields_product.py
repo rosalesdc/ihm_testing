@@ -20,12 +20,20 @@ class AddProductFields(models.Model):
         else: return producto_creado
         
     #Antes de actualizar el producto se verifica si el usuario es administrador
-    @api.multi
-    def write(self, vals):
-        if self.es_inmueble == True and self.is_group_admin == False:
-            raise ValidationError('Usuario actual no puede actualizar inmuebles')
-        else:
-            return super(AddProductFields, self).write(vals)
+#    @api.multi
+#    def write(self, vals):
+#        print(vals)
+#        if self.es_inmueble == True and self.is_group_admin == False:
+#            keys=vals.keys()
+#            if ('invoice_policy' in keys) or ('service_type' in keys) or ('estatus' in keys) or ('sale_order' in keys):
+#                return super(AddProductFields, self).write(vals)
+#            else:
+#                raise ValidationError('Usuario actual no puede actualizar inmuebles')
+#        else:
+#            return super(AddProductFields, self).write(vals)
+        
+        
+        
     #Antes de eliminar el producto se verifica si el usuario es administrador
     @api.multi
     def unlink(self):

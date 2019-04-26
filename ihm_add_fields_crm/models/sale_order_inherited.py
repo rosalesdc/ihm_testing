@@ -49,7 +49,7 @@ class SaleOrderMod(models.Model):
             record.nombre_asesor = record.id_asesor_ventas.name
             #print(record.nombre_asesor)
         
-            ##REVIAR PAGOS POR SI SE HIZO UNA NUEVA ORDEN##########################
+            ##REVISAR PAGOS POR SI SE HIZO UNA NUEVA ORDEN##########################
             if record.id_numero_referencia.name:
                 print("CON referencia")
                 pagos=self.env['account.payment'].search([('id_numero_referencia', '=', res.id_numero_referencia.name),('state','=', 'posted')])
@@ -111,7 +111,16 @@ class SaleOrderMod(models.Model):
             pagos_total += pago.amount
         self.saldo_cliente = self.suma_global-pagos_total
         
-        
+    #Antes de eliminar, se cambia el estatus de los productos
+    @api.multi
+    def unlink(self):
+        for lines in self.order_line:
+            producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
+            producto_inmueble.write({'estatus': 'Disponible','sale_order':''})
+        return super(SaleOrderMod, self).unlink()
+    
+    
+    
     opportunity_id = fields.Many2one(
                                      'crm.lead',
                                      string='Oportunidad',

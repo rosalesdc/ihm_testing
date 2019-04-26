@@ -92,7 +92,7 @@
         <field name="inherit_id" ref="project.edit_project" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='emails']" position="after">
-                <page name="Total Proyecto" string="Total Proyecto">
+                <page name="Total Proyecto" string="Total Proyecto" groups="ihm_ocultar_validar.group_director">
                     <group>
                         <h1>Total Proyecto</h1>
                     </group>
