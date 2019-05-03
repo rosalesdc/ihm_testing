@@ -7,7 +7,7 @@
           <field name="inherit_id" ref="base.res_partner_kanban_view"/>
           <field name="arch" type="xml">
               <xpath expr="//field[@name='id']" position="replace">
-                  <field name="id" domain="[('is_company','=','True')]" string="Un string"/>
+                  <field name="id" domain="[('customer','=','True')]" string="Un string"/>
               </xpath>
           </field>
         </record>
@@ -16,10 +16,9 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='display_name']" position="replace">
-                    <field name="display_name" domain="[('is_company','=','True')]" string="Un string"/>
+                <xpath expr="//field[@name='display_name']" position="after">
+                    <field name="partner_id"  domain="[('partner_id', '=', 5)]"/>
                 </xpath>
-                
             </field>
           </record>
     </data>
