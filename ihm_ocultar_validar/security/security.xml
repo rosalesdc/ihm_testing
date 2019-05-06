@@ -57,5 +57,9 @@
             <field name="name">no_editarcrear</field>
             <field name="comment">Grupo para evitar que usuarios creen o editen productos</field>
         </record>
+        <record id="group_botones_prodstock" model="res.groups">
+            <field name="name">botones_prodstock</field>
+            <field name="comment">Grupo para ocultar botones de actualizar inventario en producto</field>
+        </record>
     </data>
 </odoo>

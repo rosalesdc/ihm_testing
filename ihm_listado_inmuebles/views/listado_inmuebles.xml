@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        
+
         <record id="listado_inmuebles_view" model="ir.ui.view">
             <field name="name">listado.inmuebles.view</field>
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_tree_view"/>
             <field name="mode">primary</field>
             <field name="arch" type="xml">
-                
+
                 <xpath expr="//field[@name='default_code']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='list_price']" position="replace">
@@ -57,7 +57,7 @@
                 </xpath>
             </field>
         </record>
-        
+
         <record id="listado_inmuebles_action_window" model="ir.actions.act_window">
             <field name="name">listado.inmuebles.action.window</field>
             <field name="type">ir.actions.act_window</field>
@@ -73,15 +73,15 @@
 			name="Training Module"
 			sequence="50"
 			/>
-        
+
         <menuitem
             id="listado_inmueble_menuitem"
             name="Listado Inmuebles"
             action="listado_inmuebles_action_window"
-            
+
             sequence="102"
         />
-        
-        
+
+
     </data>
 </odoo>

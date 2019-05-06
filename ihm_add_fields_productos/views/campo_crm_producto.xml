@@ -9,7 +9,7 @@
                 <xpath expr="//group" position='after'>
                     <group>
                         <field name="id_proyecto" required="1"></field>
-                        <field name="id_producto_inmueble" domain="[('estatus', '=', 'Disponible'),('x_proyecto_id', '=', id_proyecto)]"></field>
+                        <field name="id_producto_inmueble" domain="[('estatus', '=', 'Disponible'),('x_proyecto_id', '=', id_proyecto)]" required="1"></field>
                     </group>
                 </xpath>
             </field>
