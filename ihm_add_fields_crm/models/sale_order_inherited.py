@@ -14,7 +14,8 @@ class SaleOrderMod(models.Model):
         print("Orden Cancelada")
         for lines in self.order_line:
             producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
-            producto_inmueble.write({'estatus': 'Disponible','sale_order':''})
+            producto_inmueble.write({'estatus': 'Disponible','sale_order':'','xreferencia_texto':''})
+
         return self.write({'state': 'cancel'})
     
     #CACHANDO EL CAMPO DE ESTADO si la orden se cancela, los productos deben regresar a su estatus original
@@ -116,7 +117,7 @@ class SaleOrderMod(models.Model):
     def unlink(self):
         for lines in self.order_line:
             producto_inmueble = self.env['product.product'].search([('id', '=', lines.product_id.id)], limit=1)
-            producto_inmueble.write({'estatus': 'Disponible','sale_order':''})
+            producto_inmueble.write({'estatus': 'Disponible','sale_order':'','xreferencia_texto':self.id_numero_referencia.name})
         return super(SaleOrderMod, self).unlink()
     
     
@@ -225,7 +226,8 @@ class OrderLinesProduct(models.Model):
         for record in res_id:
             if record.product_id.es_inmueble == True:
                 record.product_id.sale_order = record.order_id
-                #record.product_id.xreferencia=record.id_numero_referencia.name
+                record.product_id.xreferencia_texto = record.order_id.id_numero_referencia.name
+                #record.product_id.xreferencia=record.id_numero_referencia.name ,'xreferencia_texto':self.id_numero_referencia.name
         return res_id
     
     related_es_inmueble = fields.Boolean(string='Es inmueble',

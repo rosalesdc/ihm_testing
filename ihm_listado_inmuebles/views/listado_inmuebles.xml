@@ -39,7 +39,7 @@
                     <field name="list_price" string="Precio de venta"></field>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
-                    <field name="xreferencia" ></field>
+                    <field name="xreferencia_texto" ></field>
                 </xpath>
                 <xpath expr="//field[@name='name']" position="after">
                     <field name="estatus"></field>

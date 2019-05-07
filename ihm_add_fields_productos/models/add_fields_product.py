@@ -165,5 +165,11 @@ class AddProductFields(models.Model):
                               #store=True,
                               compute='_obtener_referencia',
                               )
-    
+                              
+    #campo que muestra la referencia en el listado de inmuebles
+    xreferencia_texto = fields.Char(
+                              string='Referencia',
+                              #store=True,
+                              )
+                              
 #https://fundamentos-de-desarrollo-en-odoo.readthedocs.io/es/latest/capitulos/modelos-estructura-datos-aplicacion.html
