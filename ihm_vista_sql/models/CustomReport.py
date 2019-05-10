@@ -18,6 +18,7 @@ class CustomReport(models.Model):
     cantidad_infornativ = fields.Char(string='Cantidad C Infonavit', readonly=True, default="-")
     cliente = fields.Char(string='Cliente', readonly=True, default="-") 
     orden = fields.Char(string='Orden', readonly=True, default="-")
+    referencia_fecha = fields.Char(string='Referencia Fecha', readonly=True, default="-")
     referencia = fields.Char(string='Referencia', readonly=True, default="-")
     asesor = fields.Char(string='Asesor', readonly=True, default="-")
     entidad_financiera = fields.Char(string='Entidad Financiera', readonly=True, default="-")
@@ -52,7 +53,7 @@ class CustomReport(models.Model):
                 sale_order.expediente_ingreso_ifinanciera as ingreso_i_financiera,
                 sale_order.avaluo_fiscal as avaluo_fiscal,
                 sale_order.expediente_fecha_completo as fecha_completo,
-                
+                crm_lead.fecha_entrega_referencia as referencia_fecha,
 		numero_referencia.name as referencia,
 		sale_order.nombre_asesor as asesor, 
 		sale_order.amount_total as precio,

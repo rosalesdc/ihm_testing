@@ -20,6 +20,7 @@
                 <field name="avaluo_fiscal" type="row" />
                 <field name="instruccion_i_financiera" type="row" />
                 <field name="fecha_completo" type="row" />
+                <field name="referencia_fecha" type="row" />
                 <field name="referencia" type="row" />
                 <field name="asesor" type="row" />
                 <field name="precio" type="row" />
