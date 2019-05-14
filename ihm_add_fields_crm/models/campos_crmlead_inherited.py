@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from odoo import api
 from odoo import fields
 from odoo import models
 
@@ -18,7 +19,31 @@ class CamposResPartner(models.Model):
         #print(delta.days)
         self.dias_desde_creacion=delta.days
         #return delta.days
+        
+    @api.multi
+    @api.depends('won_status')
+    def _cambia_estatus(self):
+        print("Cambiando estado")
+        for record in self:
+            print("record")
+#        if self.state=="lost":
+#            print("El estado de la oportunidad es Perdida")
+#            self.write({'id_producto_inmueble': '','id_numero_referencia':''})
+#        return "ejecutando"
     
+    cambia_estatus_oportunidad = fields.Char(compute='_cambia_estatus')        
+     
+#    @api.multi
+#    def write(self, vals):
+#        print("Entra Wonstatus")
+#        actualizado=super(CamposResPartner, self).write(vals)
+#        if self.won_status=='lost':
+#            self.id_producto_inmueble=''
+#            self.id_numero_referencia=''
+#            print("se actualiza inmueble por ser op perdida")
+#        return actualizado
+        
+                
     id_numero_referencia = fields.Many2one(
                                            'numero.referencia',
                                            string="Número de Referencia"
@@ -89,5 +114,12 @@ class NumeroReferencia(models.Model):
          "En número de referencia debe ser único"),
         ]
                        
-
-                       
+class OportunidadesPerdidas(models.TransientModel):
+    _inherit = 'crm.lead.lost'
+    
+    @api.multi
+    def action_lost_reason_apply(self):
+        leads = self.env['crm.lead'].browse(self.env.context.get('active_ids'))
+        #leads.write({'lost_reason': self.lost_reason_id.id})
+        leads.write({'lost_reason': self.lost_reason_id.id,'id_producto_inmueble': '','id_numero_referencia':''})
+        return leads.action_set_lost()
