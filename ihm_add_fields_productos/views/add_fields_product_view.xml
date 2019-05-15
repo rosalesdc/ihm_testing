@@ -24,6 +24,8 @@
                                 <field name="cantidad_enganche"></field>
                                 <field name="garantia_id"></field>
 <!--                                <field name="sale_order"></field>-->
+<!--                                <field name="xreferencia" groups="ihm_ocultar_validar.group_director"></field>
+                                <field name="xreferencia_texto" groups="ihm_ocultar_validar.group_director"></field>-->
                             </group>
                         </group>
                         <group string="Asignacion de elementos">
