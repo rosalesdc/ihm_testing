@@ -42,7 +42,22 @@ class ValidateBid(http.Controller):
                             amt.append({'total_amount':"{:,.2f}".format(po_line.product_qty * po_line.price_unit), 'price':"{:,.2f}".format(po_line.price_unit), 'supplier_id':suppliers['supplier_id'], "purchase_order_id":record.id, "po_line":po_line.id})
                         else:
                             amt.append({'total_amount':'0.00', 'price':'0.00', 'supplier_id':suppliers['supplier_id'], "purchase_order_id":record.id,"po_line":po_line.id})
+
+            min_amount=max_amount=-1
+            for row in amt:
+                if 'amt' in row:
+                    if min_amount==-1:
+                        min_amount=row['amt']
+                    elif min_amount>=row['amt'] and row['amt']>0:
+                        min_amount=row['amt']
+                    if max_amount==-1:
+                        max_amount=row['amt']
+                    elif max_amount<=row['amt'] and row['amt']>0:
+                        max_amount=row['amt']
+           
             values[count]['amt'] = amt
+            values[count]['min_amount'] = "{:,.2f}".format(min_amount)
+            values[count]['max_amount'] = "{:,.2f}".format(max_amount)
             count += 1
             amt = []
         # Generate number to create rows and columns
@@ -76,7 +91,7 @@ class ValidateBid(http.Controller):
                 if total == odd_no:                  
                     supplier_amount_total_1[odd_no - 1] = "{:,.2f}".format(supplier_id[scount - 1])
                     scount += 1
-        return request.render('purchase_comparison_chart_v2.purchase_comparison', {'data':values, 'supplier':supplier_ids, 'purchase_requisition_id':purchase_requisition_id,
+        return request.render('purchase_comparison_chart_v2.purchase_comparison', {'data': values, 'supplier':supplier_ids, 'purchase_requisition_id':purchase_requisition_id,
                                                                'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':supplier_amount_total,
                                                                 'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number})
     
@@ -237,8 +252,8 @@ class ValidateBid(http.Controller):
                     supplier_amount_total_1[odd_no - 1] = "{:,.2f}".format(supplier_id[scount - 1])
                     scount += 1
         return request.render('purchase_comparison_chart_v2.purchase_comparison_list', {'po':0,'data':values, 'supplier':supplier_ids, 'list_id':list_id, 
-                                                               'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':"{:,.2f}".format(supplier_amount_total[0]),                                                                'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number,
-                                                                'total_supplier':total_supplier})
+                                                               'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':supplier_amount_total,
+                                                                'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number})
 
 
         
@@ -365,7 +380,3 @@ class ValidateBid(http.Controller):
         return request.render('purchase_comparison_chart_v2.purchase_comparison_list', {'po':1,'data':values, 'supplier':supplier_ids, 'list_id':False, 
                                                                'number':number, 'to_no':total_no, 'column_no':even_number, 'supplier_amount_total':supplier_amount_total,
                                                                 'supplier_amount_total_1':supplier_amount_total_1, 'odd_number':odd_number})
-
-
-        
-        
