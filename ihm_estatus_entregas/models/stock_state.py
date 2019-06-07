@@ -12,7 +12,7 @@ class StockState(models.Model):
     state = fields.Selection([
                              ('draft', 'Escriturado'),
                              ('waiting', 'Esperando otra operacion'),
-                             ('confirmed', 'En preparación'),
+                             ('confirmed', 'Escriturado'),
                              ('assigned', 'Liberado'),
                              ('done', 'Entregado'),
                              ('cancel', 'Cancelado'),
