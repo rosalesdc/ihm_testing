@@ -2,7 +2,7 @@
 <odoo>
     <data>
         <record id="estado_00" model="estatus.model">
-            <field name="name">-En preparación</field>
+            <field name="name">-Escriturado</field>
         </record>
         <record id="estado_01" model="estatus.model">
             <field name="name">-Liberado</field>
