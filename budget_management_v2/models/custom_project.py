@@ -192,7 +192,13 @@ class productList(models.Model):
         usd_seller = []
         mxn_seller = []
         print (self.product_list_ids)
+        print(self.id)
+        id_product_list=self.id
+        #print(self.name)
+        print("iniciando la requisicion")   
         for record in self.product_list_ids:
+            print (record.supplier_id,record.product.seller_ids)
+            print(record.product.id)
             print (record.supplier_id,record.product.seller_ids)
             if record.supplier_id.id != False:
                 if record.supplier_id.currency_id.name == 'MXN':
@@ -218,26 +224,26 @@ class productList(models.Model):
                     
         for seller_mxn in seller_by_product_mxn.items():
             print('FOR PROVEEDOR PREFERIDO MXN',seller_mxn)
-            self.purchase_order(seller_mxn[0],seller_mxn[1],mxn[0])
+            self.purchase_order(seller_mxn[0],seller_mxn[1],mxn[0],id_product_list)
 
         for seller_usd in seller_by_product_usd.items():
             print('FOR PROVEEDOR PREFERIDO MXN',seller_usd)
-            self.purchase_order(seller_usd[0],seller_usd[1],usd[0])
+            self.purchase_order(seller_usd[0],seller_usd[1],usd[0],id_product_list)
 
         for vendor_mxn in seller_products_mxn.items():
             print('FOR PROVEEDORES MXN',vendor_mxn)
             print('FOR PROVEEDORES MXN',mxn_seller)
-            self.purchase_order(vendor_mxn[0],vendor_mxn[1],mxn_seller[0])
+            self.purchase_order(vendor_mxn[0],vendor_mxn[1],mxn_seller[0],id_product_list)
 
         for vendor_usd in seller_products_usd.items():
             print('FOR PROVEEDORES USD',vendor_usd)
             print('FOR PROVEEDORES USD',usd_seller)
-            self.purchase_order(vendor_usd[0],vendor_usd[1],usd_seller[0])
+            self.purchase_order(vendor_usd[0],vendor_usd[1],usd_seller[0],id_product_list)
             
 #         raise ValidationError(_('The Product Quantities not in Budget.'))
     
     
-    def purchase_order(self,seller,producto,currency_id):
+    def purchase_order(self,seller,producto,currency_id,product_list):
         supplier = self.env['res.partner'].browse(seller)
         proyecto_id = self.project_id
         if proyecto_id.picking_id:
@@ -246,7 +252,7 @@ class productList(models.Model):
                 'x_cuenta_analitica_id':proyecto_id.analytic_account_id.id,
                 'partner_id':supplier.id,
                 'currency_id':currency_id,
-                'product_list_id':self.id,
+                'product_list_id':product_list,
                 'picking_type_id':proyecto_id.picking_id.id
             }
         else:
@@ -255,7 +261,7 @@ class productList(models.Model):
                 'x_cuenta_analitica_id':proyecto_id.analytic_account_id.id,
                 'partner_id':supplier.id,
                 'currency_id':currency_id,
-                'product_list_id':self.id,
+                'product_list_id':product_list,
             }
             
         print('purchase -<<<<<<',str(vals))

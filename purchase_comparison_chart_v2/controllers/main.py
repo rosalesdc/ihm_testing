@@ -106,39 +106,102 @@ class ValidateBid(http.Controller):
                 purchases.append(purchase_id)
                 po_lines.append(purchase_line_id)
         purchase_order_id = request.env['purchase.order'].sudo().search([('id', 'in', purchases),('state','=', 'draft')])  
+        purchase_order_id_product_list = request.env['purchase.order'].sudo().search([('id', 'in', purchases),('state','=', 'draft'),('product_list_id','!=','null')])  
         cancel_purchase_order_ids = False
-        for res in purchase_order_id:                 
-            cancel_purchase_order_ids =  request.env['purchase.order'].sudo().search([('id', 'not in',purchases),('requisition_id', '=', res.requisition_id.id),('state','=', 'draft')])
-        
-        if cancel_purchase_order_ids:
-            for can in cancel_purchase_order_ids:
-                can.button_cancel()
-        
-        for pro in purchase_order_id:    
-            purchase_order_line = request.env['purchase.order.line'].sudo().search([('order_id.requisition_id', '=', pro.requisition_id.id),('id','in',po_lines),('order_id.state','=', 'draft')])
-            for lines in pro.order_line:
-                if lines.id not in po_lines :
-                    lines.unlink()  
+        print(purchase_order_id)
+        print(purchase_order_id_product_list)
+        if purchase_order_id_product_list:
+            print("hola product_list_id")
+            for res in purchase_order_id_product_list: 
+                print(purchases)
+                
+                print("otro")                
+                cancel_purchase_order_ids =  request.env['purchase.order'].sudo().search([('id', 'not in',purchases),('product_list_id', '=', res.product_list_id.id),('state','=', 'draft')])
+                print("true cancel busqueda de puchase")
+                print (res.id)
+                print (res.requisition_id.name)
 
-        purchase_ids = False
-        for pr in purchase_order_id:
-            purchase_ids = request.env['purchase.order'].sudo().search([('id','in',purchases),'|', ('requisition_id', '=', pr.requisition_id.id),('product_list_id', '=', pr.product_list_id.id),('state','=',"draft")])
-        
-        list_id = 0
-        requisition_id = False
-        if purchase_ids:
-            for loop in purchase_ids:
-                requisition_id = loop.requisition_id
-                list_id = loop.product_list_id
-                loop.button_confirm()
-
-        if list_id:
-
+            if cancel_purchase_order_ids:
+                print("cancelando")
+                for can in cancel_purchase_order_ids:
+                    can.button_cancel()
             
-            return request.render('purchase_comparison_chart_v2.purchase_comparison_list_confirm', {'list_id':list_id})
-        else:
-            return request.render('purchase_comparison_chart_v2.purchase_comparison_confirm', {'requisition_id':requisition_id})
+            for pro in purchase_order_id_product_list:    
+                purchase_order_line = request.env['purchase.order.line'].sudo().search([('order_id.product_list_id', '=', pro.product_list_id.id),('id','in',po_lines),('order_id.state','=', 'draft')])
+                for lines in pro.order_line:
+                    if lines.id not in po_lines :
+                        lines.unlink()  
 
+            purchase_ids = False
+            for pr in purchase_order_id_product_list:
+                purchase_ids = request.env['purchase.order'].sudo().search([('id','in',purchases),'|', ('product_list_id', '=', pr.product_list_id.id),('product_list_id', '=', pr.product_list_id.id),('state','=',"draft")])
+            
+            list_id = 0
+            requisition_id = False
+            if purchase_ids:
+                group=False
+                for loop in purchase_ids:
+                    
+                    requisition_id = loop.requisition_id
+                    list_id = loop.product_list_id
+                    loop.button_confirm()
+
+
+            if list_id:
+
+                
+                return request.render('purchase_comparison_chart_v2.purchase_comparison_list_confirm', {'list_id':list_id})
+            else:
+                return request.render('purchase_comparison_chart_v2.purchase_comparison_confirm', {'product_list_id':product_list_id})
+
+
+
+
+
+
+        else:
+     #***********************************************************************************************           
+            for res in purchase_order_id: 
+                print(purchases)
+                
+                print("otro")                
+                cancel_purchase_order_ids =  request.env['purchase.order'].sudo().search([('id', 'not in',purchases),('requisition_id', '=', res.requisition_id.id),('state','=', 'draft')])
+                print("true cancel busqueda de puchase")
+                print (res.id)
+                print (res.requisition_id.name)
+                #print(cancel_purchase_order_ids.name)
+
+            if cancel_purchase_order_ids:
+                print("cancelando")
+                for can in cancel_purchase_order_ids:
+                    can.button_cancel()
+            
+            for pro in purchase_order_id:    
+                purchase_order_line = request.env['purchase.order.line'].sudo().search([('order_id.requisition_id', '=', pro.requisition_id.id),('id','in',po_lines),('order_id.state','=', 'draft')])
+                for lines in pro.order_line:
+                    if lines.id not in po_lines :
+                        lines.unlink()  
+
+            purchase_ids = False
+            for pr in purchase_order_id:
+                purchase_ids = request.env['purchase.order'].sudo().search([('id','in',purchases),'|', ('requisition_id', '=', pr.requisition_id.id),('product_list_id', '=', pr.product_list_id.id),('state','=',"draft")])
+            
+            list_id = 0
+            requisition_id = False
+            if purchase_ids:
+                for loop in purchase_ids:
+                    requisition_id = loop.requisition_id
+                    list_id = loop.product_list_id
+                    loop.button_confirm()
+
+            if list_id:
+
+                
+                return request.render('purchase_comparison_chart_v2.purchase_comparison_list_confirm', {'list_id':list_id})
+            else:
+                return request.render('purchase_comparison_chart_v2.purchase_comparison_confirm', {'requisition_id':requisition_id})
+
+    #*********************************************************************
 
     @http.route(['/purchase_comparison_chart/purchase_comparison_product_list/<model("product.list"):list_id>'], type='http', auth='public', website=True)
     def purchase_comparison_list(self, list_id, **post):
