@@ -106,3 +106,6 @@ class StockState(models.Model):
 
     productos_related = fields.Char(string='Productos',
                         related='sale_id.productos_reporte')
+                        
+    fecha_related = fields.Datetime(string='Productos',
+                        related='sale_id.x_fecha_escritura')

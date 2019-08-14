@@ -10,6 +10,7 @@
     'depends': ['base',
     'stock',
     'ihm_add_fields_productos',
+    'ihm_escritura_model',
     ],
     'data': [
         'views/stock_picking_state.xml',

@@ -24,6 +24,7 @@
                                 type="action" icon="fa-book" >
                             Escritura
                         </button>
+                        <field name="x_fecha_escritura" invisible="1"/>
                 </xpath>
             </field>
         </record>

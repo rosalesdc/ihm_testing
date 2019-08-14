@@ -24,6 +24,7 @@
                                         <li>Empresa: <field name="partner_id"></field></li>
 <!--                                        <li>Estado: <field name="state"></field></li>-->
                                         <li>Inmuebles: <field name="productos_related"></field></li>
+                                        <li>Fecha Escrituración: <field name="fecha_related"></field></li>
                                     </ul>
                                 </div>
                             </div>
