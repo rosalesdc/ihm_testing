@@ -93,7 +93,7 @@ class InmuebleEscritura(models.Model):
         #producto_inmueble = self.env['product.template'].search([('id', '=', oportunidad.id_producto_inmueble.id)], limit=1)
 
         ##Checar el saldo del cliente en la liquidación debe ser 0 o menor a 0
-        if so.total_liquidacion>0:
+        if so.saldo_cliente>0:
             raise ValidationError('El saldo del cliente en la liquidación debe ser 0 o menor a 0 ')
 
         print("Verificar si se puede escriturar")
