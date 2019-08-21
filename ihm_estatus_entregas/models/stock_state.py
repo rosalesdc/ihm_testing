@@ -103,9 +103,32 @@ class StockState(models.Model):
                                      string="Estatus",
                                      default=_default_estado_id
                                      )
+                                     
+    estado_select = fields.Selection(
+                             selection=[
+                             ('liberado_cita', '-Liberado con cita'),
+                             ('liberado_acta', '-Liberado con Acta Firmada'),
+                             ('liberado_ticket', '-Liberado con ticket de detalles'),
+                             ('no_presento', '-No se presentó a la cita'),
+                             ],
+                             default='liberado_cita',
+                             String='Modificación de subestatus'
+                             )
 
     productos_related = fields.Char(string='Productos',
                         related='sale_id.productos_reporte')
                         
     fecha_related = fields.Datetime(string='Productos',
                         related='sale_id.x_fecha_escritura')
+                        
+    
+    def establecer_estado_id(self):
+        self.env.cr.commit()
+        if self.estado_select == 'liberado_cita':
+            self.estado_id = '3'
+        elif self.estado_select == 'liberado_acta':
+            self.estado_id = '4'
+        elif self.estado_select == 'liberado_ticket':
+            self.estado_id = '5'
+        elif self.estado_select == 'no_presento':
+            self.estado_id = '6'
