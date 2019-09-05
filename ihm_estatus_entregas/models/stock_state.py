@@ -10,9 +10,9 @@ class StockState(models.Model):
     _inherit = 'stock.picking'
 
     state = fields.Selection([
-                             ('draft', 'Escriturado'),
+                             ('draft', 'Borrador'),
                              ('waiting', 'Esperando otra operacion'),
-                             ('confirmed', 'Escriturado'),
+                             ('confirmed', 'Confirmado'),
                              ('assigned', 'Liberado'),
                              ('done', 'Entregado'),
                              ('cancel', 'Cancelado'),

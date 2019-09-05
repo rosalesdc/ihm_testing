@@ -17,7 +17,6 @@ class InmuebleEscritura(models.Model):
                             string="Fecha de Escritura"
                             )
     id_notaria = fields.Many2one(
-
                                 string="Notaría ID"
                                 )
     orden_venta_id = fields.Many2one(
@@ -120,7 +119,8 @@ class InmuebleEscritura(models.Model):
 ###COPIA EL NOMBRE DE LA ESCRITURA A LA SO
         so.x_fecha_escritura=escritura.fecha
         #print (escritura.name)
-
+        entrega=self.env['stock.picking'].search([('sale_id', '=', so.id)], limit=1)
+        entrega.estado_id=1 #ESCRITRUADO
 
 
         return escritura
