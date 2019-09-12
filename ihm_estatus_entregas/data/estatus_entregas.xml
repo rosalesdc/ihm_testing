@@ -22,6 +22,9 @@
         <record id="estado_06" model="estatus.model">
             <field name="name">-Entregado</field>
         </record>
+        <record id="estado_07" model="estatus.model">
+            <field name="name">-Vendido</field>
+        </record>
     </data>
 </odoo>
 

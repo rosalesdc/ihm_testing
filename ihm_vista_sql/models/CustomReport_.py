@@ -41,7 +41,7 @@ class CustomReport(models.Model):
                 SELECT ROW_NUMBER() OVER (ORDER BY product_template.name) as id,
 		product_template.id as name,
 		product_template.name as nombre_inmueble,
-                product_template.estatus_ordenado as estatus,
+                product_template.estatus as estatusx,
 		
 		crm_lead.name as oportunidad,
 		res_partner.name as cliente, 
@@ -66,7 +66,17 @@ class CustomReport(models.Model):
                 inmueble_escritura.name as escritura,
 		inmueble_escritura.notaria as notaria,
 		inmueble_escritura.fecha as fecha_escritura,
-                product_category.name as categoria
+                product_category.name as categoria,
+                
+                CASE
+                    WHEN (estatus = 'Disponible') THEN 'Disponible'
+                    WHEN (estatus = 'Apartado') THEN 'Apartado'
+                    WHEN (estatus = 'Vendido') THEN 'Vendido'
+                    WHEN (estatus = 'Escriturado') THEN 'Escriturado'
+                    WHEN (estatus = 'Preparacion') THEN 'Liberado'
+                    WHEN (estatus = 'Entregado') THEN 'Entregado'
+                    ELSE 'no especificado'
+                    END AS estatus
 		
 		
     FROM product_template  

@@ -10,8 +10,8 @@
                 <!--                AGREGAR CAMPO DE ESTADO Y EL CAMPO QUE CAMBIA EL ESTADO DE LOS PRODUCTOS (NO VISIBLE)-->
                 <xpath expr="//field[@name='origin']" position="after">
                     <field name="estado_id"/>
-                    <field name="estado_select" attrs="{'invisible': ['|',('estado_id', 'in', (1,2,7))]}"/>
-                    <button string="Establecer Subestatus" type="object" name="establecer_estado_id" attrs="{'invisible': [('estado_id', 'in', (1,2,7))]}" class="oe_highlight"/>
+                    <field name="estado_select" attrs="{'invisible': ['|',('estado_id', 'in', (1,7,8))]}"/>
+                    <button string="Establecer Subestatus" type="object" name="establecer_estado_id" attrs="{'invisible': [('estado_id', 'in', (1,7,8))]}" class="oe_highlight"/>
                     <field name="cambia_estatus_inmueble" invisible="True"/>
                 </xpath>
                 
