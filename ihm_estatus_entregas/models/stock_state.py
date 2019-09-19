@@ -41,10 +41,11 @@ class StockState(models.Model):
     @api.multi
     @api.depends('state')
     def _cambia_estatus(self):
+                
         print("Cambiando estado")
-        if self.state=="confirmed":
-            print("El estado de la orden es Confirmed")
-            self.write({'estado_id': '8'}) # 8 ahora es el primer estado
+       # if self.state=="confirmed":
+       #     print("El estado de la orden es Confirmed")
+       #     self.write({'estado_id': '8'}) # 8 ahora es el primer estado
         
         if self.state == "assigned":
             #Cambiar el estado del inmueble
@@ -64,7 +65,7 @@ class StockState(models.Model):
                 
             #cambia el subestado
             
-            if (self.estado_id.id==8 or self.estado_id.id==7): #EN IHM es 1 o 7
+            if (self.estado_id.id==1 or self.estado_id.id==7): #EN IHM es 1 o 7
                 print("cambia estado entrega")
                 self.write({'estado_id': '2'}) # EN IHM es 2
             else:
