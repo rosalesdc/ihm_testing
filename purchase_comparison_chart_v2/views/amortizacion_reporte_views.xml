@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_amortizacion_reporte_form" model="ir.ui.view">
+        <field name="name">view.amortizacion.reporte.form</field>
+        <field name="model">amortizacion.reporte</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            Amoritzación
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="purchase_order_id"/>
+                        <field name="account_invoice_id"/>
+                        <field name="cantidad_descontada"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_amortizacion_reporte_tree" model="ir.ui.view">
+        <field name="name">view.amortizacion.reporte.tree</field>
+        <field name="model">amortizacion.reporte</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" type="row" />
+                <field name="purchase_order_id" type="row"/>
+                <field name="account_invoice_id" type="row"/>
+                <field name="cantidad_descontada" type="row"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_amortizacion_reporte" model="ir.actions.act_window">
+        <field name="name">Amortizaciones</field>
+        <field name="res_model">amortizacion.reporte</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="configurar_amortizacion_reporte_menuitem"
+        name="Amortizaciones"
+        action="action_amortizacion_reporte"
+        parent="purchase.menu_procurement_management"
+        sequence="11"
+    />
+
+</odoo>

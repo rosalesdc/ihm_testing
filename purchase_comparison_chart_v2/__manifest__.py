@@ -17,6 +17,8 @@
         'views/inherit_purchase_requisition_view.xml',
         'views/purchase_order.xml',
         'views/bid_templates.xml',
+        'views/amortizacion_reporte_views.xml',
+        'security/ir.model.access.csv',
     ],
     'images': ['static/description/banner.png'],
     'installable': True,
