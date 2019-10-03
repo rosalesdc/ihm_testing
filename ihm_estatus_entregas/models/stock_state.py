@@ -65,7 +65,7 @@ class StockState(models.Model):
                 
             #cambia el subestado
             
-            if (self.estado_id.id==1 or self.estado_id.id==7): #EN IHM es 1 o 7
+            if (self.estado_id.id==1 or self.estado_id.id==7): #EN IHM es 1 o 7, se le quitó el estado 8 de aqui por los que modificó odooBot
                 print("cambia estado entrega")
                 self.write({'estado_id': '2'}) # EN IHM es 2
             else:
