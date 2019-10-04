@@ -79,16 +79,19 @@ class PurchaseOrder(models.Model):
             print("costo ******+++ cambiado")
             print(cost)       
             linea.price_unit=cost
+            
             #####DATA AMORTIZACION
             print(":::::::::::::DATA AMORTIZACION")
             print("ORDEN",self.id)
             print("Factura",factura_creada)
             print("RETENCION",retencion)
-            #self.creacion_registro_amortizacion(factura_creada,self.id,retencion)
+            linea.retencion_amortizacion=retencion
             
-            amortizacion_obj = self.env['amortizacion.reporte']
-            amortizacion_data = {'name':"Test",  'purchase_order_id': self.id,'account_invoice_id': factura_creada,'cantidad_descontada':retencion}
-            amoritzacion_crear = amortizacion_obj.create(amortizacion_data)
+            #amortizacion_obj = self.env['amortizacion.reporte']
+            #amortizacion_data = {'name':"Test",  'purchase_order_id': self.id,'account_invoice_id': factura_creada,'cantidad_descontada':retencion}
+            #amoritzacion_crear = amortizacion_obj.create(amortizacion_data)
+            #####DATA AMORTIZACION
+            
             
         print("que costo se quedo?")
         print(cost)
@@ -160,10 +163,10 @@ class PurchaseOrder(models.Model):
                 factura_crear = factura_obj.create(factura_data) # se crea la factura
 
                 print("se creo la factura")
-                for valor in self.order_line:
+                for line in self.order_line:
                     linea_obj = self.env['account.invoice.line']
-                    linea_data = self._preparar_linea_factura(self.invoice_ids, valor,factura_crear.id)
-                    linea_crear = linea_obj.create(linea_data) #se crea ñla linea de la factura
+                    linea_data = self._preparar_linea_factura(self.invoice_ids, line,factura_crear.id)
+                    linea_crear = linea_obj.create(linea_data) #
                     
                 #crear_fac=True
                 factura_crear.type='in_invoice'

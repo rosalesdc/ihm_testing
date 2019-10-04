@@ -5,4 +5,4 @@ from.import inherit_purchase_requisition
 from.import purchase_order
 from.import purchase_order_line
 from.import amortizacion_reporte
-
+from.import account_invoice
