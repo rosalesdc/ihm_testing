@@ -12,7 +12,7 @@ class AmortizacionReporte(models.Model):
                        )
 
     purchase_order_id = fields.Many2one(
-                                        'purchase_order',
+                                        'purchase.order',
                                         string="Purchase Order"
                                         )
                                         

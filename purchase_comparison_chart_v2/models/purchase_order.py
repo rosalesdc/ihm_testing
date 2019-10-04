@@ -12,13 +12,13 @@ import werkzeug
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-   
     # factura = fields.Char(compute='_compute_depends')
     # crear_fac=fields.Boolean()
 
     # @api.depends('crear_fac')
     # def _compute_depends(self):
-        
+    
+
     @api.depends('order_line.invoice_lines.invoice_id','invoice_ids')
     def _compute_invoice(self):
         print("entrando a invoice ids************")
@@ -34,7 +34,6 @@ class PurchaseOrder(models.Model):
                 invoices |= line.invoice_lines.mapped('invoice_id')
             order.invoice_ids = invoices
             order.invoice_count = len(invoices)
-  
 
     #invoice_count = fields.Integer(compute="_compute_invoice", string='Bill Count', copy=False, default=0, store=True)
     def _preparar_factura(self, proveedor, origin,purchase_id):
@@ -60,7 +59,7 @@ class PurchaseOrder(models.Model):
         return super(PurchaseOrder, self).create(vals)
 
 
-    def _preparar_linea_factura(self, factura,linea):
+    def _preparar_linea_factura(self, factura,linea,factura_creada):
         """
         Prepara el diccionario de datos para crear las líneas de la nueva orden
     """ 
@@ -73,12 +72,24 @@ class PurchaseOrder(models.Model):
         print("costo ******+++ oficial")
         print(cost)
         if contrato:
+            print("ES UN CONTRATO:::::::::::::::")
             costo_anticipo=(cost * x_anticipo)/porcentaje #se saca la cantidad del costo total menos el porentaje del anticipo
             retencion=(cost * x_retencion)/porcentaje # se saca el costo menos la retencion 
             cost=costo_anticipo-retencion 
             print("costo ******+++ cambiado")
             print(cost)       
             linea.price_unit=cost
+            #####DATA AMORTIZACION
+            print(":::::::::::::DATA AMORTIZACION")
+            print("ORDEN",self.id)
+            print("Factura",factura_creada)
+            print("RETENCION",retencion)
+            #self.creacion_registro_amortizacion(factura_creada,self.id,retencion)
+            
+            amortizacion_obj = self.env['amortizacion.reporte']
+            amortizacion_data = {'name':"Test",  'purchase_order_id': self.id,'account_invoice_id': factura_creada,'cantidad_descontada':retencion}
+            amoritzacion_crear = amortizacion_obj.create(amortizacion_data)
+            
         print("que costo se quedo?")
         print(cost)
         print("impuesto")
@@ -86,7 +97,10 @@ class PurchaseOrder(models.Model):
         # self.write({'invoice_ids': [(4, factura.id,
         #                     )],
         #                     })
-
+        
+        
+        
+        
         return {
         'invoice_id':factura.id,
         'product_id':linea.product_id.id,
@@ -148,7 +162,7 @@ class PurchaseOrder(models.Model):
                 print("se creo la factura")
                 for valor in self.order_line:
                     linea_obj = self.env['account.invoice.line']
-                    linea_data = self._preparar_linea_factura(self.invoice_ids, valor)
+                    linea_data = self._preparar_linea_factura(self.invoice_ids, valor,factura_crear.id)
                     linea_crear = linea_obj.create(linea_data) #se crea ñla linea de la factura
                     
                 #crear_fac=True
@@ -205,4 +219,3 @@ class PurchaseOrder(models.Model):
             'target': 'self',
             'url':redirect_url
         }
-
