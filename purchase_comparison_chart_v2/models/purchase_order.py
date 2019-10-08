@@ -162,27 +162,26 @@ class PurchaseOrder(models.Model):
                 #print(purchase_actual.id)
                 factura_data = self._preparar_factura(self.partner_id.id, self.name,self.id)
                 print("hola")
-                factura_crear = factura_obj.create(factura_data) # se crea la factura
+                #factura_crear = factura_obj.create(factura_data) # se crea la factura
 
                 print("SE CREO FACTURA::::::::::")
                 for line in self.order_line:
-                    print("SE CREAN LINEAS DE FACTURA::::::::::")
-                    linea_obj = self.env['account.invoice.line']
-                    linea_data = self._preparar_linea_factura(self.invoice_ids, line,factura_crear)
-                    linea_crear = linea_obj.create(linea_data)
+                    print("SE CREAN LINEAS DE amortizacion::::::::::")
+                    #linea_obj = self.env['account.invoice.line']
+                    #linea_data = self._preparar_linea_factura(self.invoice_ids, line,factura_crear)
+                    #linea_crear = linea_obj.create(linea_data)
+                    self.set_amortizacion_data(line)
+                    print("CANTIDAD AMORTIZADA",line.retencion_amortizacion)
                     
                 #crear_fac=True
-                factura_crear.type='in_invoice'
+                #factura_crear.type='in_invoice'
                # factura_crear.amount_tax=self.amount_tax
                 print("id de purchase")
                 print(self.id)
                 #print(purchase_actual.id)
-                print(factura_crear.id)
+                #print(factura_crear.id)
                 #factura_crear.purchase_id=self.id
                 print(purchase_actual)                    
-                """ self.write({
-                    'invoice_ids':[(4, factura_crear.id,) ]
-                }) """
                 print("ORDEN ACUTAL",self.id)
                 print("FACTURAS RELACIONADAS:::::::::::",self.invoice_ids)
                 
@@ -194,7 +193,26 @@ class PurchaseOrder(models.Model):
                 return purchase_actual
         return super(PurchaseOrder, self).write(vals)
 
-
+    def set_amortizacion_data(self, linea):
+        product = self.env['product.product'].browse(linea.product_id.id)
+        contrato=product.categ_id.x_contrato
+        x_anticipo=product.categ_id.x_anticipo
+        x_retencion=product.categ_id.x_retencion
+        porcentaje=100 #representa el 100% de toda la cantidad
+        cost=linea.price_unit
+        
+        if contrato:
+            print("ES UN CONTRATO:::::::::::::::")
+            costo_anticipo=(cost * x_anticipo)/porcentaje #se saca la cantidad del costo total menos el porentaje del anticipo
+            retencion=(cost * x_retencion)/porcentaje # se saca el costo menos la retencion 
+            cost=costo_anticipo-retencion 
+            print("costo ******+++ cambiado")
+            print(cost)       
+            linea.price_unit=cost
+            
+            #####DATA AMORTIZACION
+            linea.retencion_amortizacion=retencion
+            
  
     @api.multi
     def compare_purchase_orders(self):
