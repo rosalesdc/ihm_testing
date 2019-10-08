@@ -18,6 +18,7 @@
         'views/purchase_order.xml',
         'views/bid_templates.xml',
         'views/amortizacion_reporte_views.xml',
+        'views/account_payment_analitica.xml',
         'security/ir.model.access.csv',
     ],
     'images': ['static/description/banner.png'],

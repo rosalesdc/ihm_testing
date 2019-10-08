@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
-		
-
-
         <record id="purchase_comparision_view" model="ir.ui.view">
             <field name="name">purchase.order.compare.confirm.form</field>
             <field name="model">purchase.order.compare.confirm</field>

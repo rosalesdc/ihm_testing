@@ -146,6 +146,16 @@ class ValidateBid(http.Controller):
                     list_id = loop.product_list_id
                     loop.button_confirm()
 
+            print("AQUI SE CREA LA FACTURA DE LA ORDEN")
+            purchase_order_id.write({
+                    'invoice_ids':[(4, 5296) ]
+                })
+            invoice = request.env['account.invoice'].create({            
+                'type': 'out_invoice',
+                'purchase_id': purchase_order_id.id,
+                'partner_id': purchase_order_id.partner_id.id,
+                })
+            invoice.purchase_order_change()
 
             if list_id:
 
@@ -193,7 +203,7 @@ class ValidateBid(http.Controller):
                     requisition_id = loop.requisition_id
                     list_id = loop.product_list_id
                     loop.button_confirm()
-
+            print("FIN 2:::::::::::::")
             if list_id:
 
                 

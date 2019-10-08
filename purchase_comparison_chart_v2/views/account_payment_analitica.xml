@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="pagos_cuenta_analitica">
+			<field name="name">pagos.cuenta.analitica</field>
+			<field name="model">account.payment</field>
+			<field name="inherit_id" ref="account.view_account_payment_form"></field>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='journal_id']" position="after">
+					<field name="x_cuenta_analitica_id" readonly="1"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

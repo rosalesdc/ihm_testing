@@ -105,16 +105,16 @@ class PurchaseOrder(models.Model):
         
         
         return {
-        'invoice_id':factura.id,
+        'invoice_id':factura_creada.id,
         'product_id':linea.product_id.id,
         'name':linea.name,
-        'origin':factura.name,
+        'origin':factura_creada.name,
         'account_id':linea.product_id.categ_id.property_account_income_categ_id.id,
         'price_unit': linea.price_unit,
         'uom_id': linea.product_id.uom_id.id,
         'type':'in_invoice',
         'quantity':linea.product_qty,
-        'purchase_id':[(4,factura.purchase_id.id)],
+        'purchase_id':[(4,factura_creada.purchase_id.id)],
         'invoice_line_tax_ids':[(6,0,linea.product_id.supplier_taxes_id.ids)],
         'account_analytic_id':linea.account_analytic_id.id,
 
@@ -129,7 +129,7 @@ class PurchaseOrder(models.Model):
         current_uid = context.get('uid')
         user = self.env['res.users'].search([('id','=',current_uid)])
         group= self.env['res.groups'].search([('name','=','validacion_director'),('users','=',user.id)]) 
-        # identifico que usuario esta en sesion y que si ese usuari pertenece al grupo de validacion director
+        # identifico que usuario esta en sesion y que si ese usuario pertenece al grupo de validacion director
         if vals.get('partner_id') or vals.get('requisition_id'):
             purchase_ids = self.env['purchase.order'].search([('requisition_id', '=', vals.get('requisition_id'))])
             for po_id in purchase_ids:
@@ -145,12 +145,14 @@ class PurchaseOrder(models.Model):
         if (('state' in keys)& ('purchase' in values)): # pregunto si state esta en lso campos que han cambiado de estod y que si values esta purchase
 
             if(group): 
-                print("creando purchase")                  
+                print("Creando purchase:::::::::::::::")                  
                 #vals['invoice_count']=1     # este campo es para que en el modelo de purchase se vea que exist las factura. dado que en este campo lleva el conteo de facturas     
                 #vals['invoice_status']='Sin factura para recibir'
-                vals['invoice_ids']= [(0, 0,self._preparar_factura(self.partner_id.id, self.name,self.id))]
+                #vals['invoice_ids']= [(0, 0,self._preparar_factura(self.partner_id.id, self.name,self.id))]
                 # values[name] = [(6, 0, line[name].ids)]
+                print("ESTADO ACTUAL 1:::::::::",self.state)
                 purchase_actual=super(PurchaseOrder, self).write(vals) #se crea la purchase order
+                #self.invoice_count=1
                 print(vals)               
                 print("la self su estado es =  purchase")
                 factura_obj = self.env['account.invoice']
@@ -162,11 +164,12 @@ class PurchaseOrder(models.Model):
                 print("hola")
                 factura_crear = factura_obj.create(factura_data) # se crea la factura
 
-                print("se creo la factura")
+                print("SE CREO FACTURA::::::::::")
                 for line in self.order_line:
+                    print("SE CREAN LINEAS DE FACTURA::::::::::")
                     linea_obj = self.env['account.invoice.line']
-                    linea_data = self._preparar_linea_factura(self.invoice_ids, line,factura_crear.id)
-                    linea_crear = linea_obj.create(linea_data) #
+                    linea_data = self._preparar_linea_factura(self.invoice_ids, line,factura_crear)
+                    linea_crear = linea_obj.create(linea_data)
                     
                 #crear_fac=True
                 factura_crear.type='in_invoice'
@@ -177,6 +180,12 @@ class PurchaseOrder(models.Model):
                 print(factura_crear.id)
                 #factura_crear.purchase_id=self.id
                 print(purchase_actual)                    
+                """ self.write({
+                    'invoice_ids':[(4, factura_crear.id,) ]
+                }) """
+                print("ORDEN ACUTAL",self.id)
+                print("FACTURAS RELACIONADAS:::::::::::",self.invoice_ids)
+                
                 return purchase_actual
             else:
                 print("creando purchase")   

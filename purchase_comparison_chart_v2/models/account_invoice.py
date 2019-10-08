@@ -5,7 +5,6 @@ from odoo import fields
 from odoo import models
 
 
-   
 class FacturaAmortizacion(models.Model):
     _inherit = 'account.invoice'
     
@@ -15,10 +14,8 @@ class FacturaAmortizacion(models.Model):
         if self.state == 'draft' and self.type == 'in_invoice':
             #orden = self.env['purchase.order'].search([('name', '=', self.origin)], limit=1)
             orden = self.env['purchase.order'].search([('id', '=', self.purchase_id.id)], limit=1)
-            print(self.origin)
             retencion_total = 0
             for line in orden.order_line:
-                print("EN FOR:::")
                 if line.retencion_amortizacion:
                     retencion_total += line.retencion_amortizacion
             if retencion_total != 0:
