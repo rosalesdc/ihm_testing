@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.ui.view" id="product_list_view_inherit">
+        <field name="name">product.list.view.inherit</field>
+        <field name="model">product.list</field>
+        <field name="inherit_id" ref="project_product_list.product_list_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <field name="categoria_id" string="Contrato (estimación)"  />
+                <field name="productos_a" string="temporal"  />
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='product']" position="replace">
+                <field name="product" domain="[('categ_id', '=', parent.categoria_id)]"/>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>
