@@ -7,9 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='type']" position="after">
                 <field name="categoria_id" string="Contrato (estimación)"  />
-                <field name="productos_a" string="temporal"  />
+                <!-- <field name="productos_a" string="temporal"  /> -->
             </xpath>
-
+            
             <!-- <xpath expr="//field[@name='product']" position="replace">
                 <field name="product" domain="[('categ_id', '=', parent.categoria_id)]"/>
             </xpath> -->
