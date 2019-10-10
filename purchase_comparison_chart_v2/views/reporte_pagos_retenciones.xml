@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="reporte_pagos_retenciones_view" model="ir.ui.view">
+        <field name="name">reporte.pagos.retenciones.view</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='emails']" position="after">
+                <page name="Reporte de pagos y retenciones" string="Reporte de pagos y retenciones" groups="ihm_ocultar_validar.group_director">
+                    <group>
+                        <h2>Reporte de pagos y retenciones</h2>
+                    </group>
+                    <group>
+                        <field name="rep_contrato_categoria_id" />
+                        <field name="rep_total_categoria" />
+                    </group>
+                    <group>
+                        <h2>Retenciones</h2>
+                    </group>
+                    <group>
+                        <field name="rep_amortizaciones_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="purchase_order_id"></field>
+                                <field name="account_invoice_id"></field>
+                                <field name="cantidad_descontada"></field>
+                                <field name="create_date"></field>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="rep_total_retenciones" read_only="1"/>
+                    </group>
+                    <group>
+                        <h2>Pagos</h2>
+                    </group>
+                    <group>
+                        <field name="rep_pago_ids" nolabel="1">
+                            <tree editable="top">
+                                <field name="payment_date"></field>
+                                <field name="name"></field>
+                                <field name="journal_id"></field>
+                                <field name="payment_method_id"></field>
+                                <field name="partner_id"></field>
+                                <field name="amount"></field>
+                                <field name="state"></field>
+                                <field name="company_id"></field>
+                                <field name="communication"></field>
+                                <field name="reportado"></field>
+                            </tree>
+                        </field>
+                        <group>
+                            <field name="rep_total_pagos" read_only="1"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -20,6 +20,7 @@
         'views/amortizacion_reporte_views.xml',
         'views/account_payment_analitica.xml',
         'views/product_list_view_inherit.xml',
+        'views/reporte_pagos_retenciones.xml',
         'security/ir.model.access.csv',
     ],
     'images': ['static/description/banner.png'],

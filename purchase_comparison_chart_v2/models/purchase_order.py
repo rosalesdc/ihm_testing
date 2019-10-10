@@ -91,7 +91,7 @@ class PurchaseOrder(models.Model):
             linea.price_unit=cost
             
             #####DATA AMORTIZACION
-            linea.retencion_amortizacion=retencion
+            linea.retencion_amortizacion=retencion*linea.product_qty
 
  
     @api.multi

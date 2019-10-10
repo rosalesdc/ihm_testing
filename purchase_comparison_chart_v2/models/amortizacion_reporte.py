@@ -27,3 +27,10 @@ class AmortizacionReporte(models.Model):
         'product.category',
         string="Contrato (categoría)",
     )
+
+    project_id = fields.Many2one(
+        'project.project',
+        string = 'Proyecto'
+    )
+
+    #fecha_registro = fields.Date(string = 'Fecha')

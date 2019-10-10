@@ -8,3 +8,4 @@ from.import amortizacion_reporte
 from.import account_invoice
 from.import account_payment
 from.import product_list
+from.import project_project
