@@ -17,5 +17,14 @@ class FacturaAmortizacion(models.Model):
         for record in self.invoice_ids[0]:
             orden=record.purchase_id
             self.x_cuenta_analitica_id=orden.x_cuenta_analitica_id
+            #if record.invoice_line_ids[0].product_id.categ_id.x_contrato == True: #Por el momento no hay otro lugar para tomar categoria
+                #self.x_categoria_id = record.invoice_line_ids[0].product_id.categ_id.id
+
+    @api.model
+    def create(self, vals):
+        pago=super(FacturaAmortizacion, self).create(vals)
+        for record in pago.invoice_ids[0]:
             if record.invoice_line_ids[0].product_id.categ_id.x_contrato == True: #Por el momento no hay otro lugar para tomar categoria
-                self.x_categoria_id = record.invoice_line_ids[0].product_id.categ_id.id
+                pago.x_categoria_id = record.invoice_line_ids[0].product_id.categ_id.id
+                print("PAGO RELACIONADO A CONTRATO")
+        return pago
