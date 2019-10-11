@@ -39,6 +39,7 @@ class Project(models.Model):
         self.rep_amortizaciones_ids = registros_amortizacion
         self.rep_total_retenciones = total_descontado
         #self.rep_amortizaciones_ids : (6, 0,registros_amortizacion )
+        #self.write({"rep_amortizaciones_ids": [(6, 0, [registros_amortizacion])]})
 
     #@api.depends('name')
     @api.onchange('rep_contrato_categoria_id')   
