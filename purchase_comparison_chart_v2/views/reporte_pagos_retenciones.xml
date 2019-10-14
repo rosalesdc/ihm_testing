@@ -13,6 +13,11 @@
                     <group>
                         <field name="rep_contrato_categoria_id" />
                         <field name="rep_total_categoria" />
+                        <field name="rep_total_anticipo" />
+                        <field name="rep_remanente" />
+                        <field name="rep_total_pagos" string= "(-) Total Pagos" />
+                        <field name="rep_saldo" />
+                        <field name="rep_total_retenciones" />
                     </group>
                     <group>
                         <h2>Retenciones</h2>
@@ -22,13 +27,13 @@
                             <tree editable="top">
                                 <field name="purchase_order_id"></field>
                                 <field name="account_invoice_id"></field>
-                                <field name="cantidad_descontada"></field>
+                                <field name="cantidad_descontada" widget="monetary"  options="{'currency_field': 'currency_id'}"></field>
                                 <field name="create_date"></field>
                             </tree>
                         </field>
                     </group>
                     <group>
-                        <field name="rep_total_retenciones" read_only="1"/>
+                        <field name="rep_total_retenciones" />
                     </group>
                     <group>
                         <h2>Pagos</h2>
@@ -49,7 +54,7 @@
                             </tree>
                         </field>
                         <group>
-                            <field name="rep_total_pagos" read_only="1"/>
+                            <field name="rep_total_pagos" />
                         </group>
                     </group>
                 </page>

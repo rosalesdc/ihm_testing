@@ -12,11 +12,17 @@ class Project(models.Model):
 
     rep_amortizaciones_ids = fields.One2many ('amortizacion.reporte', 'project_id', string = 'Retenciones (amoritzación)', compute='_calcula_retenciones')
     
-    rep_total_retenciones = fields.Float (string = 'Total de retenciones')
+    rep_total_retenciones = fields.Float (string = 'Total de retenciones', compute='_calcula_retenciones')
 
     rep_pago_ids = fields.Many2many ('account.payment', string = 'Pagos', compute='_calcula_pagos')
 
-    rep_total_pagos = fields.Float (string = 'Total de pagos')
+    rep_total_pagos = fields.Float (string = 'Total de pagos', compute='_calcula_pagos')
+    
+    rep_total_anticipo = fields.Float (string = 'Total anticipo', compute='_calcula_total_anticipo')
+    
+    rep_remanente = fields.Float (string = 'Remanente', compute = '_calcula_remanente')
+    
+    rep_saldo = fields.Float (string = 'Saldo', compute = '_calcula_saldo')
 
     @api.onchange('rep_contrato_categoria_id')   
     def _calcula_total_categoria(self):
@@ -52,3 +58,18 @@ class Project(models.Model):
             total_pago+=pago.amount
         self.rep_pago_ids = registros_pago
         self.rep_total_pagos = total_pago
+    
+    @api.onchange('rep_contrato_categoria_id')
+    def _calcula_total_anticipo(self):
+        if self.rep_total_categoria != 0:
+            self.rep_total_anticipo= self.rep_total_categoria - ((self.rep_contrato_categoria_id.x_anticipo * self.rep_total_categoria)/ 100)
+        else:
+            self.rep_total_anticipo = 0
+            
+    @api.onchange('rep_contrato_categoria_id')
+    def _calcula_remanente(self):
+        self.rep_remanente=  self.rep_total_categoria - self.rep_total_anticipo
+        
+    @api.onchange('rep_saldo')
+    def _calcula_saldo(self):
+        self.rep_saldo=  self.rep_remanente - self.rep_total_pagos
