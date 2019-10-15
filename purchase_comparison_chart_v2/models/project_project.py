@@ -23,6 +23,8 @@ class Project(models.Model):
     rep_remanente = fields.Float (string = 'Remanente', compute = '_calcula_remanente')
     
     rep_saldo = fields.Float (string = 'Saldo', compute = '_calcula_saldo')
+    
+    rep_total_amortizado = fields.Float (string = 'Total amortizado', compute = '_calcula_amortizado')
 
     @api.onchange('rep_contrato_categoria_id')   
     def _calcula_total_categoria(self):
@@ -73,3 +75,7 @@ class Project(models.Model):
     @api.onchange('rep_saldo')
     def _calcula_saldo(self):
         self.rep_saldo=  self.rep_remanente - self.rep_total_pagos
+    
+    @api.onchange('rep_total_pagos', 'rep_total_retenciones')
+    def _calcula_amortizado(self):
+        self.rep_total_amortizado =  self.rep_total_pagos + self.rep_total_retenciones

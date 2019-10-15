@@ -16,8 +16,10 @@
                         <field name="rep_total_anticipo" />
                         <field name="rep_remanente" />
                         <field name="rep_total_pagos" string= "(-) Total Pagos" />
-                        <field name="rep_saldo" />
                         <field name="rep_total_retenciones" />
+                        <field name="rep_total_amortizado" />
+                        <field name="rep_saldo" />
+                        
                     </group>
                     <group>
                         <h2>Retenciones</h2>
