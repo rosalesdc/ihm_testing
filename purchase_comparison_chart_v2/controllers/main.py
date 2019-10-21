@@ -155,6 +155,8 @@ class ValidateBid(http.Controller):
             invoice.purchase_order_change()
             invoice.purchase_id=purchase_order_id.id
             invoice.origin=purchase_order_id.name
+            #invoice.amount_tax=purchase_order_id.amount_tax
+            #invoice.amount_total=purchase_order_id.amount_total
             #invoice.action_invoice_open()
             
 
