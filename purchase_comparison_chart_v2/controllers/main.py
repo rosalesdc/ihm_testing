@@ -155,21 +155,32 @@ class ValidateBid(http.Controller):
             invoice.purchase_order_change()
             invoice.purchase_id=purchase_order_id.id
             invoice.origin=purchase_order_id.name
-            #invoice.amount_tax=purchase_order_id.amount_tax
-            #invoice.amount_total=purchase_order_id.amount_total
+            invoice.amount_tax=purchase_order_id.amount_tax
+            invoice.amount_total=purchase_order_id.amount_total
             #invoice.action_invoice_open()
-            
-
+            for line in invoice.invoice_line_ids:
+                for impuesto in line.invoice_line_tax_ids:
+                    agregado = False
+                    for linea_tax in invoice.tax_line_ids:
+                        
+                        if linea_tax.name == impuesto.name:
+                            linea_tax.amount += line.price_subtotal*(impuesto.amount/100)
+                            agregado = True
+                    if agregado == False:
+                        invoice.write ({
+                            'tax_line_ids':[(0,0,{
+                                    'name': impuesto.name,
+                                    'account_id': impuesto.account_id.id,
+                                    'account_analytic_id': purchase_order_id.x_cuenta_analitica_id.id,
+                                    'amount': line.price_subtotal*(impuesto.amount/100),
+                                })]           
+                            })
             if list_id:
 
                 
                 return request.render('purchase_comparison_chart_v2.purchase_comparison_list_confirm', {'list_id':list_id})
             else:
                 return request.render('purchase_comparison_chart_v2.purchase_comparison_confirm', {'product_list_id':product_list_id})
-
-
-
-
 
 
         else:
