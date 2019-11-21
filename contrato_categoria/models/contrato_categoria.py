@@ -12,9 +12,9 @@ class ContratoCategoria(models.Model):
 	#x_anticipo  o x_retencion 
 	x_contrato = fields.Boolean(string='Contrato')
 
-	x_anticipo = fields.Integer(string = 'Anticipo %')
+	x_anticipo = fields.Float(string = 'Anticipo %')
 
-	x_retencion = fields.Integer(string = 'Retencion %')
+	x_retencion = fields.Float(string = 'Retencion %')
 
 	
 
