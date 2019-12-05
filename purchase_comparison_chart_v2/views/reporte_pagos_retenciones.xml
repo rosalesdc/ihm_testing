@@ -13,8 +13,8 @@
                     <group>
                         <field name="rep_contrato_categoria_id" />
                         <field name="rep_total_categoria" />
-                        <field name="rep_total_anticipo" />
-                        <field name="rep_remanente" />
+                        <field name="rep_remanente" string="Total anticipo"/>
+                        <field name="rep_total_anticipo" string="Remanente"/>
                         <field name="rep_total_pagos" string= "(-) Total Pagos" />
                         <field name="rep_total_retenciones" />
                         <field name="rep_total_amortizado" />

@@ -80,16 +80,18 @@ class PurchaseOrder(models.Model):
         contrato=product.categ_id.x_contrato
         x_anticipo=product.categ_id.x_anticipo
         x_retencion=product.categ_id.x_retencion
-        porcentaje=100 #representa el 100% de toda la cantidad
+        porcentaje=(100-x_retencion)/100
         cost=linea.price_unit
-        
+        print("POCENTAJE",porcentaje)
         if contrato:
-            costo_anticipo=(cost * x_anticipo)/porcentaje #se saca la cantidad del costo total menos el porentaje del anticipo
-            retencion=(cost * x_retencion)/porcentaje # se saca el costo menos la retencion 
-            cost=costo_anticipo-retencion 
-            print(cost)       
-            linea.price_unit=cost
-            
+            r1=cost*porcentaje
+            print("R1::::",r1)
+            r2=r1*(x_anticipo/100)
+            print("R2",r2)
+            costo=r2
+            print("COSTO:::",costo)       
+            linea.price_unit=costo
+            retencion=cost-costo
             #####DATA AMORTIZACION
             linea.retencion_amortizacion=retencion*linea.product_qty
 
