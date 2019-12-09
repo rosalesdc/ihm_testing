@@ -1,0 +1,119 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    
+    <record id="inmuebles_list" model="ir.ui.view">
+      <field name="name">Inmuebles List</field>
+      <field name="model">inmuebles.helpdesk</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="partner_id"/>
+          <field name="product_id"/>
+          <field name="project_id"/>
+          <field name="picking_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="inmuebles_form" model="ir.ui.view">
+      <field name="name">Inmuebles Form</field>
+      <field name="model">inmuebles.helpdesk</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="partner_id"/>
+              </h1>
+            </div>
+            <div class="o_row">
+              <label for="project_id" string="Proyecto"/>
+              <field name="project_id"/>
+            </div>
+            <group>
+              <field name="product_id" domain="[('es_inmueble', '=', True),('categ_id.name', '=', 'DEPARTAMENTOS')]"/>
+              <field name="picking_id"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="inmuebles_search" model="ir.ui.view">
+        <field name="name">inmuebles.search</field>
+        <field name="model">inmuebles.helpdesk</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    
+    <record id="inmuebles_action_window" model="ir.actions.act_window">
+      <field name="name">Inmuebles</field>
+      <field name="res_model">inmuebles.helpdesk</field>
+      <field name="view_mode">tree,form</field>
+    </record>    
+
+    <!-- Top menu item -->
+    
+    <menuitem name="Inmuebles Entregados" id="inmuebles_menu_root"/>
+   
+    <!-- menu categories -->
+    
+    <menuitem name="Inmuebles Entregados" id="inmuebles_menu_1" parent="inmuebles_menu_root"/>
+   
+    <!-- actions -->
+   
+    <menuitem name="List" id="inmuebles_menu_1_list" parent="inmuebles_menu_1"
+              action="inmuebles_action_window"/>
+
+    <!-- wizard form -->
+
+    <record id="partner_inmueble" model="ir.ui.view">
+        <field name="name">partner.inmueble</field>
+        <field name="model">inmuebles.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asociar contacto con propiedades">
+                <group>
+                    <p>
+                        Contactos con propiedades
+                    </p>
+                </group>
+                <footer>
+                    <button name="asignacion_inmueble" string="Asociar" type="object" class="oe_highlight" />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window name="Asociar Contactos-Inmuebles" res_model="inmuebles.wizard" 
+                src_model="stock.picking" view_mode="form" target="new" 
+                multi="True" key2="client_action_multi" id="action_view_contacto_inmueble" />
+    
+    <!-- Adding inmuebles_id to helpdesk.ticket form -->
+
+    <record id="inmuebles_helpdesk_form" model="ir.ui.view">
+        <field name="name">inmuebles.helpdesk.form</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="inmuebles_id"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <function model="ir.model.fields" name="formbuilder_whitelist">
+        <value>helpdesk.ticket</value>
+        <value eval="[
+            'tag_ids', 'inmuebles_id', 'x_categoria_id',
+        ]"/>
+    </function>  
+
+  </data>
+</odoo>
